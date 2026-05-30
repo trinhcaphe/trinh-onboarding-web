@@ -1,0 +1,47 @@
+# Mac OS system files
+.DS_Store
+
+# Temporary & IDE cache directories
+.obsidian/
+.cursor/
+scratch/
+.gemini/
+
+# Exclude other projects & vault directories completely for security and simplicity
+000_System/
+100_Projects/
+200_Areas/
+300_Resources/
+400_Archive/
+"Tài liệu A Brian/"
+trinh/
+training-dashboard/
+
+# Exclude independent files that are not part of the onboarding web portal
+*.md
+*.canvas
+*.scpt
+
+# But keep the onboarding files
+!landing-page-hoi-nhap-trinh.html
+!quy-dinh-chung-trinh.html
+!trinh-onboarding-web/
+!deploy-onboarding-web.sh
+!push-to-github.sh
+!gui-push.sh
+!coffee-packages.png
+!coffee-workshop.png
+!logo-trinh.png
+!slogan-philosophy.png
+!store-chain.jpg
+
+# Exclude any other archives, pptx, etc.
+*.tar.gz
+*.zip
+*.tgz
+*.pptx
+*.ppt
+*.docx
+*.doc
+*.csv
+*.xlsx

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình Cà Phê - Marketing Training (Bản Đầy Đủ Chi Tiết)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4A3E3D; /* Coffee brown */
+            --secondary: #2C3E35; /* Leaf green */
+            --accent: #D4A373; /* Light brown/caramel */
+            --bg-light: #FDFBF7;
+            --text-dark: #333333;
+            --text-light: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+            transform: translateY(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 4rem;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0);
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        /* Slide specific styles */
+        .slide-bg-image {
+            background-size: cover;
+            background-position: center;
+            color: var(--text-light);
+        }
+
+        .slide-bg-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9));
+            z-index: -1;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 2rem;
+            max-width: 1100px;
+            width: 100%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .glass-panel-dark {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            width: 100%;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        .slide-bg-image h2 {
+            color: var(--accent);
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .lead {
+            font-size: 1.3rem;
+            font-weight: 400;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1200px;
+            align-items: stretch;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary);
+            height: 100%;
+            overflow-y: auto;
+            max-height: 500px;
+        }
+        
+        /* Custom scrollbar for cards */
+        .card::-webkit-scrollbar {
+            width: 6px;
+        }
+        .card::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 10px;
+        }
+        .card::-webkit-scrollbar-thumb {
+            background: var(--accent); 
+            border-radius: 10px;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--secondary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        ul.styled-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.styled-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        ul.styled-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: rgba(212, 163, 115, 0.15);
+            border-left: 4px solid var(--accent);
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+        }
+
+        .image-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Controls */
+        .controls {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            align-items: center;
+        }
+
+        .controls button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .controls button:hover {
+            color: var(--accent);
+            transform: scale(1.2);
+        }
+
+        .controls button:disabled {
+            color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .slide-counter {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 6px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: #eee;
+            color: #333;
+            margin-right: 0.3rem;
+            margin-bottom: 0.3rem;
+        }
+        .badge.accent { background: var(--accent); color: white; }
+        .badge.primary { background: var(--primary); color: white; }
+        .badge.secondary { background: var(--secondary); color: white; }
+        .badge.warning { background: #f4a261; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="progress-bar" id="progress"></div>
+
+    <div class="presentation-container">
+        
+        <!-- Slide 1: Welcome -->
+        <div class="slide slide-bg-image active" style="background-image: url('file:///Users/thanhson/.gemini/antigravity/brain/5e12da8b-a390-4721-b98b-43e22acc6b3a/trinh_caphe_brand_vibe_1778816612543.png');">
+            <div class="glass-panel glass-panel-dark text-center">
+                <h1 style="color: var(--accent);">TRÌNH CÀ PHÊ</h1>
+                <p class="lead" style="font-size: 1.6rem; font-weight: 600;">SỔ TAY NGHIỆP VỤ MARKETING (BẢN CHI TIẾT)</p>
+                <p>Nắm bắt toàn bộ quy trình, công việc và cách phối hợp của các thành viên.</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Ban Quản Lý & Định Hướng -->
+        <div class="slide">
+            <h2>BAN QUẢN LÝ & STRATEGIST (ĐỊNH HƯỚNG & KIỂM DUYỆT)</h2>
+            <p style="text-align: center; margin-bottom: 1.5rem;">Những người định hướng chiến lược, đào tạo và phê duyệt công việc cuối cùng.</p>
+            <div class="grid-3">
+                <div class="card" style="border-color: var(--primary);">
+                    <h3><i class="fa-solid fa-user-tie"></i> Anh Vũ (Manager)</h3>
+                    <ul class="styled-list">
+                        <li>Định hướng chiến lược các chiến dịch (Ví dụ: Plan Workshop, Phố đi bộ).</li>
+                        <li>Duyệt Menu (cùng Chị Hương) cho các cơ sở: Phố đi bộ, Hội An, Chợ Hàn.</li>
+                        <li>Đánh giá hiệu quả, duyệt KPI, họp team định kỳ.</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-color: var(--secondary);">
+                    <h3><i class="fa-solid fa-crown"></i> Chị Hương (Owner/Manager)</h3>
+                    <ul class="styled-list">
+                        <li>Duyệt các chính sách và menu quan trọng.</li>
+                        <li>Yêu cầu đăng tin bài chiến lược (VD: Tin vườn cà phê & cà phê đóng gói).</li>
+                        <li>Quyết định các chương trình tặng quà (Mời KOC trải nghiệm).</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-color: var(--accent);">
+                    <h3><i class="fa-solid fa-lightbulb"></i> Tú Anh (Creative Strategist)</h3>
+                    <ul class="styled-list">
+                        <li>Lên Plan truyền thông (VD: Chiến dịch ra mắt Flan, Đêm nhạc pháo hoa).</li>
+                        <li>Duyệt nội dung hình ảnh/video trước khi đăng (Draft approval).</li>
+                        <li>Training team (VD: Training 5 key tươi, Training về thương hiệu Trình).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Executive - Hạ Vy & Quốc Huy -->
+        <div class="slide">
+            <h2>TEAM ĐÀ NẴNG & SẢN XUẤT VIDEO (HẠ VY & QUỐC HUY)</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fa-solid fa-user-pen"></i> Hạ Vy (Executive F&B, Mạng lưới ĐN)</h3>
+                    <ul class="styled-list">
+                        <li><strong>Chiến dịch & Kế hoạch:</strong> Làm kế hoạch tổng sự kiện (VD: Foodtour Đà Nẵng).</li>
+                        <li><strong>Content Fanpage/Story:</strong> Đăng đều đặn Story "Cà phê khuya 24/7" (109-111 Nguyễn Hữu Thọ, VTV8) vào lúc 19h-20h.</li>
+                        <li><strong>Chiến dịch Flan:</strong> Phân bổ quà tặng (sticker, quạt) cho các cơ sở, lên idea bài viết bánh Flan.</li>
+                        <li><strong>Sản xuất:</strong> Quay 2 video TikTok/tuần, edit video (VD: Mẫu + Flan, Idea Gánh).</li>
+                        <li><strong>Hành chính MKT:</strong> Mua vật tư sự kiện (pháo cầm tay), in bảng thông điệp.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-video"></i> Quốc Huy (Video Creator / Editor)</h3>
+                    <ul class="styled-list">
+                        <li><strong>Sản xuất Video Chủ lực:</strong> Trực tiếp quay & edit (Video Phố đi bộ, Vợt Trình 19/5, Trình về đêm, Food tour).</li>
+                        <li><strong>Bắt Trend:</strong> Tìm idea quay video theo Trend (VD: Trend Sơn Tùng, Americano Dâu tằm).</li>
+                        <li><strong>KOC / KOL:</strong> Book và làm việc trực tiếp với KOC trải nghiệm (VD: Trải nghiệm bánh Flan). Hỗ trợ đón KOC lúc 14h.</li>
+                        <li><strong>Hỗ trợ Sự kiện:</strong> Book xe di chuyển, quay video hậu trường, support set up chụp ảnh món mới.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Executive - Mỹ Duyên & Thanh Thuỳ -->
+        <div class="slide">
+            <h2>TEAM HỘI AN, RETAIL & WORKSHOP (MỸ DUYÊN & THANH THUỲ)</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fa-solid fa-map-location-dot"></i> Mỹ Duyên (Chuyên trách Hội An & Menu)</h3>
+                    <ul class="styled-list">
+                        <li><strong>Phụ trách Trình Hội An (HA):</strong> Đăng Story/Video về không gian, món ăn, Đêm nhạc pháo hoa HA. </li>
+                        <li><strong>Cộng đồng HA:</strong> Đi comment dạo (seeding) 20 bài thông báo đêm nhạc HA có Thứ 6 & Thứ 7. Mời KOC HA ghé đêm nhạc.</li>
+                        <li><strong>Hệ thống Menu:</strong> Thiết kế và điều chỉnh Menu cho các chi nhánh (Phố đi bộ, Chợ Hàn, Hội An). Thêm layout sản phẩm đóng gói.</li>
+                        <li><strong>Website:</strong> Tạo các Combo Promotion đưa lên hệ thống Website.</li>
+                        <li><strong>Tuyển dụng:</strong> Seeding tin tuyển dụng nhân sự.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-people-group"></i> Thanh Thuỳ (Workshop & Community)</h3>
+                    <ul class="styled-list">
+                        <li><strong>Tổ chức Workshop:</strong> Trực tiếp làm Plan Workshop trình Anh Vũ duyệt. Đăng 2 story/bài viết về Workshop.</li>
+                        <li><strong>Quản lý Danh tiếng (Google Map):</strong> Tổng hợp đánh giá và trả lời review trên Google Map (Task cố định liên tục).</li>
+                        <li><strong>Hỗ trợ Sản xuất:</strong> Quay video daily đồ uống, không gian quán. Tìm idea short video Instagram.</li>
+                        <li><strong>Tuyển dụng:</strong> Soạn bài đăng tuyển dụng, đăng Fanpage và seeding vào các hội nhóm tìm việc.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Quy trình "WORKING FILE_MKT" -->
+        <div class="slide slide-bg-image" style="background-image: url('file:///Users/thanhson/.gemini/antigravity/brain/5e12da8b-a390-4721-b98b-43e22acc6b3a/marketing_team_collaboration_1778816631084.png');">
+            <div class="glass-panel glass-panel-dark">
+                <h2>QUY TRÌNH SỬ DỤNG "WORKING FILE_MKT"</h2>
+                <p class="lead" style="margin-bottom: 2rem;">File Google Sheet là nơi <strong>duy nhất</strong> để ghi nhận công việc hợp lệ. Không có trên File = Chưa làm!</p>
+                <div class="grid-2">
+                    <div>
+                        <ul class="styled-list" style="color: white;">
+                            <li><strong>Bước 1:</strong> Điền Task CỐ ĐỊNH của cá nhân vào sheet (Story cf đêm, trả lời review, v.v.).</li>
+                            <li><strong>Bước 2:</strong> Điền Task PHÁT SINH được giao, note rõ người yêu cầu ở cột "Yêu cầu từ?" (Anh Vũ, Chị Hương, Tú Anh...).</li>
+                            <li><strong>Bước 3:</strong> Chụp màn hình task của mình để báo cáo đầu ngày vào nhóm Zalo ("Nhóm Tát").</li>
+                            <li><strong>Cập nhật Status:</strong> Liên tục đổi trạng thái: <span class="badge warning">Đang thực hiện</span>, <span class="badge primary">Chờ duyệt</span>, <span class="badge accent">Hoàn thành</span>, <span class="badge" style="background:red;color:white;">Hoãn</span>.</li>
+                            <li><strong>Gắn Link:</strong> Khi Hoàn thành, BẮT BUỘC gắn Link bài đăng, Link video, hoặc Link Menu/Plan vào cột "Đính kèm".</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="highlight-box" style="background: rgba(255,255,255,0.1); border-left: 4px solid var(--accent); color: white;">
+                            <strong>Ví dụ thực tế từ File:</strong><br><br>
+                            - <em>Task:</em> Điều chỉnh Menu Phố đi bộ.<br>
+                            - <em>Người làm:</em> Mỹ Duyên.<br>
+                            - <em>Yêu cầu từ:</em> a Vũ, c Hương.<br>
+                            - <em>Ghi chú:</em> Sửa layout, thêm sp đóng gói.<br>
+                            - <em>Status:</em> Hoàn thành (Gắn kèm Link ảnh Menu).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Cẩm Nang Báo Cáo & Khung Giờ Vàng -->
+        <div class="slide">
+            <h2>BÁO CÁO & KHUNG GIỜ HOẠT ĐỘNG</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fa-solid fa-clock"></i> Khung giờ vàng đăng bài</h3>
+                    <ul class="styled-list">
+                        <li><strong>19h00 - 20h00:</strong> Khung giờ bắt buộc cho các tuyến nội dung "Cà phê khuya 24/7" (cơ sở Nguyễn Hữu Thọ, VTV8).</li>
+                        <li><strong>Thứ 6 & Thứ 7:</strong> Thời điểm vàng để đẩy truyền thông cho Sự kiện/Đêm nhạc Hội An, Foodtour cuối tuần.</li>
+                        <li><strong>Sáng (Đầu ngày):</strong> Báo cáo kế hoạch làm việc (Chụp màn hình file).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-list-check"></i> Họp & Báo Cáo Nội Bộ</h3>
+                    <ul class="styled-list">
+                        <li><strong>Đào tạo:</strong> Yêu cầu tham gia đầy đủ các buổi training của Tú Anh (Training quay video, Training 5 key tươi, Phổ biến chương trình).</li>
+                        <li><strong>Báo cáo Tuần:</strong> Phải hoàn thành file Kế hoạch Tuần và Báo cáo. (Tham khảo cột Output trên Working File).</li>
+                        <li><strong>Nghiệm thu:</strong> Bất kỳ Video hay Plan nào cũng phải qua bước "Chờ duyệt" từ Manager/Strategist trước khi chuyển sang "Hoàn thành".</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Outro -->
+        <div class="slide">
+            <div class="text-center" style="max-width: 800px; margin: 0 auto;">
+                <i class="fa-solid fa-mug-hot" style="font-size: 5rem; color: var(--accent); margin-bottom: 2rem;"></i>
+                <h1 style="color: var(--primary);">BẠN ĐÃ SẴN SÀNG!</h1>
+                <p class="lead" style="margin-bottom: 2rem;">Hãy điền tên bạn vào "WORKING FILE_MKT" và bắt đầu những Task đầu tiên.</p>
+                <p style="margin-bottom: 3rem; color: #666;">Nhớ rằng: Mọi khó khăn từ việc thiếu idea video, tìm nhà in ấn, hay khách hàng complain... hãy nhắn lên Group Zalo để cả team cùng support!</p>
+                <button onclick="goToSlide(0)" style="background: var(--primary); color: white; border: none; padding: 1rem 2.5rem; font-size: 1.2rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s;">
+                    <i class="fa-solid fa-house"></i> Về trang chủ
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="controls">
+        <button id="prevBtn" onclick="prevSlide()" title="Trang trước"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="slide-counter"><span id="currentNum">1</span> / 7</div>
+        <button id="nextBtn" onclick="nextSlide()" title="Trang sau"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const progressBar = document.getElementById('progress');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentNum = document.getElementById('currentNum');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            // Update Progress bar
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = progress + '%';
+            
+            // Update Counter
+            currentNum.textContent = currentSlide + 1;
+
+            // Update Buttons
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlides();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Init
+        updateSlides();
+    </script>
+</body>
+</html>

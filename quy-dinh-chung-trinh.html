@@ -1,0 +1,2399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quy Định Chung – Trình Cà Phê</title>
+  <meta name="description" content="Văn bản quy định nội bộ dành cho toàn bộ nhân sự Trình Cà Phê. Áp dụng từ 01/01/2025." />
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta property="og:title" content="Quy Định Chung – Trình Cà Phê" />
+  <meta property="og:description" content="Hệ thống quy định nội bộ chuẩn chỉnh dành cho nhân sự Trình Cà Phê." />
+  <meta property="og:type" content="website" />
+  
+  <!-- Prefetch Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS – TRINH CÀ PHÊ BRAND (WARM WHITE CREAM & ULTRA COMPACT)
+       ============================================================ */
+    :root {
+      --trinh-blue:        #05AFF2;
+      --trinh-blue-dark:   #0084B5;
+      --trinh-blue-light:  #E8F6FD;
+      --trinh-green:       #2B4C3F;
+      --trinh-green-light: #F4F2EB; /* Trắng kem sữa dịu */
+      --coffee-dark:       #3E2F2E;
+      --caramel-gold:      #D4A373;
+      
+      /* Refined Pure White Cream Palette */
+      --cream-bg:          #F7F4EC; /* Màu nền trắng kem ấm nhã nhặn, sang trọng */
+      --cream-card:        #FFFFFF; /* Mặt card trắng tinh khiết nổi bật */
+      --white:             #FFFFFF;
+      --text-dark:         #151C1E; /* Chữ tối đậm tương phản cực nét */
+      --text-muted:        #4A555C;
+      
+      /* Semantic Status Colors */
+      --red-alert:         #c62828;
+      --red-light:         #FEE2E2;
+      --gold-dark:         #784A00;
+      --gold-light:        #FEF3C7;
+      --gold-border:       #F59E0B;
+      
+      /* Compact Radius & Borders */
+      --radius-lg: 12px;
+      --radius-md: 6px;
+      --radius-sm: 4px;
+      --border-light: rgba(43, 76, 63, 0.1);
+      
+      --transition-smooth: all 0.2s ease;
+    }
+
+    /* ============================================================
+       RESET & BASE RESETS
+       ============================================================ */
+    *, *::before, *::after { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+
+    html { 
+      scroll-behavior: smooth; 
+      -webkit-text-size-adjust: 100%; 
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--cream-bg);
+      color: var(--text-dark);
+      line-height: 1.5; /* Co hẹp dòng chữ gần nhau hơn */
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Print styling optimization */
+    @media print {
+      .no-print, .toolbar, .dept-filter, .checkbox-wrap, .btn-confirm, .sig-controls { 
+        display: none !important; 
+      }
+      body { 
+        background: white; 
+      }
+      .page-wrap { 
+        padding: 0 !important; 
+      }
+      .page-card { 
+        box-shadow: none !important; 
+        border-radius: 0 !important; 
+        border: none !important;
+        max-width: 100% !important;
+      }
+      .section-block { 
+        break-inside: avoid; 
+      }
+      .rule-table {
+        display: table !important;
+      }
+      .mobile-cards {
+        display: none !important;
+      }
+      .confirm-section {
+        background: #f9f9f9 !important;
+        color: #000 !important;
+        border-top: 2px solid #ccc !important;
+      }
+      .confirm-section * {
+        color: #000 !important;
+      }
+      .form-grid input, .form-grid select {
+        border-bottom: 1px solid #000 !important;
+        background: transparent !important;
+        color: #000 !important;
+      }
+    }
+
+    /* ============================================================
+       LAYOUT & PAGE CONTAINERS (COMPACT)
+       ============================================================ */
+    .page-wrap {
+      min-height: 100vh;
+      padding: 8px 4px 40px;
+    }
+
+    @media (min-width: 640px) {
+      .page-wrap { 
+        padding: 24px 16px 60px; 
+      }
+    }
+
+    .page-card {
+      max-width: 880px;
+      margin: 0 auto;
+      background: var(--cream-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      box-shadow: 0 12px 36px rgba(43, 76, 63, 0.08); /* Đổ bóng nhẹ nhàng sang trọng */
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ============================================================
+       BANNER HEADER IMAGE (chuẩn Trình 100%)
+       ============================================================ */
+    .banner-container {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .banner-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Logo con chim xanh chuẩn thương hiệu Trình */
+    .header-bird-logo {
+      display: block;
+      width: 56px;
+      height: auto;
+      margin: 0 auto 10px;
+      opacity: 0.95;
+      filter: drop-shadow(0 2px 4px rgba(43, 76, 63, 0.1));
+    }
+
+    /* Compact text info header under banner */
+    .doc-meta-header {
+      padding: 20px 16px 12px;
+      text-align: center;
+      border-bottom: 1px dashed rgba(43, 76, 63, 0.12);
+    }
+
+    @media (min-width: 640px) {
+      .doc-meta-header {
+        padding: 28px 36px 16px;
+      }
+    }
+
+    .doc-main-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(28px, 6vw, 42px); /* Tăng cỡ chữ to rõ nổi bật theo yêu cầu */
+      color: var(--trinh-green);
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    .doc-sub-title {
+      font-size: 13px;
+      color: var(--text-dark);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .doc-meta-chips {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .meta-chip {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--trinh-green);
+      background: var(--trinh-green-light);
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(43, 76, 63, 0.1);
+    }
+
+    /* ============================================================
+       INTRO INTRODUCTORY SECTION
+       ============================================================ */
+    .intro-section {
+      padding: 16px 20px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .philosophy-box {
+      background: #FAF8F5; /* Màu kem nhạt ấm áp, nhã nhặn */
+      border: 1px solid rgba(43, 76, 63, 0.08);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 10px;
+      box-shadow: inset 0 0 12px rgba(43, 76, 63, 0.02);
+    }
+
+    .philosophy-box::before {
+      content: '“';
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      font-size: 60px;
+      color: rgba(43, 76, 63, 0.05);
+      font-family: 'Georgia', serif;
+      line-height: 1;
+    }
+
+    .philosophy-text {
+      font-size: 15.5px;
+      color: var(--trinh-green);
+      line-height: 1.7;
+      font-weight: 500;
+      text-align: justify;
+      text-justify: inter-word;
+      margin: 0;
+      letter-spacing: -0.1px;
+    }
+
+    @media (max-width: 640px) {
+      .philosophy-text {
+        font-size: 14.5px; /* Tối ưu cho màn hình di động to rõ nét */
+        line-height: 1.65;
+        text-align: center; /* Căn giữa trên điện thoại cho thơ mộng */
+      }
+      .philosophy-box {
+        padding: 16px 18px;
+      }
+    }
+
+    /* ============================================================
+       TOOLBAR
+       ============================================================ */
+    .toolbar {
+      background: var(--trinh-green-light);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .toolbar { 
+        padding: 10px 36px; 
+      }
+    }
+
+    .toolbar-meta {
+      font-size: 11px;
+      color: var(--trinh-green);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-print {
+      background: var(--white);
+      border: 1px solid var(--trinh-green);
+      color: var(--trinh-green);
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-print:hover {
+      background: var(--trinh-green);
+      color: var(--white);
+    }
+
+    /* ============================================================
+       CONTENT CONTAINER (COMPACTED)
+       ============================================================ */
+    .content {
+      padding: 20px 12px 32px;
+    }
+
+    @media (min-width: 640px) {
+      .content { 
+        padding: 24px 36px 40px; 
+      }
+    }
+
+    /* ============================================================
+       SECTION HEADINGS (COMPACT)
+       ============================================================ */
+    .section-block {
+      margin-bottom: 28px; /* Giảm khoảng cách giữa các phần quy định */
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid rgba(43, 76, 63, 0.12);
+    }
+
+    .section-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--trinh-blue-dark);
+    }
+
+    .section-heading h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--trinh-green);
+    }
+
+    .section-heading-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(43, 76, 63, 0.08);
+    }
+
+    /* ============================================================
+       DEPARTMENT FILTER SUBMENU (SECTION III)
+       ============================================================ */
+    .dept-filter {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      background: var(--trinh-green-light);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(43, 76, 63, 0.08);
+    }
+
+    .filter-btn {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--trinh-green);
+      background: transparent;
+      border: none;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .filter-btn:hover {
+      background: rgba(43, 76, 63, 0.08);
+    }
+
+    .filter-btn.active {
+      background: var(--trinh-green);
+      color: var(--white);
+    }
+
+    .dept-block {
+      margin-bottom: 16px;
+    }
+
+    .dept-label {
+      background: var(--trinh-green-light);
+      border-left: 3px solid var(--trinh-green);
+      padding: 6px 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--trinh-green);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: 10px;
+    }
+
+    /* ============================================================
+       TABLE LAYOUT (DESKTOP - CO HẸP DÒNG)
+       ============================================================ */
+    .table-container {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .rule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+      display: none; /* Mobile first */
+    }
+
+    /* ============================================================
+       MOBILE CARDS LAYOUT (PURE MINIMAL - CO HẸP DÒNG)
+       ============================================================ */
+    .mobile-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 8px; /* Thu hẹp khoảng cách card di động */
+    }
+
+    .mobile-card {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 10px 14px; /* Giảm đáng kể padding thẻ di động */
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+
+    .mobile-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-card-num {
+      background: var(--trinh-blue-light);
+      color: var(--trinh-blue-dark);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 10px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-card-content {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       DESKTOP MEDIA QUERIES FOR TABLES
+       ============================================================ */
+    @media (min-width: 768px) {
+      .mobile-cards {
+        display: none !important;
+      }
+      
+      .rule-table {
+        display: table !important;
+      }
+
+      .rule-table thead th {
+        background: var(--trinh-green-light);
+        color: var(--trinh-green);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 9.5px;
+        font-weight: 900;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        padding: 10px 14px; /* Giảm padding tiêu đề bảng */
+        border-bottom: 2px solid rgba(43, 76, 63, 0.1);
+      }
+
+      .rule-table thead th:last-child {
+        text-align: right;
+      }
+
+      /* Hàng chẵn trong bảng có nền kem ấm mịn */
+      .rule-table tbody tr:nth-child(even) {
+        background: rgba(244, 242, 235, 0.5);
+      }
+
+      .rule-table tbody tr {
+        border-bottom: 1px solid rgba(43, 76, 63, 0.06);
+        transition: var(--transition-smooth);
+      }
+
+      .rule-table tbody tr:hover {
+        background: var(--trinh-blue-light);
+      }
+
+      .rule-table tbody tr:last-child {
+        border-bottom: none;
+      }
+
+      .rule-table td {
+        padding: 8px 14px; /* Giảm padding dòng đáng kể giúp bảng siêu ngắn gọn */
+        vertical-align: middle;
+        color: var(--text-dark);
+      }
+
+      .rule-table td:first-child {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        color: var(--trinh-blue-dark);
+        font-size: 12px;
+        width: 44px;
+      }
+
+      .rule-table td:last-child {
+        text-align: right;
+        width: 190px;
+      }
+    }
+
+    /* ============================================================
+       SUB LABELS (TIERED DETAILS)
+       ============================================================ */
+    .sub-label {
+      display: block;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.4;
+      background: rgba(5, 175, 242, 0.04);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      border-left: 2px solid var(--trinh-blue-dark);
+    }
+    
+    .sub-label:first-of-type {
+      margin-top: 6px;
+    }
+
+    /* ============================================================
+       PENALTY PILL BADGES (MINIMAL FLAT DESIGN)
+       ============================================================ */
+    .penalty {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px; /* Co nhỏ các pill badge xử phạt */
+      border-radius: var(--radius-sm);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+      gap: 3px;
+      letter-spacing: 0.1px;
+    }
+
+    .penalty-money {
+      background: var(--gold-light);
+      color: var(--gold-dark);
+      border: 1px solid var(--gold-border);
+    }
+
+    .penalty-dismiss {
+      background: var(--red-light);
+      color: var(--red-alert);
+      border: 1px solid rgba(198, 40, 40, 0.2);
+    }
+
+    .penalty-shift {
+      background: var(--trinh-blue-light);
+      color: var(--trinh-blue-dark);
+      border: 1px solid rgba(5, 175, 242, 0.15);
+    }
+
+    .penalty-other {
+      background: rgba(43, 76, 63, 0.06);
+      color: var(--trinh-green);
+      border: 1px solid rgba(43, 76, 63, 0.15);
+    }
+
+    /* ============================================================
+       DIVIDERS
+       ============================================================ */
+    .divider {
+      height: 1px;
+      background: rgba(43, 76, 63, 0.08);
+      margin: 24px 0; /* Giảm khoảng cách ngăn cách phần */
+    }
+
+    /* ============================================================
+       E-CONTRACT CONFIRMATION FORM SECTION (KRAFT PAPER LOOK)
+       ============================================================ */
+    .confirm-section {
+      background: var(--trinh-green-light);
+      padding: 28px 16px;
+      border-top: 1.5px solid rgba(43, 76, 63, 0.12);
+      position: relative;
+      color: var(--text-dark);
+    }
+
+    @media (min-width: 640px) {
+      .confirm-section { 
+        padding: 36px 40px; 
+      }
+    }
+
+    .confirm-title-area {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .confirm-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(18px, 4.5vw, 24px);
+      font-weight: 900;
+      color: var(--trinh-green);
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+
+    .confirm-title span { 
+      color: var(--trinh-blue-dark); 
+    }
+
+    .confirm-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 6px auto 0;
+      font-weight: 500;
+    }
+
+    /* Form Wrapper */
+    .form-wrapper {
+      transition: var(--transition-smooth);
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .form-wrapper.hide {
+      max-height: 0;
+      opacity: 0;
+      visibility: hidden;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Grid layout - 3 columns on large screens to fit EMAIL field nicely */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 580px) {
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr 1fr 1fr; /* 3 cột giúp form cực kỳ thu gọn chiều cao */
+      }
+      .form-group.full-on-desktop {
+        grid-column: span 2;
+      }
+    }
+
+    .form-group { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 6px; 
+    }
+    
+    .form-group.full { 
+      grid-column: 1 / -1; 
+    }
+
+    .form-group label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--trinh-green);
+    }
+
+    /* Pure Porcelain inputs */
+    .form-group input,
+    .form-group select {
+      background: var(--white);
+      border: 1px solid rgba(43, 76, 63, 0.25);
+      border-radius: var(--radius-md);
+      padding: 10px 12px; /* Co nhỏ input */
+      font-family: 'Outfit', sans-serif;
+      font-size: 13.5px;
+      color: var(--text-dark);
+      outline: none;
+      transition: var(--transition-smooth);
+      width: 100%;
+    }
+
+    .form-group.select-wrap {
+      position: relative;
+    }
+    
+    .form-group.select-wrap::after {
+      content: "▼";
+      font-size: 7px;
+      color: var(--text-muted);
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      pointer-events: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--trinh-blue-dark);
+      box-shadow: 0 0 0 3px rgba(5, 175, 242, 0.12);
+    }
+
+    .form-group input::placeholder { 
+      color: #90a0a8; 
+    }
+    
+    .form-group select option { 
+      background: var(--white); 
+      color: var(--text-dark); 
+    }
+
+    /* ============================================================
+       CANVAS SIGNATURE PAD (MINIMALIST)
+       ============================================================ */
+    .signature-area {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .signature-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--trinh-green);
+    }
+
+    .sig-canvas-container {
+      background: var(--white);
+      border: 1px solid rgba(43, 76, 63, 0.25);
+      border-radius: var(--radius-md);
+      position: relative;
+      overflow: hidden;
+      height: 120px; /* Giảm bớt chiều cao canvas ký để gọn hơn */
+      width: 100%;
+    }
+
+    .sig-canvas-container canvas {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    .sig-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+    }
+
+    .btn-sig-clear {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      padding: 2px 6px;
+    }
+
+    .btn-sig-clear:hover {
+      color: var(--red-alert);
+      text-decoration: underline;
+    }
+
+    .sig-helper-text {
+      color: var(--text-muted);
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    /* Checkbox wrap styles */
+    .checkbox-wrap {
+      background: rgba(5, 175, 242, 0.04);
+      border: 1px solid rgba(5, 175, 242, 0.1);
+      border-radius: var(--radius-md);
+      padding: 12px 14px; /* Giảm padding */
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .checkbox-wrap:hover { 
+      background: rgba(5, 175, 242, 0.08); 
+    }
+
+    .checkbox-wrap input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      accent-color: var(--trinh-blue-dark);
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    .checkbox-wrap p {
+      font-size: 12.5px;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Error alert box */
+    .error-box {
+      display: none;
+      background: #FFF5F5;
+      border: 1px solid rgba(211, 47, 47, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 12.5px;
+      color: var(--red-alert);
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .error-box.show { 
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Submit btn */
+    .btn-confirm {
+      background: var(--trinh-blue-dark);
+      color: var(--white);
+      border: none;
+      padding: 12px 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    @media (min-width: 480px) {
+      .btn-confirm { 
+        width: auto; 
+      }
+    }
+
+    .btn-confirm:hover:not(:disabled) {
+      background: #006b94;
+    }
+
+    .btn-confirm:disabled {
+      background: rgba(0, 132, 181, 0.35);
+      color: rgba(255, 255, 255, 0.5);
+      cursor: not-allowed;
+    }
+
+    .btn-confirm.loading::after {
+      content: "";
+      width: 12px; height: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { 
+      to { transform: rotate(360deg); } 
+    }
+
+    /* ============================================================
+       SUCCESS CONTRACT VERIFICATION & DYNAMIC STAMP & SIGNATURE
+       ============================================================ */
+    .success-card {
+      display: none;
+      background: var(--white);
+      border: 1px solid rgba(43, 76, 63, 0.15);
+      border-radius: var(--radius-lg);
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(43, 76, 63, 0.06);
+    }
+
+    .success-card.show {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: slideUp 0.5s ease forwards;
+    }
+
+    .success-icon-wrap {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .success-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--trinh-green);
+      font-size: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    /* Verification contract ticket box */
+    .ticket-box {
+      background: var(--trinh-green-light);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      width: 100%;
+      max-width: 440px;
+      text-align: left;
+      color: var(--text-dark);
+      border: 1px solid rgba(43, 76, 63, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .ticket-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed rgba(0,0,0,0.08);
+      padding: 8px 0;
+      font-size: 13px;
+    }
+    
+    .ticket-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .ticket-label {
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .ticket-value {
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    /* Render Signature Output */
+    .output-signature-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding-top: 10px;
+    }
+
+    .output-signature-box span {
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--trinh-blue-dark);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .rendered-signature {
+      max-height: 50px;
+      max-width: 180px;
+      object-fit: contain;
+      opacity: 0.9;
+    }
+
+    /* Dynamic Affixed Verified Seal Stamp */
+    .seal-wrap-container {
+      position: relative;
+      height: 110px;
+      width: 110px;
+    }
+
+    .stamp-seal {
+      width: 108px;
+      height: 108px;
+      border: 3px double #d32f2f;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #d32f2f;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      background: rgba(255, 255, 255, 0.95);
+      animation: sealAffix 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.25) 0.3s forwards;
+      opacity: 0;
+      transform: scale(2.5) rotate(-45deg);
+      filter: blur(3px);
+      position: absolute;
+      top: 0; left: 0;
+    }
+
+    .stamp-seal::before {
+      content: "";
+      position: absolute;
+      top: 4px; left: 4px; right: 4px; bottom: 4px;
+      border: 1px solid rgba(211, 47, 47, 0.3);
+      border-radius: 50%;
+    }
+
+    .stamp-text-top {
+      font-size: 7px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+    }
+    
+    .stamp-text-mid {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      border-top: 1.5px solid #d32f2f;
+      border-bottom: 1.5px solid #d32f2f;
+      padding: 1px 3px;
+      margin: 2px 0;
+    }
+
+    .stamp-text-bot {
+      font-size: 6px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: rgba(211, 47, 47, 0.8);
+    }
+
+    @keyframes sealAffix {
+      to { 
+        opacity: 1; 
+        transform: scale(1) rotate(-8deg);
+        filter: blur(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrap">
+    <main class="page-card">
+      <div class="top-gradient-bar"></div>
+
+      <!-- ===== BANNER HEADER IMAGE (xịn và chuẩn Trình 100%) ===== -->
+      <section class="banner-container">
+        <img src="slogan-philosophy.png" alt="Trình Cà Phê Banner Triết Lý" class="banner-img" />
+      </section>
+
+      <!-- ===== MINIMAL TEXT INFO HEADER UNDER BANNER ===== -->
+      <header class="doc-meta-header">
+        <h1 class="doc-main-title">Quy Định Chung</h1>
+      </header>
+
+      <!-- ===== TOOLBAR (Print Utility) ===== -->
+      <section class="toolbar no-print">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <a href="index.html" style="color: var(--trinh-green); text-decoration: none; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px; transition: var(--transition-smooth);" onmouseover="this.style.color='var(--trinh-blue-dark)'" onmouseout="this.style.color='var(--trinh-green)'">
+            <i class="fa-solid fa-house"></i> Cổng Hội Nhập
+          </a>
+          <span style="color: rgba(43, 76, 63, 0.15);">|</span>
+          <span class="toolbar-meta">📋 Tài liệu ký cam kết bắt buộc</span>
+        </div>
+        <button class="btn-print" onclick="window.print()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          In tài liệu
+        </button>
+      </section>
+
+      <!-- ===== MAIN CONTENT CONTAINER ===== -->
+      <div class="content">
+
+        <!-- ========================= SECTION I ========================= -->
+        <section class="section-block" id="sec-1">
+          <div class="section-heading">
+            <span class="section-num">I.</span>
+            <h2>Vi phạm về giờ giấc & tác phong làm việc</h2>
+            <div class="section-heading-line"></div>
+          </div>
+
+          <div class="table-container">
+            <!-- Desktop Layout -->
+            <table class="rule-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nội dung vi phạm</th>
+                  <th>Hình thức kỷ luật</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Vào ca – ra ca không chấm công</td>
+                  <td><span class="penalty penalty-money">🪙 10.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>
+                    Đi làm trễ bậc thang
+                    <span class="sub-label">Trễ từ 1 phút $\rightarrow$ Phạt 10.000₫ &nbsp;|&nbsp; Trễ từ 5 phút $\rightarrow$ Phạt 15.000₫</span>
+                    <span class="sub-label">Trễ từ 10 phút $\rightarrow$ Phạt 20.000₫ &nbsp;|&nbsp; Trễ từ 20 phút $\rightarrow$ Phạt 30.000₫</span>
+                    <span class="sub-label">Trễ từ 30 phút $\rightarrow$ Phạt 55.000₫ (Part-time) | Phạt 80.000₫ (Full-time)</span>
+                    <span class="sub-label">Tự ý bỏ ca không phép $\rightarrow$ Phạt 110.000₫ (Part-time) | Phạt 160.000₫ (Full-time)</span>
+                  </td>
+                  <td><span class="penalty penalty-money">🪙 Phạt theo bậc trễ</span></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Đổi ca, thế ca không thông qua sự đồng ý của cấp trên trực tiếp</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Không thực hiện đúng tiêu chuẩn đồng phục quy định (áo, mũ, tạp dề...)</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Không thực hiện đúng tiêu chuẩn ngoại diện (để tóc dài che mặt, móng tay bẩn/dài, thiếu vệ sinh cơ thể…)</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Đăng ký lịch làm không đúng thời hạn quy định (muộn hơn Thứ 6 hàng tuần)</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Nghỉ đột xuất không có lý do chính đáng, không xin phép hoặc không được sự phê duyệt trước từ cấp trên</td>
+                  <td><span class="penalty penalty-shift">📅 Phạt 1 ca làm</span></td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Không hoàn tất nhiệm vụ đầu ca; không dọn dẹp vệ sinh; không bàn giao đầy đủ dụng cụ, khu vực khi xuống ca</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Nghỉ việc tự ý không thông báo trước 14 ngày làm việc</td>
+                  <td><span class="penalty penalty-shift">📅 Phạt 5 ca + Mất thưởng</span></td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Bỏ ca làm không lý do quá 2 lần trong một tháng</td>
+                  <td><span class="penalty penalty-dismiss">⚠️ Buộc thôi việc</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Mobile Layout (Cards) -->
+            <div class="mobile-cards">
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">1</span>
+                  <span class="penalty penalty-money">🪙 10k VND</span>
+                </div>
+                <p class="mobile-card-content">Vào ca – ra ca không chấm công</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">2</span>
+                  <span class="penalty penalty-money">🪙 Theo bậc</span>
+                </div>
+                <div class="mobile-card-content">
+                  Đi làm trễ bậc thang
+                  <span class="sub-label">Trễ 1 phút: 10.000₫ | Trễ 5 phút: 15.000₫</span>
+                  <span class="sub-label">Trễ 10 phút: 20.000₫ | Trễ 20 phút: 30.000₫</span>
+                  <span class="sub-label">Trễ 30 phút: 55.000₫ (PT) / 80.000₫ (FT)</span>
+                  <span class="sub-label">Bỏ ca: 110.000₫ (PT) / 160.000₫ (FT)</span>
+                </div>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">3</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Đổi ca, thế ca không thông qua sự đồng ý của cấp trên trực tiếp</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">4</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Không thực hiện đúng tiêu chuẩn đồng phục quy định (áo, mũ, tạp dề...)</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">5</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Không thực hiện đúng tiêu chuẩn ngoại diện (để tóc dài, móng tay bẩn/dài, vệ sinh cơ thể kém…)</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">6</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Đăng ký lịch làm không đúng thời hạn quy định (muộn hơn Thứ 6 hàng tuần)</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">7</span>
+                  <span class="penalty penalty-shift">📅 Phạt 1 ca làm</span>
+                </div>
+                <p class="mobile-card-content">Nghỉ đột xuất không có lý do chính đáng, không xin phép hoặc không được sự phê duyệt trước từ cấp trên</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">8</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Không hoàn tất nhiệm vụ đầu ca; không dọn dẹp vệ sinh; không bàn giao đầy đủ dụng cụ khi xuống ca</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">9</span>
+                  <span class="penalty penalty-shift">📅 Phạt 5 ca + Mất thưởng</span>
+                </div>
+                <p class="mobile-card-content">Nghỉ việc tự ý không thông báo trước 14 ngày làm việc</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">10</span>
+                  <span class="penalty penalty-dismiss">⚠️ Buộc thôi việc</span>
+                </div>
+                <p class="mobile-card-content">Bỏ ca làm không lý do quá 2 lần trong một tháng</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- ========================= SECTION II ========================= -->
+        <section class="section-block" id="sec-2">
+          <div class="section-heading">
+            <span class="section-num">II.</span>
+            <h2>Vi phạm liên quan đến hoạt động cá nhân</h2>
+            <div class="section-heading-line"></div>
+          </div>
+
+          <div class="table-container">
+            <!-- Desktop Layout -->
+            <table class="rule-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nội dung vi phạm</th>
+                  <th>Hình thức kỷ luật</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Không thực hiện đúng/thiếu các công việc ghi nhận trong bảng checklist công việc hàng ngày</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Không thực hiện đúng quy chế giao tiếp lịch sự với khách hàng</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Vi phạm hoặc thực hiện sai lệch quy trình chuyên môn đã triển khai</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Không dọn vệ sinh tủ đồ, tụ tập hút thuốc, hoặc sử dụng điện thoại làm việc riêng thời gian dài trong giờ làm</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Để tài sản cá nhân, đồ dùng không đúng tủ quy định</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Ăn uống không đúng thời gian hoặc không đúng khu vực quy định</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Không tham gia họp định kỳ hoặc đột xuất mà không xin phép trước</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Tự ý rời khu vực phục vụ được phân công, tụ tập nói chuyện riêng, đùa giỡn làm ảnh hưởng chất lượng dịch vụ chung</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Sử dụng ly cốc, ống hút cốc không đúng tiêu chuẩn quy định nội bộ</td>
+                  <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Mobile Layout (Cards) -->
+            <div class="mobile-cards">
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">1</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Không thực hiện đúng/thiếu công việc trong checklist hàng ngày</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">2</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Không thực hiện đúng quy chế giao tiếp lịch sự với khách hàng</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">3</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Vi phạm hoặc thực hiện sai lệch quy trình chuyên môn đã triển khai</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">4</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Không dọn vệ sinh tủ đồ, hút thuốc, hoặc dùng điện thoại làm việc riêng lâu trong ca</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">5</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Để tài sản cá nhân, đồ dùng không đúng tủ quy định</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">6</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Ăn uống không đúng thời gian hoặc không đúng khu vực quy định</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">7</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Không tham gia họp định kỳ hoặc đột xuất mà không xin phép trước</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header">
+                  <span class="mobile-card-num">8</span>
+                  <span class="penalty penalty-money">🪙 30k VND</span>
+                </div>
+                <p class="mobile-card-content">Tự ý rời khu vực phục vụ, tụ tập nói chuyện, đùa giỡn ảnh hưởng dịch vụ chung</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header"><span class="mobile-card-num">9</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                <p class="mobile-card-content">Sử dụng ly cốc, ống hút cốc không đúng tiêu chuẩn quy định nội bộ</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- ========================= SECTION III ========================= -->
+        <section class="section-block" id="sec-3">
+          <div class="section-heading">
+            <span class="section-num">III.</span>
+            <h2>Vi phạm liên quan đến từng bộ phận cụ thể</h2>
+            <div class="section-heading-line"></div>
+          </div>
+
+          <!-- Interactive Position Selector (Filter) -->
+          <div class="dept-filter no-print" role="tablist" aria-label="Bộ lọc theo bộ phận">
+            <button class="filter-btn active" role="tab" aria-selected="true" onclick="filterDept('all', this)">Tất cả vị trí</button>
+            <button class="filter-btn" role="tab" aria-selected="false" onclick="filterDept('cashier', this)">Thu Ngân</button>
+            <button class="filter-btn" role="tab" aria-selected="false" onclick="filterDept('service', this)">Phục Vụ / Pha Ngoài</button>
+            <button class="filter-btn" role="tab" aria-selected="false" onclick="filterDept('washer', this)">Rửa Ly</button>
+            <button class="filter-btn" role="tab" aria-selected="false" onclick="filterDept('parking', this)">Giữ Xe</button>
+          </div>
+
+          <!-- THU NGÂN -->
+          <div class="dept-block" id="dept-cashier">
+            <div class="dept-label">📋 Vị trí: Thu Ngân</div>
+            <div class="table-container">
+              <!-- Desktop Table -->
+              <table class="rule-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nội dung vi phạm</th>
+                    <th>Hình thức kỷ luật</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Không mở lời chào hỏi khách, không hỗ trợ khách khi order</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Order không xác nhận lại món với khách, không mời kèm bánh/đồ ăn vặt, không giới thiệu chương trình ưu đãi hiện có</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Không chủ động tư vấn món mới, món đặc sản, topping đi kèm hoặc đồ ăn nhẹ cho khách</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Quy trình nhận tiền và thối tiền không xác nhận cụ thể số lượng bằng lời với khách</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Để tủ đồ, công cụ cá nhân sai vị trí quy định của quầy</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Không giữ gìn khu vực bàn order và không gian quầy thu ngân sạch sẽ</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>Không hỗ trợ các vị trí khác khi quá tải trong giờ cao điểm theo lệnh điều động của quản lý</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>Không tuân thủ đúng chuẩn mực giao tiếp lịch sự với khách hàng theo quy chế</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>9</td>
+                    <td>Không kiểm kê lượng nguyên vật liệu, bỏ qua bước cập nhật file quản lý thu chi hàng ca</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>10</td>
+                    <td>Tự ý hủy bill, sửa bill hoặc áp dụng mức chiết khấu giảm giá sai lệch nguyên tắc</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>11</td>
+                    <td>Không kiểm kê và bàn giao tiền mặt chính xác theo quy trình khi kết thúc ca làm</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Mobile Card list -->
+              <div class="mobile-cards">
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">1</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không mở lời chào hỏi khách, không hỗ trợ khách khi order</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">2</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Order không xác nhận lại món với khách, không mời kèm bánh/đồ ăn vặt, không giới thiệu ưu đãi</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">3</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không chủ động tư vấn món mới, món đặc sản, topping đi kèm hoặc đồ ăn nhẹ cho khách</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">4</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Quy trình nhận tiền và thối tiền không xác nhận cụ thể số lượng bằng lời với khách</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">5</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Để tủ đồ, công cụ cá nhân sai vị trí quy định của quầy</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">6</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không giữ gìn khu vực bàn order và không gian quầy thu ngân sạch sẽ</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">7</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không hỗ trợ các vị trí khác khi quá tải trong giờ cao điểm theo lệnh quản lý</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">8</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không tuân thủ đúng chuẩn mực giao tiếp lịch sự với khách hàng theo quy chế</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">9</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không kiểm kê lượng nguyên vật liệu, bỏ qua bước cập nhật file quản lý thu chi hàng ca</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">10</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Tự ý hủy bill, sửa bill hoặc áp dụng mức chiết khấu giảm giá sai lệch nguyên tắc</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">11</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không kiểm kê và bàn giao tiền mặt chính xác theo quy trình khi kết thúc ca làm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PHỤC VỤ PHA NGOÀI -->
+          <div class="dept-block" id="dept-service">
+            <div class="dept-label">🛒 Vị trí: Phục Vụ / Pha Ngoài</div>
+            <div class="table-container">
+              <!-- Desktop Table -->
+              <table class="rule-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nội dung vi phạm</th>
+                    <th>Hình thức kỷ luật</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Không chào đón khách, không hướng dẫn khách hàng vị trí ngồi phù hợp</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Nhìn thấy khách cần hỗ trợ nhưng thờ ơ, không chủ động tiếp cận hỗ trợ</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Không vệ sinh sạch khu vực: để bàn ghế bụi, bẩn, sàn nhà dơ, dùng khăn lau bẩn hoặc ly tách bám vân tay</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Dọn dẹp bàn khách sơ sài, không lau kỹ mặt bàn hoặc bỏ qua phần sàn nhà xung quanh chân bàn</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Để bàn đã dùng xong của khách quá lâu không thu dọn, gây mất mỹ quan</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Không kiểm tra và bổ sung kịp thời khăn giấy, tăm, gia vị hoặc không tuần tra khu vực phục vụ được phân công</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>Không phối hợp hỗ trợ các vị trí khác khi quá tải trong giờ cao điểm theo lệnh quản lý</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>Không đảm bảo đúng chuẩn giao tiếp lịch thiệp với khách hàng</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>9</td>
+                    <td>Không đọc to xác nhận tên món uống với khách hàng trước khi đặt xuống bàn</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>10</td>
+                    <td>Phục vụ sai món, nhầm kích cỡ ly hoặc giao nhầm khách bàn khác</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>11</td>
+                    <td>Đặt đồ uống/món ăn xuống bàn khách thô bạo, không thông báo lịch sự cho khách</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>12</td>
+                    <td>Làm đổ nước, rơi rớt dụng cụ món ăn do thao tác bất cẩn trong khi phục vụ</td>
+                    <td><span class="penalty penalty-other">🧩 Tự bù ly nước làm đổ</span></td>
+                  </tr>
+                  <tr>
+                    <td>13</td>
+                    <td>Để khu vực bàn ghế lộn xộn, xộc xệch mà không sắp xếp ngay ngắn lại</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>14</td>
+                    <td>Không theo dõi hoạt động của hệ thống đèn chiếu sáng, quạt, điều hòa nhiệt độ tại khu vực để kịp thời báo cáo</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>15</td>
+                    <td>Không thực hiện xin ly cuối ca để bàn giao khu vực gọn gàng</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Mobile Cards -->
+              <div class="mobile-cards">
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">1</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không chào đón khách, không hướng dẫn khách hàng vị trí ngồi phù hợp</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">2</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Nhìn thấy khách cần hỗ trợ nhưng thờ ơ, không chủ động tiếp cận hỗ trợ</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">3</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không vệ sinh sạch khu vực: để bàn ghế bụi, bẩn, sàn nhà dơ, dùng khăn lau bẩn hoặc ly tách bám vân tay</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">4</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Dọn dẹp bàn khách sơ sài, không lau kỹ mặt bàn hoặc bỏ qua phần sàn nhà xung quanh bàn</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">5</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Để bàn đã dùng xong của khách quá lâu không thu dọn, gây mất mỹ quan</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">6</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không bổ sung kịp thời khăn giấy, tăm, gia vị hoặc không tuần tra khu vực phục vụ được phân công</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">7</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không phối hợp hỗ trợ các vị trí khác khi quá tải trong giờ cao điểm theo lệnh quản lý</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">8</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không đảm bảo đúng chuẩn giao tiếp lịch thiệp với khách hàng</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">9</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không đọc to xác nhận tên món uống với khách trước khi đặt xuống bàn</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">10</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Phục vụ sai món, nhầm kích cỡ ly hoặc giao nhầm khách bàn khác</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">11</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Đặt đồ uống/món ăn xuống bàn khách thô bạo, không thông báo lịch sự cho khách</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">12</span><span class="penalty penalty-other">🧩 Tự bù nước đổ</span></div>
+                  <p class="mobile-card-content">Làm đổ nước, rơi rớt dụng cụ món ăn do thao tác bất cẩn trong khi phục vụ</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">13</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Để khu vực bàn ghế lộn xộn, xộc xệch mà không sắp xếp ngay ngắn lại</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">14</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không theo dõi hoạt động của đèn chiếu sáng, quạt, điều hòa tại khu vực để kịp thời báo cáo</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">15</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không thu dọn ly bẩn cuối ca để bàn giao khu vực gọn gàng</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RỬA LY -->
+          <div class="dept-block" id="dept-washer">
+            <div class="dept-label">🧤 Vị trí: Rửa Ly</div>
+            <div class="table-container">
+              <!-- Desktop Table -->
+              <table class="rule-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nội dung vi phạm</th>
+                    <th>Hình thức kỷ luật</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Rửa ly cốc, muỗng, ống hút không sạch, để sót cặn bẩn</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Không phân loại ly cốc, công cụ dụng cụ rửa theo đúng khu vực quy định</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Sử dụng ly bẩn, chưa ráo nước khô ráo để phục vụ đồ uống cho khách</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Làm rơi vỡ ly cốc do thao tác thô bạo hoặc cẩu thả</td>
+                    <td><span class="penalty penalty-other">🧩 Bù đúng số lượng vỡ</span></td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Không lau dọn bồn rửa sạch sẽ, để đầy rác thải và không refill ly sạch kịp thời cho quầy bar pha chế</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Không thường xuyên kiểm tra tình trạng hư hại của trang thiết bị làm việc để báo cáo quản lý</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Mobile Cards -->
+              <div class="mobile-cards">
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">1</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Rửa ly cốc, muỗng, ống hút không sạch, để sót cặn bẩn</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">2</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không phân loại ly cốc, công cụ dụng cụ rửa theo đúng quy định</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">3</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Sử dụng ly bẩn, chưa ráo nước khô ráo để phục vụ đồ uống cho khách</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">4</span><span class="penalty penalty-other">🧩 Bù ly vỡ</span></div>
+                  <p class="mobile-card-content">Làm rơi vỡ ly cốc do thao tác thô bạo hoặc cẩu thả</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">5</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không lau dọn bồn rửa sạch, để đầy rác và không refill ly sạch kịp thời cho quầy bar</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">6</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không thường xuyên kiểm tra tình trạng hư hại của thiết bị để báo cáo quản lý</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GIỮ XE -->
+          <div class="dept-block" id="dept-parking">
+            <div class="dept-label">🏍 Vị trí: Giữ Xe</div>
+            <div class="table-container">
+              <!-- Desktop Table -->
+              <table class="rule-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nội dung vi phạm</th>
+                    <th>Hình thức kỷ luật</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Nhân viên tự ý ngồi leo lên xe của khách hàng nghỉ ngơi</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Vứt đồ đạc cá nhân bừa bãi trước cổng quán hoặc khu vực dắt xe</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Không nhắc nhở khách tự bảo quản mũ bảo hiểm và tư trang cá nhân giá trị</td>
+                    <td><span class="penalty penalty-dismiss">⚠️ Tự chịu trách nhiệm mất</span></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Thờ ơ không chào đón khách, không dắt xe hỗ trợ khách hàng khi ra vào</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Không dọn vệ sinh quét lá rác cổng thường xuyên; sắp xếp xe sai vị trí gây cản trở lối đi</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Không chăm sóc tưới cây cảnh quan mặt tiền, để cây bị khô héo úa tàn</td>
+                    <td><span class="penalty penalty-money">🪙 30.000 VND</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Mobile Cards -->
+              <div class="mobile-cards">
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">1</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Nhân viên tự ý ngồi leo lên xe của khách hàng nghỉ ngơi</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">2</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Vứt đồ đạc cá nhân bừa bãi trước cổng quán hoặc khu vực dắt xe</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">3</span><span class="penalty penalty-dismiss">⚠️ Tự chịu trách nhiệm</span></div>
+                  <p class="mobile-card-content">Không nhắc nhở khách tự bảo quản mũ bảo hiểm và tư trang cá nhân giá trị</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">4</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Thờ ơ không chào đón khách, không dắt xe hỗ trợ khách hàng khi ra vào</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">5</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không dọn vệ sinh cổng thường xuyên; sắp xe sai vị trí gây cản trở lối đi</p>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-header"><span class="mobile-card-num">6</span><span class="penalty penalty-money">🪙 30k VND</span></div>
+                  <p class="mobile-card-content">Không chăm sóc tưới cây cảnh quan mặt tiền, để cây bị khô héo úa tàn</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- ========================= SECTION IV ========================= -->
+        <section class="section-block" id="sec-4">
+          <div class="section-heading">
+            <span class="section-num">IV.</span>
+            <h2>Vi phạm nghiêm trọng ảnh trực tiếp uy tín quán</h2>
+            <div class="section-heading-line"></div>
+          </div>
+
+          <div class="table-container">
+            <!-- Desktop Layout -->
+            <table class="rule-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nội dung vi phạm</th>
+                  <th>Hình thức kỷ luật</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Gây chia rẽ nội bộ, có lời lẽ thóa mạ, khiêu khích hoặc có hành vi đánh nhau, ẩu đả tại quán</td>
+                  <td><span class="penalty penalty-dismiss">⚠️ Buộc thôi việc ngay lập tức</span></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Tự ý mang nguyên vật liệu, dụng cụ hay bất kỳ tài sản nào của Quán ra ngoài mà chưa có sự đồng ý của Quản lý</td>
+                  <td><span class="penalty penalty-dismiss">⚠️ Buộc thôi việc ngay lập tức</span></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Có thái độ thiếu chuẩn mực, xúc phạm danh dự hoặc xâm phạm thân thể, tài sản của khách hàng</td>
+                  <td><span class="penalty penalty-dismiss">⚠️ Buộc thôi việc ngay lập tức</span></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Gian lận tài chính, bớt xén tiền thanh toán của khách hàng, gian lận công quỹ hoặc báo cáo láo với quản lý</td>
+                  <td><span class="penalty penalty-dismiss">⚠️ Buộc thôi việc ngay lập tức</span></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Tiết lộ công thức pha chế, bí mật công nghệ hoặc thông tin mật về kinh doanh của quán ra bên ngoài</td>
+                  <td><span class="penalty penalty-dismiss">⚠️ Buộc thôi việc ngay lập tức</span></td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Sử dụng mạng xã hội cá nhân đăng tải các nội dung không trung thực gây tổn hại danh tiếng và thương hiệu quán</td>
+                  <td><span class="penalty penalty-dismiss">⚠️ Buộc thôi việc ngay lập tức</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Mobile Layout (Cards) -->
+            <div class="mobile-cards">
+              <div class="mobile-card">
+                <div class="mobile-card-header"><span class="mobile-card-num">1</span><span class="penalty penalty-dismiss">⚠️ Thôi việc</span></div>
+                <p class="mobile-card-content">Gây chia rẽ nội bộ, có lời lẽ thóa mạ, khiêu khích hoặc có hành vi đánh nhau, ẩu đả tại quán</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header"><span class="mobile-card-num">2</span><span class="penalty penalty-dismiss">⚠️ Thôi việc</span></div>
+                <p class="mobile-card-content">Tự ý mang nguyên vật liệu, dụng cụ hay tài sản của Quán ra ngoài mà chưa có sự đồng ý của Quản lý</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header"><span class="mobile-card-num">3</span><span class="penalty penalty-dismiss">⚠️ Thôi việc</span></div>
+                <p class="mobile-card-content">Có thái độ thiếu chuẩn mực, xúc phạm danh dự hoặc xâm phạm thân thể, tài sản của khách hàng</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header"><span class="mobile-card-num">4</span><span class="penalty penalty-dismiss">⚠️ Thôi việc</span></div>
+                <p class="mobile-card-content">Gian lận tài chính, bớt xén tiền thanh toán, gian lận công quỹ hoặc báo cáo láo với quản lý</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header"><span class="mobile-card-num">5</span><span class="penalty penalty-dismiss">⚠️ Thôi việc</span></div>
+                <p class="mobile-card-content">Tiết lộ công thức pha chế, bí mật công nghệ hoặc thông tin mật về kinh doanh của quán ra ngoài</p>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-header"><span class="mobile-card-num">6</span><span class="penalty penalty-dismiss">⚠️ Thôi việc</span></div>
+                <p class="mobile-card-content">Sử dụng mạng xã hội cá nhân đăng tải các nội dung không trung thực gây tổn hại danh tiếng quán</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div><!-- end .content -->
+
+      <!-- ===== E-CONTRACT CONFIRMATION FORM SECTION (WARM CREAM) ===== -->
+      <section class="confirm-section" aria-labelledby="form-title">
+        <div class="confirm-title-area">
+          <h2 id="form-title" class="confirm-title">Ký cam kết <span>Nhân Sự</span></h2>
+          <p class="confirm-desc">
+            Vui lòng điền thông tin cá nhân và vẽ chữ ký điện tử của bạn để gửi cam kết chấp hành quy chế nội bộ.
+          </p>
+        </div>
+
+        <!-- Warning Alert Box -->
+        <div id="err-box" class="error-box" role="alert">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/></svg>
+          <span id="err-text">Vui lòng nhập đầy đủ thông tin cá nhân, vẽ chữ ký cam kết.</span>
+        </div>
+
+        <!-- Interactive Form Wrapper -->
+        <div class="form-wrapper" id="form-wrapper">
+          <form class="form-grid" id="confirm-form" onsubmit="return false;">
+            <div class="form-group">
+              <label for="f-name">Họ và tên nhân sự</label>
+              <input type="text" id="f-name" placeholder="Ví dụ: Nguyễn Văn Trình" autocomplete="name" />
+            </div>
+            
+            <div class="form-group">
+              <label for="f-phone">Số điện thoại liên hệ</label>
+              <input type="tel" id="f-phone" placeholder="Ví dụ: 0905 123 456" autocomplete="tel" />
+            </div>
+
+            <!-- EMAIL field added -->
+            <div class="form-group">
+              <label for="f-email">Địa chỉ Email</label>
+              <input type="email" id="f-email" placeholder="Ví dụ: trinh@trinhcaphe.com" autocomplete="email" />
+            </div>
+            
+            <div class="form-group select-wrap">
+              <label for="f-position">Cùng Trình gieo duyên ở</label>
+              <select id="f-position">
+                <option value="">— Chọn vị trí bạn gieo duyên —</option>
+                <option>Phục vụ</option>
+                <option>Thu Ngân</option>
+                <option>Trưởng ca</option>
+                <option>Pha chế</option>
+                <option>Bảo vệ</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="f-date">Ngày ký kết văn bản</label>
+              <input type="date" id="f-date" />
+            </div>
+            
+            <div class="form-group select-wrap">
+              <label for="f-branch">Chi nhánh công tác chính</label>
+              <select id="f-branch">
+                <option value="">— Chọn chi nhánh bạn tỏa hương —</option>
+                <option>Trình 111 Nguyễn Hữu Thọ</option>
+                <option>Trình 109 Nguyễn Hữu Thọ</option>
+                <option>Trình VTV 258 Bạch Đằng</option>
+                <option>Trình Phạm Hồng Thái</option>
+                <option>Trình Phố Đi Bộ: Bạch Đằng</option>
+                <option>Trình Chợ Hàn</option>
+                <option>Trình Cá Chép</option>
+                <option>Trình Bảo Tàng</option>
+                <option>Trình Hội An</option>
+              </select>
+            </div>
+          </form>
+
+          <!-- INTERACTIVE DRAW SIGNATURE CANVAS -->
+          <div class="signature-area">
+            <span class="signature-title">Chữ ký tay điện tử (Vẽ trực tiếp vào ô bên dưới)</span>
+            <div class="sig-canvas-container">
+              <canvas id="sig-canvas"></canvas>
+            </div>
+            <div class="sig-controls">
+              <span class="sig-helper-text">Sử dụng ngón tay hoặc chuột của bạn để ký tên</span>
+              <button class="btn-sig-clear" onclick="clearSignature()">Xóa chữ ký</button>
+            </div>
+          </div>
+
+          <label class="checkbox-wrap" for="f-agree">
+            <input type="checkbox" id="f-agree" />
+            <p>
+              <strong>Tôi xác nhận đã đọc kỹ, cam kết hiểu rõ và tự giác tuân thủ</strong> mọi điều khoản thuộc văn bản Quy Định Chung này. Tôi chịu hoàn toàn trách nhiệm và chấp nhận mọi hình thức xử lý kỷ luật theo đúng tinh thần quy định nếu có hành vi vi phạm.
+            </p>
+          </label>
+
+          <button class="btn-confirm" id="btn-confirm" onclick="submitEContract()">
+            ✓&nbsp; Gửi xác nhận &amp; Ký chữ ký điện tử
+          </button>
+        </div>
+
+        <!-- Success Verification Card with Verified Circular Stamp -->
+        <div class="success-card" id="success-card">
+          <div class="success-icon-wrap" style="font-size: 32px; filter: drop-shadow(0 2px 8px rgba(43,76,63,0.15));">💚</div>
+          <h3 style="font-family: 'Outfit', sans-serif; font-weight: 800; color: var(--trinh-green); margin-bottom: 8px;">Trình xin cảm ơn lời cam kết chân thành của bạn!</h3>
+          <p style="color: var(--text-muted); font-size: 13.5px; line-height: 1.6; margin-bottom: 20px; max-width: 500px; margin-left: auto; margin-right: auto;">
+            Lời cam kết đồng hành tử tế của bạn đã được lưu giữ cẩn thận và trân trọng tại ngôi nhà chung Trình Cà Phê.
+          </p>
+          
+          <div class="ticket-box" style="border: 1px solid rgba(43,76,63,0.08); background: #FAF9F5;">
+            <div class="ticket-row" style="border-bottom: 1px dashed rgba(43,76,63,0.08);">
+              <span class="ticket-label" style="color: #5F6D75;">Bạn là</span>
+              <span class="ticket-value" id="res-name" style="font-weight: 800; color: var(--trinh-green);">-</span>
+            </div>
+            <div class="ticket-row" style="border-bottom: 1px dashed rgba(43,76,63,0.08);">
+              <span class="ticket-label" style="color: #5F6D75;">Số điện thoại</span>
+              <span class="ticket-value" id="res-phone" style="font-weight: 600;">-</span>
+            </div>
+            <div class="ticket-row" style="border-bottom: 1px dashed rgba(43,76,63,0.08);">
+              <span class="ticket-label" style="color: #5F6D75;">Địa chỉ Email</span>
+              <span class="ticket-value" id="res-email" style="font-weight: 600;">-</span>
+            </div>
+            <div class="ticket-row" style="border-bottom: 1px dashed rgba(43,76,63,0.08);">
+              <span class="ticket-label" style="color: #5F6D75;">Vị trí đồng hành</span>
+              <span class="ticket-value" id="res-position" style="font-weight: 600;">-</span>
+            </div>
+            <div class="ticket-row" style="border-bottom: 1px dashed rgba(43,76,63,0.08);">
+              <span class="ticket-label" style="color: #5F6D75;">Chi nhánh công tác</span>
+              <span class="ticket-value" id="res-branch" style="font-weight: 600;">-</span>
+            </div>
+            <div class="ticket-row" style="border-bottom: 1px dashed rgba(43,76,63,0.08);">
+              <span class="ticket-label" style="color: #5F6D75;">Thời khắc cam kết</span>
+              <span class="ticket-value" id="res-date" style="font-weight: 600;">-</span>
+            </div>
+            
+            <!-- Output letter signature from Canvas -->
+            <div class="output-signature-box" id="sig-output-box" style="padding-top: 12px;">
+              <span style="color: #5F6D75; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Nét ký chân thành</span>
+              <img id="rendered-sig-img" class="rendered-signature" src="" alt="Chữ ký nhân viên" style="max-height: 48px; margin-top: 6px;" />
+            </div>
+          </div>
+          
+          <!-- Classic circular corporate verified stamp in CSS -->
+          <div class="seal-wrap-container">
+            <div class="stamp-seal" id="stamp-seal">
+              <span class="stamp-text-top">★ TRÌNH CÀ PHÊ ★</span>
+              <span class="stamp-text-mid">ĐÃ KÝ TÊN</span>
+              <span class="stamp-text-bot">XÁC THỰC NỘI BỘ</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // --------------------------------------------------
+    // CANVAS SIGNATURE DRAWING SYSTEM
+    // --------------------------------------------------
+    var canvas = document.getElementById('sig-canvas');
+    var ctx = canvas.getContext('2d');
+    var isDrawing = false;
+    var hasSigned = false; // Flag to trace if they actually drew anything
+
+    // Initialize Canvas Resizing & Scaling
+    function resizeCanvas() {
+      var rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+      
+      // Canvas Drawing Context Style Config
+      ctx.strokeStyle = '#2B4C3F'; // Ink color match Trinh Green
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      
+      hasSigned = false;
+    }
+
+    // Call size calculation initially
+    window.addEventListener('load', function() {
+      resizeCanvas();
+      // Auto-fill Current Date
+      var d = new Date();
+      var yyyy = d.getFullYear();
+      var mm = String(d.getMonth() + 1).padStart(2, '0');
+      var dd = String(d.getDate()).padStart(2, '0');
+      var dateField = document.getElementById('f-date');
+      if (dateField) dateField.value = yyyy + '-' + mm + '-' + dd;
+    });
+
+    window.addEventListener('resize', resizeCanvas);
+
+    // Mouse events logic
+    canvas.addEventListener('mousedown', function(e) {
+      isDrawing = true;
+      ctx.beginPath();
+      var pos = getMousePos(canvas, e);
+      ctx.moveTo(pos.x, pos.y);
+    });
+
+    canvas.addEventListener('mousemove', function(e) {
+      if (!isDrawing) return;
+      var pos = getMousePos(canvas, e);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+      hasSigned = true;
+    });
+
+    window.addEventListener('mouseup', function() {
+      isDrawing = false;
+    });
+
+    // Touch mobile events logic (Prevent scrolling on touch canvas)
+    canvas.addEventListener('touchstart', function(e) {
+      if (e.target === canvas) {
+        e.preventDefault();
+      }
+      isDrawing = true;
+      ctx.beginPath();
+      var touch = e.touches[0];
+      var pos = getTouchPos(canvas, touch);
+      ctx.moveTo(pos.x, pos.y);
+    }, { passive: false });
+
+    canvas.addEventListener('touchmove', function(e) {
+      if (e.target === canvas) {
+        e.preventDefault();
+      }
+      if (!isDrawing) return;
+      var touch = e.touches[0];
+      var pos = getTouchPos(canvas, touch);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+      hasSigned = true;
+    }, { passive: false });
+
+    canvas.addEventListener('touchend', function(e) {
+      if (e.target === canvas) {
+        e.preventDefault();
+      }
+      isDrawing = false;
+    }, { passive: false });
+
+    function getMousePos(canvasDom, mouseEvent) {
+      var rect = canvasDom.getBoundingClientRect();
+      return {
+        x: mouseEvent.clientX - rect.left,
+        y: mouseEvent.clientY - rect.top
+      };
+    }
+
+    function getTouchPos(canvasDom, touchDom) {
+      var rect = canvasDom.getBoundingClientRect();
+      return {
+        x: touchDom.clientX - rect.left,
+        y: touchDom.clientY - rect.top
+      };
+    }
+
+    function clearSignature() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hasSigned = false;
+    }
+
+    // --------------------------------------------------
+    // Department filtering function (Interactive submenu)
+    // --------------------------------------------------
+    function filterDept(deptId, element) {
+      // Remove active class from all filter buttons
+      document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      // Add active to current
+      element.classList.add('active');
+      element.setAttribute('aria-selected', 'true');
+
+      // Filter dept blocks
+      var depts = ['dept-cashier', 'dept-service', 'dept-washer', 'dept-parking'];
+      depts.forEach(function(id) {
+        var deptEl = document.getElementById(id);
+        if (!deptEl) return;
+
+        if (deptId === 'all') {
+          deptEl.style.display = 'block';
+        } else {
+          if (id === 'dept-' + deptId) {
+            deptEl.style.display = 'block';
+          } else {
+            deptEl.style.display = 'none';
+          }
+        }
+      });
+    }
+
+    // --------------------------------------------------
+    // Submit Verification & Canvas Extraction
+    // --------------------------------------------------
+    function submitEContract() {
+      // ==========================================
+      // CẤU HÌNH API GOOGLE APPS SCRIPT
+      // Dán URL ứng dụng web nhận từ Google Apps Script (kết thúc bằng /exec) vào đây để kích hoạt tự động gửi dữ liệu & email phản hồi thực tế.
+      // Nếu để trống "", hệ thống sẽ chạy ở chế độ Giả lập (Offline) trực quan.
+      var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxlnA5pFOJRJi5SIHfuPdSNmfht-ua6I4b1c9M4RtRkKsnxp5a6lJDqIR59oyNS6p1H/exec"; 
+      // ==========================================
+
+      var name     = document.getElementById('f-name').value.trim();
+      var phone    = document.getElementById('f-phone').value.trim();
+      var email    = document.getElementById('f-email').value.trim();
+      var position = document.getElementById('f-position').value;
+      var branch   = document.getElementById('f-branch').value;
+      var dateVal  = document.getElementById('f-date').value;
+      var agreed   = document.getElementById('f-agree').checked;
+      var errBox   = document.getElementById('err-box');
+      var errText  = document.getElementById('err-text');
+
+      // Validation
+      if (!name || !phone || !email || !position || !branch) {
+        showError("Bạn vui lòng điền đầy đủ tất cả thông tin cá nhân (bao gồm Email).");
+        return;
+      }
+
+      // Check simple email validation regex
+      var emailPat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPat.test(email)) {
+        showError("Địa chỉ Email nhập vào không hợp lệ. Vui lòng kiểm tra lại.");
+        return;
+      }
+
+      if (!hasSigned) {
+        showError("Bạn chưa ký tên. Hãy vẽ chữ ký điện tử của bạn vào bảng vẽ bên dưới.");
+        return;
+      }
+
+      if (!agreed) {
+        showError("Vui lòng tích chọn đồng ý cam kết tuân thủ quy định.");
+        return;
+      }
+
+      errBox.classList.remove('show');
+
+      // Button states
+      var btn = document.getElementById('btn-confirm');
+      btn.disabled = true;
+      btn.classList.add('loading');
+      btn.innerHTML = 'Đang tiến hành ký điện tử... &nbsp;';
+
+      var dateDisplay = dateVal
+        ? new Date(dateVal + 'T00:00:00').toLocaleDateString('vi-VN')
+        : new Date().toLocaleDateString('vi-VN');
+
+      var signatureBase64 = canvas.toDataURL('image/png');
+
+      if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.trim() !== "") {
+        // --- CHẾ ĐỘ CHẠY THỰC TẾ (ONLINE API) ---
+        var payload = {
+          name: name,
+          phone: phone,
+          email: email,
+          position: position,
+          branch: branch,
+          date: dateDisplay,
+          signature: signatureBase64
+        };
+
+        // Gửi POST request dạng no-cors để tránh lỗi CORS của Google Apps Script
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify(payload)
+        })
+        .then(function() {
+          // Với no-cors, trình duyệt sẽ gửi dữ liệu thành công lên Google Apps Script dưới nền
+          showSuccessCard(name, phone, email, position, branch, dateDisplay, signatureBase64);
+        })
+        .catch(function(error) {
+          console.error("Error submitting contract:", error);
+          showError("Lỗi kết nối: Không thể kết nối tới hệ thống tự động. Vui lòng kiểm tra mạng.");
+          resetButton();
+        });
+
+      } else {
+        // --- CHẾ ĐỘ GIẢ LẬP (OFFLINE SIMULATE) ---
+        setTimeout(function () {
+          showSuccessCard(name, phone, email, position, branch, dateDisplay, signatureBase64);
+        }, 1200);
+      }
+
+      // Hàm hiển thị vé xác thực thành công
+      function showSuccessCard(name, phone, email, position, branch, dateDisplay, signatureBase64) {
+        var formWrap = document.getElementById('form-wrapper');
+        formWrap.classList.add('hide');
+
+        document.getElementById('rendered-sig-img').src = signatureBase64;
+
+        document.getElementById('res-name').textContent = name;
+        document.getElementById('res-phone').textContent = phone;
+        document.getElementById('res-email').textContent = email;
+        document.getElementById('res-position').textContent = position;
+        document.getElementById('res-branch').textContent = branch;
+        document.getElementById('res-date').textContent = dateDisplay;
+
+        var card = document.getElementById('success-card');
+        card.classList.add('show');
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      // Hàm hiển thị thông báo lỗi
+      function showError(message) {
+        errText.textContent = message;
+        errBox.classList.add('show');
+        errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      // Hàm reset nút bấm ký tên
+      function resetButton() {
+        btn.disabled = false;
+        btn.classList.remove('loading');
+        btn.innerHTML = 'Ký Cam Kết Ngay';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>Trình Cà Phê | Hành Trình Hội Nhập 2025</title>
+  <meta name="description" content="Bộ slide hội nhập nhân sự chính thức của Trình Cà Phê. Sống tươi mỗi ngày qua tách cà phê.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --blue:      #05AFF2;
+      --blue-dark: #0084B5;
+      --blue-light:#E6F7FD;
+      --navy:      #0d2d45;
+      --navy2:     #1a3a52;
+      --green:     #2B4C3F;
+      --gold:      #dfb76c;
+      --coffee:    #3E2F2E;
+      --cream:     #F5FCFF;
+      --white:     #ffffff;
+      --text:      #1E282D;
+      --muted:     #5F6D75;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html, body { width:100%; height:100%; overflow:hidden; font-family:'Outfit',sans-serif; background:#0a1a2e; }
+
+    /* ═══ SLIDE ENGINE ═══ */
+    .deck {
+      width:100vw;
+      height:100vh;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .slide {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:40px 32px;
+      opacity:0;
+      transform:translateX(100%);
+      transition:opacity .5s ease, transform .5s cubic-bezier(.4,0,.2,1);
+      pointer-events:none;
+      overflow-y:auto;
+    }
+    .slide.active {
+      opacity:1;
+      transform:translateX(0);
+      pointer-events:all;
+    }
+    .slide.exit-left {
+      opacity:0;
+      transform:translateX(-60px);
+    }
+
+    /* ═══ NAV BAR (TOP) ═══ */
+    .top-bar {
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:100;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 24px;
+      background:rgba(10,26,46,.75);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .top-bar .brand {
+      display:flex; align-items:center; gap:10px;
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:15px; color:#fff;
+    }
+    .top-bar .brand img { height:28px; }
+    .slide-counter {
+      font-size:12px; font-weight:700; color:rgba(255,255,255,.55);
+      font-family:'Montserrat',sans-serif; letter-spacing:1px;
+    }
+
+    /* ═══ PROGRESS DOTS ═══ */
+    .dots {
+      position:fixed;
+      bottom:24px; left:50%;
+      transform:translateX(-50%);
+      z-index:100;
+      display:flex; gap:8px; align-items:center;
+    }
+    .dot {
+      width:8px; height:8px; border-radius:50%;
+      background:rgba(255,255,255,.25);
+      cursor:pointer;
+      transition:all .3s ease;
+    }
+    .dot.active { width:24px; border-radius:4px; background:var(--blue); }
+
+    /* ═══ ARROW NAVIGATION ═══ */
+    .nav-btn {
+      position:fixed;
+      top:50%; transform:translateY(-50%);
+      z-index:100;
+      width:44px; height:44px; border-radius:50%;
+      background:rgba(255,255,255,.1);
+      backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,.15);
+      color:#fff; font-size:16px;
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      transition:all .25s ease;
+    }
+    .nav-btn:hover { background:var(--blue); border-color:var(--blue); transform:translateY(-50%) scale(1.1); }
+    .nav-btn:disabled { opacity:.25; cursor:not-allowed; pointer-events:none; }
+    #btn-prev { left:16px; }
+    #btn-next { right:16px; }
+
+    /* ═══ KEYBOARD HINT ═══ */
+    .key-hint {
+      position:fixed;
+      bottom:58px; right:20px;
+      font-size:11px; color:rgba(255,255,255,.3);
+      display:flex; align-items:center; gap:5px;
+    }
+    .key-hint kbd {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:20px; height:20px; border-radius:4px;
+      background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.15);
+      font-family:'Montserrat',sans-serif; font-size:9px; color:rgba(255,255,255,.5);
+    }
+
+    /* ═══════════════════════════════
+       SLIDE THEMES & UTILITIES
+    ═══════════════════════════════ */
+    .bg-navy    { background:linear-gradient(145deg, #0a1a2e 0%, #0d2d45 100%); }
+    .bg-blue    { background:linear-gradient(145deg, #0369a1 0%, #0284c7 60%, #05AFF2 100%); }
+    .bg-coffee  { background:linear-gradient(145deg, #281D1C 0%, #3E2F2E 100%); }
+    .bg-cream   { background:linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%); }
+    .bg-green   { background:linear-gradient(145deg, #14532d 0%, #166534 60%, #2B4C3F 100%); }
+    .bg-dark    { background:linear-gradient(145deg, #111827 0%, #1f2937 100%); }
+    .bg-slate   { background:linear-gradient(145deg, #0f172a 0%, #1e293b 100%); }
+
+    h1,h2,h3 { font-family:'Montserrat',sans-serif; }
+
+    .slide-tag {
+      font-size:11px; font-weight:800; letter-spacing:2.5px; text-transform:uppercase;
+      color:var(--blue); background:rgba(5,175,242,.15); border:1px solid rgba(5,175,242,.3);
+      padding:5px 14px; border-radius:50px; display:inline-block; margin-bottom:20px;
+    }
+    .slide-tag.gold { color:var(--gold); background:rgba(223,183,108,.12); border-color:rgba(223,183,108,.3); }
+    .slide-tag.green { color:#34d399; background:rgba(52,211,153,.12); border-color:rgba(52,211,153,.3); }
+
+    /* ═══ SLIDE 1: COVER ═══ */
+    #s1 { text-align:center; }
+    #s1 .cover-logo {
+      width:90px; height:90px; border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),#b8892e);
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto 24px;
+      box-shadow:0 0 0 16px rgba(223,183,108,.1), 0 0 0 32px rgba(223,183,108,.05);
+      animation:pulse-ring 3s ease infinite;
+    }
+    @keyframes pulse-ring {
+      0%,100% { box-shadow:0 0 0 16px rgba(223,183,108,.1), 0 0 0 32px rgba(223,183,108,.05); }
+      50%     { box-shadow:0 0 0 22px rgba(223,183,108,.15), 0 0 0 44px rgba(223,183,108,.06); }
+    }
+    #s1 .cover-logo img { width:56px; }
+    #s1 h1 {
+      font-size:clamp(32px,6vw,64px); font-weight:900; color:#fff;
+      line-height:1.05; margin-bottom:16px;
+    }
+    #s1 h1 span { color:var(--gold); }
+    #s1 .cover-sub {
+      font-family:'Dancing Script',cursive; font-size:clamp(20px,3vw,28px);
+      color:rgba(255,255,255,.7); margin-bottom:32px;
+    }
+    #s1 .cover-chips {
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:40px;
+    }
+    #s1 .chip {
+      padding:7px 18px; border-radius:50px;
+      border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.7);
+      font-size:13px; font-weight:600;
+      background:rgba(255,255,255,.06);
+    }
+    #s1 .start-btn {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:14px 36px; border-radius:50px;
+      background:linear-gradient(135deg,var(--blue),var(--blue-dark));
+      color:#fff; font-size:16px; font-weight:700;
+      border:none; cursor:pointer;
+      box-shadow:0 8px 32px rgba(5,175,242,.35);
+      transition:all .3s ease; font-family:'Montserrat',sans-serif;
+    }
+    #s1 .start-btn:hover { transform:translateY(-3px); box-shadow:0 16px 48px rgba(5,175,242,.5); }
+
+    /* ═══ CONTENT SLIDES ═══ */
+    .slide-inner { max-width:900px; width:100%; }
+    .slide-title {
+      font-size:clamp(26px,5vw,48px); font-weight:900;
+      color:#fff; line-height:1.1; margin-bottom:12px;
+    }
+    .slide-title.dark { color:var(--text); }
+    .slide-subtitle { font-size:16px; color:rgba(255,255,255,.65); margin-bottom:36px; line-height:1.6; }
+    .slide-subtitle.dark { color:var(--muted); }
+
+    /* 2-col grid */
+    .two-col {
+      display:grid; grid-template-columns:1fr 1fr; gap:28px;
+      align-items:start;
+    }
+    @media(max-width:640px){ .two-col{ grid-template-columns:1fr; } }
+
+    /* Cards */
+    .glass-card {
+      background:rgba(255,255,255,.07);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:20px;
+      padding:24px;
+    }
+    .glass-card.light {
+      background:rgba(255,255,255,.9);
+      border:1px solid rgba(5,175,242,.15);
+      color:var(--text);
+    }
+    .glass-card h3 {
+      font-size:16px; font-weight:800; color:#fff; margin-bottom:10px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .glass-card.light h3 { color:var(--blue-dark); }
+    .glass-card p { font-size:14px; color:rgba(255,255,255,.75); line-height:1.65; }
+    .glass-card.light p { color:var(--muted); }
+
+    /* ═══ SLIDE 3: VISION/MISSION PILLARS ═══ */
+    .pillars { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:16px; }
+    .pillar {
+      padding:24px 20px; border-radius:16px; text-align:center;
+      background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);
+      transition:transform .3s ease;
+    }
+    .pillar:hover { transform:translateY(-6px); }
+    .pillar .pi { font-size:32px; margin-bottom:12px; }
+    .pillar h4 { font-size:14px; font-weight:800; color:#fff; margin-bottom:8px; }
+    .pillar p  { font-size:12.5px; color:rgba(255,255,255,.65); line-height:1.55; }
+
+    /* ═══ SLIDE 4: PHILOSOPHY ═══ */
+    .philosophy-big {
+      font-family:'Dancing Script',cursive;
+      font-size:clamp(28px,6vw,60px);
+      color:var(--gold);
+      text-align:center;
+      line-height:1.2;
+      margin-bottom:28px;
+      text-shadow:0 0 60px rgba(223,183,108,.3);
+    }
+    .five-tuoi {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px;
+    }
+    .tuoi-item {
+      padding:16px; border-radius:14px; text-align:center;
+      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.1);
+    }
+    .tuoi-item .ico { font-size:24px; margin-bottom:8px; }
+    .tuoi-item span { font-size:13px; font-weight:700; color:#fff; display:block; }
+
+    /* ═══ SLIDE 5: STORES GRID ═══ */
+    .stores-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+    .store-card {
+      padding:16px; border-radius:14px;
+      background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);
+      transition:transform .3s ease;
+    }
+    .store-card:hover { transform:translateY(-4px); background:rgba(5,175,242,.12); border-color:rgba(5,175,242,.3); }
+    .store-card .sn { font-size:11px; font-weight:800; color:var(--blue); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+    .store-card h4 { font-size:14px; font-weight:800; color:#fff; margin-bottom:4px; }
+    .store-card p  { font-size:12px; color:rgba(255,255,255,.55); line-height:1.5; }
+    .store-card .hours { font-size:11px; color:var(--gold); font-weight:700; margin-top:8px; }
+    .store-card a { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; color:var(--blue); margin-top:8px; text-decoration:none; }
+    .store-card a:hover { color:#fff; }
+
+    /* ═══ SLIDE 6: ORG CHART ═══ */
+    .org-tiers { display:flex; flex-direction:column; gap:0; width:100%; }
+    .org-row { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:10px; padding:10px 0; position:relative; }
+    .org-row:not(:last-child)::after {
+      content:''; position:absolute; bottom:-1px; left:50%; transform:translateX(-50%);
+      width:2px; height:12px; background:rgba(255,255,255,.2);
+    }
+    .org-card {
+      padding:10px 14px; border-radius:12px; text-align:center; color:#fff; min-width:130px;
+      font-size:12px; font-weight:700;
+    }
+    .org-card.ceo-c {
+      background:linear-gradient(135deg,#1a3a52,#0d2d45);
+      border:2px solid var(--gold);
+      min-width:200px; padding:14px 28px;
+      box-shadow:0 0 30px rgba(223,183,108,.2);
+    }
+    .org-card.ceo-c .name { font-size:22px; font-weight:900; display:block; }
+    .org-card.filled-c { background:linear-gradient(135deg,var(--blue),var(--blue-dark)); }
+    .org-card.vacant-c { background:linear-gradient(135deg,#10B981,#047857); }
+    .org-card .role { font-size:9px; letter-spacing:1px; text-transform:uppercase; opacity:.8; display:block; margin-bottom:2px; }
+    .org-tier-label-s { font-size:9px; font-weight:800; color:rgba(255,255,255,.3); text-transform:uppercase; letter-spacing:1.5px; text-align:center; margin-bottom:4px; }
+
+    /* ═══ SLIDE 7: TIMELINE ═══ */
+    .timeline-slides { display:flex; flex-direction:column; gap:16px; }
+    .tl-item {
+      display:flex; gap:20px; align-items:flex-start;
+      padding:20px; border-radius:16px;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+    }
+    .tl-dot {
+      width:44px; height:44px; border-radius:50%; flex-shrink:0;
+      background:linear-gradient(135deg,var(--blue),var(--blue-dark));
+      display:flex; align-items:center; justify-content:center;
+      font-weight:900; font-size:18px; color:#fff;
+      font-family:'Montserrat',sans-serif;
+    }
+    .tl-item h4 { font-size:16px; font-weight:800; color:#fff; margin-bottom:4px; }
+    .tl-item .date { font-size:11px; color:var(--blue); font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; display:block; }
+    .tl-item p  { font-size:13px; color:rgba(255,255,255,.65); line-height:1.55; }
+    .tl-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+    .tl-tag { font-size:11px; font-weight:700; padding:3px 10px; border-radius:50px; background:rgba(5,175,242,.15); color:var(--blue); }
+
+    /* ═══ SLIDE 8: WORKFLOW ═══ */
+    .wf-steps { display:flex; flex-direction:column; gap:12px; }
+    .wf-step {
+      display:flex; gap:18px; align-items:flex-start;
+      padding:16px 20px; border-radius:14px;
+      background:rgba(255,255,255,.06); border-left:3px solid var(--blue);
+      transition:all .3s ease;
+    }
+    .wf-step:hover { background:rgba(5,175,242,.1); transform:translateX(6px); }
+    .wf-num {
+      width:34px; height:34px; border-radius:50%; flex-shrink:0;
+      background:var(--blue); display:flex; align-items:center; justify-content:center;
+      font-weight:900; font-size:14px; color:#fff; font-family:'Montserrat',sans-serif;
+    }
+    .wf-step h4 { font-size:15px; font-weight:800; color:#fff; margin-bottom:3px; }
+    .wf-step p  { font-size:13px; color:rgba(255,255,255,.6); line-height:1.5; }
+
+    /* ═══ SLIDE 9: CHECKLIST ═══ */
+    .checklist-slides { display:flex; flex-direction:column; gap:10px; }
+    .cl-item {
+      display:flex; align-items:center; gap:14px;
+      padding:14px 18px; border-radius:12px;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08);
+      cursor:pointer; transition:all .25s ease;
+    }
+    .cl-item:hover { background:rgba(5,175,242,.1); border-color:rgba(5,175,242,.2); }
+    .cl-item.done { background:rgba(16,185,129,.12); border-color:rgba(16,185,129,.2); }
+    .cl-box {
+      width:24px; height:24px; border-radius:6px; flex-shrink:0;
+      border:2px solid rgba(255,255,255,.3);
+      display:flex; align-items:center; justify-content:center;
+      font-size:12px; color:transparent; transition:all .25s ease;
+    }
+    .cl-item.done .cl-box { border-color:#10B981; background:#10B981; color:#fff; }
+    .cl-item span { font-size:14px; color:rgba(255,255,255,.8); font-weight:500; }
+    .cl-item.done span { color:rgba(255,255,255,.5); text-decoration:line-through; }
+    .progress-wrap { margin-bottom:20px; }
+    .progress-bar-s {
+      height:8px; border-radius:4px; background:rgba(255,255,255,.1);
+      overflow:hidden; margin-bottom:8px;
+    }
+    .progress-bar-fill-s {
+      height:100%; border-radius:4px;
+      background:linear-gradient(90deg,var(--blue),#10B981);
+      transition:width .4s ease;
+    }
+    .progress-info { display:flex; justify-content:space-between; font-size:12px; color:rgba(255,255,255,.5); }
+
+    /* ═══ SLIDE 10: FORM ═══ */
+    .form-slide { max-width:560px; width:100%; }
+    .form-group-s { margin-bottom:16px; }
+    .form-group-s label {
+      display:block; font-size:11px; font-weight:800;
+      text-transform:uppercase; letter-spacing:1px;
+      color:rgba(255,255,255,.5); margin-bottom:7px;
+    }
+    .form-group-s input,
+    .form-group-s textarea {
+      width:100%; padding:12px 16px; border-radius:12px;
+      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15);
+      color:#fff; font-family:'Outfit',sans-serif; font-size:14px;
+      outline:none; transition:all .25s ease;
+    }
+    .form-group-s input:focus,
+    .form-group-s textarea:focus { border-color:var(--blue); background:rgba(5,175,242,.08); box-shadow:0 0 0 3px rgba(5,175,242,.15); }
+    .form-group-s input::placeholder,
+    .form-group-s textarea::placeholder { color:rgba(255,255,255,.3); }
+    .form-group-s textarea { resize:vertical; min-height:80px; }
+    .two-col-form { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media(max-width:500px){ .two-col-form{ grid-template-columns:1fr; } }
+    .agree-row {
+      display:flex; align-items:flex-start; gap:12px;
+      padding:14px; border-radius:12px;
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08);
+      margin-bottom:16px; cursor:pointer;
+    }
+    .agree-row input { width:18px; height:18px; flex-shrink:0; accent-color:var(--blue); margin-top:2px; cursor:pointer; }
+    .agree-row span { font-size:13px; color:rgba(255,255,255,.65); line-height:1.5; }
+    .submit-btn-s {
+      width:100%; padding:16px; border-radius:14px;
+      background:linear-gradient(135deg,var(--blue),var(--blue-dark));
+      color:#fff; font-size:16px; font-weight:800; font-family:'Montserrat',sans-serif;
+      border:none; cursor:pointer;
+      box-shadow:0 8px 32px rgba(5,175,242,.35);
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      transition:all .3s ease;
+    }
+    .submit-btn-s:hover { transform:translateY(-3px); box-shadow:0 16px 48px rgba(5,175,242,.5); }
+    .submit-btn-s:disabled { opacity:.5; cursor:not-allowed; transform:none; }
+
+    /* ═══ SUCCESS MODAL ═══ */
+    .modal-overlay {
+      position:fixed; inset:0; z-index:999;
+      background:rgba(0,0,0,.8); backdrop-filter:blur(10px);
+      display:flex; align-items:center; justify-content:center;
+      padding:24px; opacity:0; pointer-events:none;
+      transition:opacity .4s ease;
+    }
+    .modal-overlay.show { opacity:1; pointer-events:all; }
+    .modal-card {
+      max-width:480px; width:100%; border-radius:28px;
+      background:linear-gradient(145deg,#0d2d45,#1a3a52);
+      border:2px solid var(--gold);
+      padding:40px 36px; text-align:center;
+      box-shadow:0 32px 80px rgba(0,0,0,.6);
+      transform:scale(.9); transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+    }
+    .modal-overlay.show .modal-card { transform:scale(1); }
+    .modal-logo { width:70px; height:70px; border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--gold),#b8892e); }
+    .modal-logo img { width:44px; }
+    .modal-card h2 { font-size:22px; color:#fff; margin-bottom:16px; }
+    .modal-body p { font-size:14px; color:rgba(255,255,255,.7); line-height:1.7; margin-bottom:10px; }
+    .modal-slogan { font-family:'Dancing Script',cursive; font-size:22px; color:var(--gold); margin:16px 0; }
+    .modal-close {
+      margin-top:24px; padding:12px 32px; border-radius:50px;
+      background:linear-gradient(135deg,var(--blue),var(--blue-dark));
+      color:#fff; font-size:15px; font-weight:800; font-family:'Montserrat',sans-serif;
+      border:none; cursor:pointer; display:inline-flex; align-items:center; gap:8px;
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media(max-width:640px) {
+      .slide { padding:72px 16px 80px; }
+      .nav-btn { display:none; }
+      .slide-title { font-size:26px; }
+      .stores-grid { grid-template-columns:1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ TOP BAR ═══ -->
+<div class="top-bar">
+  <div class="brand">
+    <a href="index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 10px;">
+      <img src="logo-trinh.png" alt="Logo Trình">
+      Trình Cà Phê
+    </a>
+  </div>
+  <div style="display: flex; align-items: center; gap: 16px;">
+    <a href="index.html" style="color: rgba(255,255,255,.6); text-decoration: none; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px; transition: all .2s ease;" onmouseover="this.style.color='#05AFF2'" onmouseout="this.style.color='rgba(255,255,255,.6)'">
+      <i class="fa-solid fa-house"></i> Cổng Hội Nhập
+    </a>
+    <span style="color: rgba(255,255,255,.15);">|</span>
+    <div class="slide-counter"><span id="cur">1</span> / <span id="tot">10</span></div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE DECK ═══ -->
+<div class="deck" id="deck">
+
+  <!-- ─── SLIDE 1: COVER ─── -->
+  <div class="slide bg-navy active" id="s1">
+    <div class="cover-logo">
+      <img src="logo-trinh.png" alt="Logo Trình">
+    </div>
+    <h1>Chào Mừng Đến<br>Với <span>Nhà Trình</span></h1>
+    <div class="cover-sub">"Sống tươi mỗi ngày qua tách cà phê"</div>
+    <div class="cover-chips">
+      <span class="chip"><i class="fa-solid fa-calendar-check"></i> Onboarding 2025</span>
+      <span class="chip"><i class="fa-solid fa-mug-hot"></i> Trình Cà Phê</span>
+      <span class="chip"><i class="fa-solid fa-map-location-dot"></i> Đà Nẵng · Hội An</span>
+    </div>
+    <button class="start-btn" onclick="goTo(1)">
+      <i class="fa-solid fa-play"></i> Bắt đầu hành trình
+    </button>
+  </div>
+
+  <!-- ─── SLIDE 2: VỀ TRÌNH ─── -->
+  <div class="slide bg-coffee" id="s2">
+    <div class="slide-inner">
+      <div class="slide-tag gold"><i class="fa-solid fa-book-open"></i> Câu Chuyện Thương Hiệu</div>
+      <h2 class="slide-title">Về Trình Cà Phê</h2>
+      <p class="slide-subtitle">Một quán cà phê bơ — một triết lý sống tươi — một mái nhà chung.</p>
+      <div class="two-col">
+        <div>
+          <div class="glass-card" style="margin-bottom:16px;">
+            <h3><i class="fa-solid fa-seedling"></i> Khởi Đầu</h3>
+            <p>Trình Cà Phê ra đời từ tình yêu với hạt cà phê Việt Nam và hương vị bơ sáp Krông Năng nguyên chất. Từ một cửa hàng nhỏ, Trình đã phát triển thành chuỗi 8 cơ sở trải dài Đà Nẵng và Hội An.</p>
+          </div>
+          <div class="glass-card">
+            <h3><i class="fa-solid fa-leaf"></i> Triết Lý "5 Tươi"</h3>
+            <p>Tươi nguyên liệu — Tươi cảm xúc — Tươi không gian — Tươi sáng tạo — Tươi nhân sự. Mỗi ngày ở Trình là một ngày đáng sống.</p>
+          </div>
+        </div>
+        <div class="glass-card" style="display:flex;align-items:center;justify-content:center;min-height:200px;">
+          <img src="slogan-philosophy.png" alt="Trình Cà Phê" style="width:100%;border-radius:12px;object-fit:cover;max-height:260px;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 3: VISION / MISSION ─── -->
+  <div class="slide bg-dark" id="s3">
+    <div class="slide-inner">
+      <div class="slide-tag"><i class="fa-solid fa-bullseye"></i> Định Hướng Phát Triển</div>
+      <h2 class="slide-title">Tầm Nhìn &amp; Sứ Mệnh</h2>
+      <p class="slide-subtitle">Những nguyên tắc dẫn lối cho mọi quyết định và hành động tại Trình.</p>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pi">🔭</div>
+          <h4>Tầm Nhìn</h4>
+          <p>Trở thành chuỗi cà phê đặc sản miền Trung dẫn đầu về trải nghiệm "Sống Tươi" — nơi mỗi tách cà phê là một khoảnh khắc đáng nhớ.</p>
+        </div>
+        <div class="pillar">
+          <div class="pi">❤️</div>
+          <h4>Sứ Mệnh</h4>
+          <p>Nuôi dưỡng nguồn năng lượng tươi vui mỗi ngày cho bà con qua những sản phẩm chất lượng cao và không gian ấm áp, chân thành.</p>
+        </div>
+        <div class="pillar">
+          <div class="pi">⭐</div>
+          <h4>Giá Trị Cốt Lõi</h4>
+          <p><strong style="color:#fff">Tươi · Thật · Tình</strong><br>Tươi trong sản phẩm, Thật trong con người, Tình trong từng dịch vụ.</p>
+        </div>
+        <div class="pillar">
+          <div class="pi">🌱</div>
+          <h4>Cam Kết</h4>
+          <p>Sử dụng 100% nguyên liệu tươi mỗi ngày. Cà phê rang mộc từ Trình Farm Đắk Lắk. Bơ sáp hái chín tự nhiên.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 4: TRIẾT LÝ SLOGAN ─── -->
+  <div class="slide bg-navy" id="s4">
+    <div class="slide-inner" style="text-align:center">
+      <div class="slide-tag gold"><i class="fa-solid fa-quote-left"></i> Triết Lý Thương Hiệu</div>
+      <div class="philosophy-big">"Sống tươi mỗi ngày<br>qua tách cà phê"</div>
+      <p class="slide-subtitle">Từ những hạt cà phê tươi xanh tới nụ cười tươi vui và nguồn năng lượng sống từng ngày được nuôi dưỡng. Giống như cây tràn đầy nhựa sống, Trình mong bà con cũng sẽ tràn đầy sức sống với tình yêu và những điều bình dị nhỏ bé mỗi ngày.</p>
+      <div class="five-tuoi">
+        <div class="tuoi-item"><div class="ico">🥑</div><span>Tươi Nguyên Liệu</span></div>
+        <div class="tuoi-item"><div class="ico">😊</div><span>Tươi Cảm Xúc</span></div>
+        <div class="tuoi-item"><div class="ico">🌿</div><span>Tươi Không Gian</span></div>
+        <div class="tuoi-item"><div class="ico">💡</div><span>Tươi Sáng Tạo</span></div>
+        <div class="tuoi-item"><div class="ico">🤝</div><span>Tươi Nhân Sự</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 5: CHUỖI CỬA HÀNG ─── -->
+  <div class="slide bg-slate" id="s5">
+    <div class="slide-inner">
+      <div class="slide-tag green"><i class="fa-solid fa-map-location-dot"></i> Chuỗi Cơ Sở</div>
+      <h2 class="slide-title">8 Địa Điểm Nhà Trình</h2>
+      <p class="slide-subtitle" style="margin-bottom:20px">Từ trung tâm Đà Nẵng đến phố cổ Hội An — Trình hiện diện ở khắp nơi.</p>
+      <div class="stores-grid">
+        <div class="store-card">
+          <div class="sn">CS 01 · 24/7</div>
+          <h4>Nguyễn Hữu Thọ</h4>
+          <p>111 Nguyễn Hữu Thọ, Hoà Cường, Đà Nẵng</p>
+          <div class="hours">⏰ Mở cửa 24/7</div>
+          <a href="https://maps.google.com/?q=111+Nguy%E1%BB%85n+H%E1%BB%AFu+Th%E1%BB%8D,+%C4%90%C3%A0+N%E1%BA%B5ng" target="_blank"><i class="fa-solid fa-location-dot"></i> Bản đồ</a>
+        </div>
+        <div class="store-card">
+          <div class="sn">CS 02 · MỚI · 24/7</div>
+          <h4>Trình VTV8</h4>
+          <p>258 Bạch Đằng, Hải Châu, Đà Nẵng</p>
+          <div class="hours">⏰ Mở cửa 24/7</div>
+          <a href="https://maps.google.com/?q=258+B%E1%BA%A1ch+%C4%90%E1%BA%B1ng,+%C4%90%C3%A0+N%E1%BA%B5ng" target="_blank"><i class="fa-solid fa-location-dot"></i> Bản đồ</a>
+        </div>
+        <div class="store-card">
+          <div class="sn">CS 03</div>
+          <h4>Phạm Hồng Thái</h4>
+          <p>25 Phạm Hồng Thái, Hải Châu, Đà Nẵng</p>
+          <div class="hours">⏰ 6:30 — 01:00</div>
+          <a href="https://maps.google.com/?q=25+Ph%E1%BA%A1m+H%E1%BB%93ng+Th%C3%A1i,+%C4%90%C3%A0+N%E1%BA%B5ng" target="_blank"><i class="fa-solid fa-location-dot"></i> Bản đồ</a>
+        </div>
+        <div class="store-card">
+          <div class="sn">CS 04</div>
+          <h4>Phố Đi Bộ</h4>
+          <p>Phố đi bộ Bạch Đằng, Phước Ninh, Đà Nẵng</p>
+          <div class="hours">⏰ 4:00 — 01:00</div>
+          <a href="https://maps.app.goo.gl/QUqwqe9B89ywxDQXA" target="_blank"><i class="fa-solid fa-location-dot"></i> Bản đồ</a>
+        </div>
+        <div class="store-card">
+          <div class="sn">CS 05</div>
+          <h4>Chợ Hàn</h4>
+          <p>Chợ Hàn — Cổng Bạch Đằng, Đà Nẵng</p>
+          <div class="hours">⏰ 7:00 — 18:30</div>
+          <a href="https://maps.app.goo.gl/SMxdXcA9NPW2gi8Y9" target="_blank"><i class="fa-solid fa-location-dot"></i> Bản đồ</a>
+        </div>
+        <div class="store-card">
+          <div class="sn">CS 06</div>
+          <h4>Cá Chép Hoá Rồng</h4>
+          <p>Tượng Cá Chép Hoá Rồng, Đà Nẵng</p>
+          <div class="hours">⏰ 7:00 — 23:00</div>
+          <a href="https://maps.app.goo.gl/rJfvzATJgXDaR1GHA" target="_blank"><i class="fa-solid fa-location-dot"></i> Bản đồ</a>
+        </div>
+        <div class="store-card">
+          <div class="sn">CS 07</div>
+          <h4>Bảo Tàng Đà Nẵng</h4>
+          <p>31 Trần Phú, Hải Châu, Đà Nẵng</p>
+          <div class="hours">⏰ 8:00 — 17:00</div>
+          <a href="https://maps.google.com/?q=31+Tr%E1%BA%A7n+Ph%C3%BA,+%C4%90%C3%A0+N%E1%BA%B5ng" target="_blank"><i class="fa-solid fa-location-dot"></i> Bản đồ</a>
+        </div>
+        <div class="store-card">
+          <div class="sn">CS 08 · HỘI AN</div>
+          <h4>Trình Hội An</h4>
+          <p>200 Nguyễn Tri Phương rẽ trái, Hội An</p>
+          <div class="hours">⏰ 6:30 — 22:30</div>
+          <a href="https://maps.app.goo.gl/F4buiHsQX4KXcnzd9" target="_blank"><i class="fa-solid fa-location-dot"></i> Bản đồ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 6: SƠ ĐỒ TỔ CHỨC ─── -->
+  <div class="slide bg-dark" id="s6">
+    <div class="slide-inner">
+      <div class="slide-tag"><i class="fa-solid fa-sitemap"></i> Cơ Cấu Tổ Chức</div>
+      <h2 class="slide-title">Sơ Đồ Tổ Chức Nhà Trình</h2>
+      <p class="slide-subtitle" style="margin-bottom:16px">5 tầng cấp bậc — 6 khối phòng ban — bộ máy vận hành toàn chuỗi.</p>
+      <div class="org-tiers">
+        <div class="org-tier-label-s">TẦNG 1 — BAN ĐIỀU HÀNH</div>
+        <div class="org-row">
+          <div class="org-card ceo-c">
+            <span class="role">CEO &amp; Sáng Lập</span>
+            <span class="name">Anh Sơn</span>
+          </div>
+        </div>
+        <div class="org-tier-label-s" style="margin-top:10px">TẦNG 2 — TRƯỞNG KHỐI</div>
+        <div class="org-row">
+          <div class="org-card vacant-c"><span class="role">QC &amp; Training</span>Đang Tuyển</div>
+          <div class="org-card filled-c"><span class="role">Head of Product</span>Anh Tân</div>
+          <div class="org-card filled-c"><span class="role">Operation Manager</span>Anh Sơn</div>
+          <div class="org-card filled-c"><span class="role">Kế Toán Tài Chính</span>Kim Anh</div>
+          <div class="org-card vacant-c"><span class="role">Trưởng Nhân Sự</span>Đang Tuyển</div>
+          <div class="org-card filled-c"><span class="role">Phụ Trách MKT</span>Chị Hương</div>
+        </div>
+        <div class="org-tier-label-s" style="margin-top:10px">TẦNG 3 — QUẢN LÝ</div>
+        <div class="org-row">
+          <div class="org-card filled-c"><span class="role">Food Manager</span>Nhựt</div>
+          <div class="org-card filled-c"><span class="role">Barista Manager</span>Toàn</div>
+          <div class="org-card vacant-c"><span class="role">Quản Lý Vùng</span>Đang Tuyển</div>
+          <div class="org-card vacant-c"><span class="role">Kế Toán Trưởng</span>Đang Tuyển</div>
+          <div class="org-card filled-c"><span class="role">MKT Manager</span>Anh Vũ</div>
+        </div>
+        <div class="org-tier-label-s" style="margin-top:10px">TẦNG 4–5 — CHUYÊN VIÊN &amp; THỰC THI</div>
+        <div class="org-row">
+          <div class="org-card filled-c"><span class="role">Cửa Hàng Trưởng</span>Từng CS</div>
+          <div class="org-card filled-c"><span class="role">Kế Toán Thu Chi</span>Ngọc Huyền</div>
+          <div class="org-card filled-c"><span class="role">Creative Strategist</span>Tú Anh</div>
+          <div class="org-card filled-c"><span class="role">MKT Sản Phẩm</span>Đạt</div>
+          <div class="org-card filled-c"><span class="role">Fulltime MKT</span>Vy</div>
+          <div class="org-card filled-c"><span class="role">Giám Sát Ca</span>Từng ca</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:16px;justify-content:center;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.5)">
+          <div style="width:12px;height:12px;border-radius:3px;background:linear-gradient(135deg,#05AFF2,#037ab0)"></div>Đã có nhân sự
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.5)">
+          <div style="width:12px;height:12px;border-radius:3px;background:linear-gradient(135deg,#10B981,#047857)"></div>Đang tuyển dụng
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 7: 30 NGÀY HÀNH TRÌNH ─── -->
+  <div class="slide bg-blue" id="s7">
+    <div class="slide-inner">
+      <div class="slide-tag" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff"><i class="fa-solid fa-route"></i> Lộ Trình Hội Nhập</div>
+      <h2 class="slide-title">30 Ngày Đầu Của Bạn</h2>
+      <p class="slide-subtitle" style="margin-bottom:20px">Hành trình từ hạt mầm đến cây cà phê đầu tiên trong Nhà Trình.</p>
+      <div class="timeline-slides">
+        <div class="tl-item">
+          <div class="tl-dot">1</div>
+          <div>
+            <span class="date">Ngày 1</span>
+            <h4>Chào Sân &amp; Setup</h4>
+            <p>Hội ngộ đội ngũ, tham quan quán, setup tài khoản Gmail và Odoo, làm quen môi trường.</p>
+            <div class="tl-tags">
+              <span class="tl-tag">Branding Platform</span>
+              <span class="tl-tag">Nhóm Zalo "Nhóm Tát"</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">2</div>
+          <div>
+            <span class="date">Ngày 2–3</span>
+            <h4>Nghiên Cứu Sản Phẩm &amp; Menu</h4>
+            <p>Hiểu về các dòng đồ uống signature, sản phẩm đóng gói và triết lý "5 Tươi".</p>
+            <div class="tl-tags">
+              <span class="tl-tag">Uống thử 4 signature</span>
+              <span class="tl-tag">Trình Farm</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">3</div>
+          <div>
+            <span class="date">Tuần 1</span>
+            <h4>Bắt Nhịp Quy Trình</h4>
+            <p>Nhận phân công các task cố định trên WORKING FILE_MKT. Đăng story và quay video theo định hướng.</p>
+            <div class="tl-tags">
+              <span class="tl-tag">Working File</span>
+              <span class="tl-tag">Báo cáo đầu ca</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">4</div>
+          <div>
+            <span class="date">Tuần 2+</span>
+            <h4>Vận Hành Độc Lập</h4>
+            <p>Tự chủ quản lý danh sách công việc, cập nhật trạng thái chuẩn xác, báo cáo đúng hạn.</p>
+            <div class="tl-tags">
+              <span class="tl-tag">Khung giờ vàng đăng bài</span>
+              <span class="tl-tag">Google Map checklist</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 8: QUY TRÌNH LÀM VIỆC ─── -->
+  <div class="slide bg-slate" id="s8">
+    <div class="slide-inner">
+      <div class="slide-tag"><i class="fa-solid fa-diagram-project"></i> Quy Trình MKT</div>
+      <h2 class="slide-title">Quy Trình Làm Việc Hằng Ngày</h2>
+      <p class="slide-subtitle" style="margin-bottom:20px">Chuỗi hành động chuẩn giúp đội ngũ MKT vận hành trơn tru và nhất quán.</p>
+      <div class="wf-steps">
+        <div class="wf-step">
+          <div class="wf-num">1</div>
+          <div>
+            <h4><i class="fa-solid fa-sun" style="color:var(--gold);margin-right:6px"></i>Báo Cáo Đầu Ca</h4>
+            <p>Gửi checklist nhiệm vụ ngày hôm nay qua Zalo "Nhóm Tát" trước 8:30 AM.</p>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">2</div>
+          <div>
+            <h4><i class="fa-solid fa-list-check" style="color:var(--blue);margin-right:6px"></i>Cập Nhật Working File</h4>
+            <p>Khai báo task, điền link sản phẩm, cập nhật trạng thái trên Google Sheets chia sẻ nội bộ.</p>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">3</div>
+          <div>
+            <h4><i class="fa-solid fa-file-image" style="color:#a78bfa;margin-right:6px"></i>Gửi Duyệt Thiết Kế</h4>
+            <p>Nộp ảnh/video về nhóm trước khung giờ đăng. Chờ duyệt từ Creative Strategist hoặc Manager.</p>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">4</div>
+          <div>
+            <h4><i class="fa-solid fa-clock" style="color:#f59e0b;margin-right:6px"></i>Đăng Bài Khung Giờ Vàng</h4>
+            <p>Tuân thủ nghiêm lịch đăng: 7:00 — 11:30 — 17:00 — 20:00. Không tự ý thay đổi giờ đăng.</p>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">5</div>
+          <div>
+            <h4><i class="fa-solid fa-moon" style="color:rgba(255,255,255,.5);margin-right:6px"></i>Tổng Kết Cuối Ca</h4>
+            <p>Báo cáo kết quả bài đăng, số reach/engagement, vấn đề phát sinh và đề xuất cải thiện.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 9: CHECKLIST ─── -->
+  <div class="slide bg-navy" id="s9">
+    <div class="slide-inner">
+      <div class="slide-tag green"><i class="fa-solid fa-list-check"></i> Checklist Hội Nhập</div>
+      <h2 class="slide-title">Đo Lường Tiến Độ</h2>
+      <p class="slide-subtitle" style="margin-bottom:16px">Tick đầy đủ để đạt <strong>≥70%</strong> và mở khoá form ký cam kết.</p>
+      <div class="progress-wrap">
+        <div class="progress-bar-s"><div class="progress-bar-fill-s" id="sl-progress" style="width:0%"></div></div>
+        <div class="progress-info">
+          <span id="sl-award">🌱 Hạt Cà Phê Mới Nảy Mầm</span>
+          <span id="sl-pct">0%</span>
+        </div>
+      </div>
+      <div class="checklist-slides" id="slide-checklist">
+        <div class="cl-item" onclick="toggleCl(this,10)" data-pts="10">
+          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
+          <span>Đọc kỹ Branding Platform &amp; hiểu 3 giá trị cốt lõi</span>
+        </div>
+        <div class="cl-item" onclick="toggleCl(this,10)" data-pts="10">
+          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
+          <span>Gia nhập nhóm Zalo "Nhóm Tát" và gửi lời chào bản thân</span>
+        </div>
+        <div class="cl-item" onclick="toggleCl(this,15)" data-pts="15">
+          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
+          <span>Thấu hiểu Triết lý "5 Tươi" và các hình ảnh chất liệu thương hiệu</span>
+        </div>
+        <div class="cl-item" onclick="toggleCl(this,15)" data-pts="15">
+          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
+          <span>Uống thử bơ &amp; hiểu quy chuẩn 4 sản phẩm signature</span>
+        </div>
+        <div class="cl-item" onclick="toggleCl(this,15)" data-pts="15">
+          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
+          <span>Nắm rõ vai trò các thành viên trong Sơ Đồ Tổ Chức Nhà Trình</span>
+        </div>
+        <div class="cl-item" onclick="toggleCl(this,20)" data-pts="20">
+          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
+          <span>Thực hành khai báo task và cập nhật link sản phẩm trên Working File</span>
+        </div>
+        <div class="cl-item" onclick="toggleCl(this,15)" data-pts="15">
+          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
+          <span>Hiểu rõ Tone &amp; Voice và các concept viết bài truyền thông</span>
+        </div>
+      </div>
+      <div style="text-align:right;margin-top:14px">
+        <button onclick="goTo(9)" id="sl-next-btn"
+          style="padding:10px 24px;border-radius:50px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;opacity:.4;pointer-events:none;transition:all .3s ease"
+          disabled>
+          Tiếp theo: Ký Cam Kết <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 10: FORM KÝ CAM KẾT ─── -->
+  <div class="slide bg-coffee" id="s10">
+    <div class="form-slide">
+      <div class="slide-tag gold" style="margin-bottom:16px"><i class="fa-solid fa-feather-pointed"></i> Ký Cam Kết Hội Nhập</div>
+      <h2 class="slide-title" style="font-size:30px;margin-bottom:8px">Bạn Đã Sẵn Sàng!</h2>
+      <p style="font-size:14px;color:rgba(255,255,255,.6);margin-bottom:24px">Điền đầy đủ thông tin và gửi cam kết để chính thức gia nhập Nhà Trình.</p>
+      <form id="slide-form" onsubmit="submitSlideForm(event)">
+        <div class="form-group-s">
+          <label>Họ và tên nhân viên</label>
+          <input type="text" id="sf-name" placeholder="Họ và tên đầy đủ của bạn" required>
+        </div>
+        <div class="form-group-s">
+          <label>Vị trí công tác</label>
+          <input type="text" id="sf-role" placeholder="Ví dụ: Thiết kế menu, Video creator..." required>
+        </div>
+        <div class="two-col-form">
+          <div class="form-group-s">
+            <label>Số điện thoại</label>
+            <input type="tel" id="sf-phone" placeholder="Số điện thoại" required>
+          </div>
+          <div class="form-group-s">
+            <label>Địa chỉ Email</label>
+            <input type="email" id="sf-email" placeholder="Email liên hệ" required>
+          </div>
+        </div>
+        <div class="form-group-s">
+          <label>Đóng góp ý kiến sau khi đọc</label>
+          <textarea id="sf-feedback" placeholder="Bạn có thắc mắc hay gặp khó khăn gì không?"></textarea>
+        </div>
+        <div class="agree-row" onclick="this.querySelector('input').click()">
+          <input type="checkbox" id="sf-agree" required onclick="event.stopPropagation()">
+          <span>Tôi cam kết đã tìm hiểu kỹ và nghiêm túc tuân thủ mọi nguyên tắc vận hành của Trình Cà Phê.</span>
+        </div>
+        <button type="submit" class="submit-btn-s" id="sf-btn">
+          <i class="fa-solid fa-paper-plane"></i> Gửi Cam Kết Hội Nhập
+        </button>
+      </form>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- ═══ PROGRESS DOTS ═══ -->
+<div class="dots" id="dots"></div>
+
+<!-- ═══ NAVIGATION ARROWS ═══ -->
+<button class="nav-btn" id="btn-prev" onclick="prevSlide()" disabled>
+  <i class="fa-solid fa-chevron-left"></i>
+</button>
+<button class="nav-btn" id="btn-next" onclick="nextSlide()">
+  <i class="fa-solid fa-chevron-right"></i>
+</button>
+
+<!-- ═══ KEYBOARD HINT ═══ -->
+<div class="key-hint">
+  <kbd>←</kbd><kbd>→</kbd> phím mũi tên · Swipe trên mobile
+</div>
+
+<!-- ═══ SUCCESS MODAL ═══ -->
+<div class="modal-overlay" id="success-modal">
+  <div class="modal-card">
+    <div class="modal-logo"><img src="logo-trinh.png" alt="Logo"></div>
+    <h2>Chào mừng bạn gia nhập Nhà Trình! 🕊️</h2>
+    <div class="modal-body">
+      <p>Thương chào <strong id="modal-name" style="color:var(--blue)"></strong> – thành viên mới toanh của đại gia đình Trình Cà Phê!</p>
+      <p>Bạn đã hoàn thành xuất sắc hành trình hội nhập với tinh thần rất "Tươi" và đầy nhiệt huyết.</p>
+      <div class="modal-slogan">"Sống tươi mỗi ngày qua tách cà phê"</div>
+      <p>Chúc bạn có những ngày tháng làm việc rực rỡ dưới mái nhà chung mang tên Trình! ☕✨</p>
+    </div>
+    <button class="modal-close" onclick="closeModal()">
+      <i class="fa-solid fa-mug-hot"></i> Bắt đầu hành trình!
+    </button>
+  </div>
+</div>
+
+<!-- ═══ JAVASCRIPT ═══ -->
+<script>
+  const TOTAL = 10;
+  let current = 0;
+
+  // ── Build dots ──
+  const dotsEl = document.getElementById('dots');
+  for (let i = 0; i < TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  }
+
+  function updateUI() {
+    document.getElementById('cur').textContent = current + 1;
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    document.getElementById('btn-prev').disabled = current === 0;
+    document.getElementById('btn-next').disabled = current === TOTAL - 1;
+  }
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= TOTAL || idx === current) return;
+    const slides = document.querySelectorAll('.slide');
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit-left');
+    setTimeout(() => slides[current].classList.remove('exit-left'), 500);
+    current = idx;
+    slides[current].classList.add('active');
+    updateUI();
+  }
+
+  function nextSlide() { goTo(current + 1); }
+  function prevSlide() { goTo(current - 1); }
+
+  // ── Keyboard navigation ──
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSlide();
+  });
+
+  // ── Touch/swipe navigation ──
+  let touchX = 0;
+  document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const dx = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 50) dx > 0 ? nextSlide() : prevSlide();
+  }, { passive: true });
+
+  // ── Checklist logic ──
+  let clTotal = 0;
+  function toggleCl(el, pts) {
+    el.classList.toggle('done');
+    if (el.classList.contains('done')) clTotal += pts;
+    else clTotal -= pts;
+    clTotal = Math.max(0, Math.min(100, clTotal));
+    document.getElementById('sl-progress').style.width = clTotal + '%';
+    document.getElementById('sl-pct').textContent = clTotal + '%';
+    const awards = [
+      [0,   '🌱 Hạt Cà Phê Mới Nảy Mầm'],
+      [30,  '☀️ Cây Con Đón Nắng'],
+      [60,  '🌿 Lá Non Xanh Mướt'],
+      [80,  '☕ Quả Chín Sắp Thu Hoạch'],
+      [100, '🏆 Nhân Viên Chính Thức Nhà Trình!']
+    ];
+    let award = awards[0][1];
+    for (const [threshold, name] of awards) { if (clTotal >= threshold) award = name; }
+    document.getElementById('sl-award').textContent = award;
+    const btn = document.getElementById('sl-next-btn');
+    if (clTotal >= 70) {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+    } else {
+      btn.disabled = true;
+      btn.style.opacity = '.4';
+      btn.style.pointerEvents = 'none';
+    }
+  }
+
+  // ── Form submit ──
+  async function submitSlideForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('sf-btn');
+    const name = document.getElementById('sf-name').value.trim();
+    const role = document.getElementById('sf-role').value.trim();
+    const phone = document.getElementById('sf-phone').value.trim();
+    const email = document.getElementById('sf-email').value.trim();
+    const feedback = document.getElementById('sf-feedback').value.trim();
+    if (!name || !role || !phone || !email) return;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...';
+    // Optional: Send to Google Sheets
+    const SCRIPT_URL = '';
+    if (SCRIPT_URL) {
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, role, phone, email, feedback, score: clTotal, timestamp: new Date().toISOString() })
+        });
+      } catch (_) {}
+    }
+    // Show modal
+    document.getElementById('modal-name').textContent = name;
+    document.getElementById('success-modal').classList.add('show');
+  }
+
+  function closeModal() {
+    document.getElementById('success-modal').classList.remove('show');
+    document.getElementById('slide-form').reset();
+    document.getElementById('sf-btn').disabled = false;
+    document.getElementById('sf-btn').innerHTML = '<i class="fa-solid fa-paper-plane"></i> Gửi Cam Kết Hội Nhập';
+    goTo(0);
+  }
+</script>
+</body>
+</html>
