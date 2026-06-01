@@ -1256,67 +1256,97 @@
       <style>
         .hr-grid-s {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 14px;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+          margin-top: 24px;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
           .hr-grid-s {
             grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+          }
+        }
+        @media (max-width: 576px) {
+          .hr-grid-s {
+            grid-template-columns: 1fr;
             gap: 10px;
           }
         }
-        @media (max-width: 480px) {
-          .hr-grid-s {
-            grid-template-columns: 1fr;
-            gap: 8px;
-          }
-        }
         .hr-card-s {
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(255, 255, 255, 0.04);
           border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 12px;
-          padding: 14px;
+          border-radius: 16px;
+          padding: 24px 16px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: default;
+          backdrop-filter: blur(10px);
+        }
+        .hr-card-s:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(5, 175, 242, 0.4);
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(5, 175, 242, 0.15);
+        }
+        .hr-card-s i {
+          font-size: 28px;
+          color: #05AFF2;
+          margin-bottom: 14px;
+          transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .hr-card-s:hover i {
+          transform: scale(1.15);
+          color: #dfb76c;
         }
         .hr-card-s h4 {
           font-size: 13.5px;
-          font-weight: 800;
-          color: var(--blue);
-          margin-bottom: 6px;
-          display: flex;
-          align-items: center;
-          gap: 6px;
+          font-weight: 700;
+          color: #ffffff;
+          line-height: 1.4;
+          margin: 0;
+          transition: color 0.3s ease;
         }
-        .hr-card-s p {
-          font-size: 11.5px;
-          color: rgba(255, 255, 255, 0.7);
-          line-height: 1.45;
+        .hr-card-s:hover h4 {
+          color: #dfb76c;
         }
       </style>
       
       <div class="hr-grid-s">
         <div class="hr-card-s">
-          <h4><i class="fa-solid fa-clock"></i> Giờ làm &amp; Chấm công</h4>
-          <p>Chấm công qua FaceID / App Odoo trước ca trực 10 phút. Làm việc đúng theo phân bổ ca làm.</p>
+          <i class="fa-solid fa-clock"></i>
+          <h4>1. Khung Giờ Làm Việc &amp; Ca Làm</h4>
         </div>
         <div class="hr-card-s">
-          <h4><i class="fa-solid fa-calendar-minus"></i> Quy định nghỉ phép</h4>
-          <p>Xin nghỉ phép qua Odoo trước 3 ngày đối với phép năm, hoặc ít nhất 24 giờ cho việc đột xuất.</p>
+          <i class="fa-solid fa-fingerprint"></i>
+          <h4>2. Quy Định Chấm Công</h4>
         </div>
         <div class="hr-card-s">
-          <h4><i class="fa-solid fa-money-check-dollar"></i> Lương &amp; Thưởng</h4>
-          <p>Thanh toán lương vào ngày 10 hằng tháng. Bao gồm lương cứng, phụ cấp ca và thưởng hiệu suất KPI.</p>
+          <i class="fa-solid fa-calendar-days"></i>
+          <h4>3. Quy Trình Đăng Ký Nghỉ Phép</h4>
         </div>
         <div class="hr-card-s">
-          <h4><i class="fa-solid fa-handshake"></i> Hợp đồng lao động</h4>
-          <p>Ký cam kết online ngay khi nhận việc và ký hợp đồng chính thức sau thời gian thử việc đạt yêu cầu.</p>
+          <i class="fa-solid fa-coins"></i>
+          <h4>4. Quy Chế Lương &amp; Thưởng KPI</h4>
         </div>
         <div class="hr-card-s">
-          <h4><i class="fa-solid fa-umbrella-beach"></i> Bảo hiểm &amp; Phúc lợi</h4>
-          <p>Hưởng chế độ BHXH đầy đủ, hỗ trợ cơm ca trực, kiểm tra sức khỏe định kỳ và tham gia teambuilding.</p>
+          <i class="fa-solid fa-file-signature"></i>
+          <h4>5. Hợp Đồng Lao Động &amp; Cam Kết</h4>
         </div>
         <div class="hr-card-s">
-          <h4><i class="fa-solid fa-shield-halved"></i> Bảo mật thông tin</h4>
-          <p>Bảo mật tuyệt đối công thức pha chế cốt lõi của Trình, thông tin tài chính và dữ liệu khách hàng.</p>
+          <i class="fa-solid fa-heart"></i>
+          <h4>6. Chế Độ Bảo Hiểm &amp; Phúc Lợi</h4>
+        </div>
+        <div class="hr-card-s">
+          <i class="fa-solid fa-shield-halved"></i>
+          <h4>7. Bảo Quản Tài Sản Cửa Hàng</h4>
+        </div>
+        <div class="hr-card-s">
+          <i class="fa-solid fa-key"></i>
+          <h4>8. Bảo Mật Thông Tin Nội Bộ</h4>
         </div>
       </div>
     </div>
