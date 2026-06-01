@@ -4158,263 +4158,452 @@
         </button>
       </div>
 
-      <!-- Tiered Org Chart -->
-      <div class="org-tiers-stack">
+      <!-- 5.5 CUSTOM TREE STYLE -->
+      <style>
+        .org-tree-wrapper {
+          width: 100%;
+          margin: 30px auto 0;
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(5, 175, 242, 0.08);
+          border-radius: 20px;
+          padding: 30px 20px;
+          box-shadow: var(--shadow-sm);
+        }
+        
+        .org-tree-canvas {
+          width: 100%;
+          overflow-x: auto;
+          padding: 20px 10px;
+          /* Style scrollbar */
+          scrollbar-width: thin;
+          scrollbar-color: rgba(5, 175, 242, 0.2) transparent;
+        }
+        .org-tree-canvas::-webkit-scrollbar {
+          height: 6px;
+        }
+        .org-tree-canvas::-webkit-scrollbar-thumb {
+          background: rgba(5, 175, 242, 0.15);
+          border-radius: 10px;
+        }
+        .org-tree-canvas::-webkit-scrollbar-thumb:hover {
+          background: rgba(223, 183, 108, 0.4);
+        }
 
-        <!-- ═══ TẦNG 1: BAN ĐIỀU HÀNH ═══ -->
-        <div class="org-tier">
-          <div class="org-tier-label">
-            <span class="org-tier-badge">TẦNG 1<br>Điều Hành</span>
-          </div>
-          <div class="org-tier-content">
-            <div class="org-card-ceo" data-dept="all" id="ceo-card">
-              <div class="ceo-avatar"><i class="fa-solid fa-crown"></i></div>
-              <div class="ceo-info">
-                <span class="ceo-title">CEO &amp; Sáng Lập</span>
-                <span class="ceo-name">Anh Sơn</span>
-                <span class="ceo-sub">Trình Cà Phê — Đà Nẵng</span>
-              </div>
-            </div>
-          </div>
+        .org-tree-scroll-hint {
+          text-align: center;
+          font-size: 11.5px;
+          color: var(--text-muted);
+          margin-bottom: 15px;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+
+        .org-tree-scroll-hint i {
+          animation: bounceHorizontal 1.5s infinite;
+        }
+
+        @keyframes bounceHorizontal {
+          0%, 100% { transform: translateX(0); }
+          50% { transform: translateX(5px); }
+        }
+
+        .org-tree {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          min-width: 1600px; /* Give enough room for the 6 branches */
+          margin: 0 auto;
+        }
+
+        .org-tree ul {
+          padding-top: 24px;
+          position: relative;
+          transition: all 0.3s ease;
+          display: flex;
+          justify-content: center;
+          gap: 16px;
+          width: 100%;
+          padding-left: 0;
+          margin-bottom: 0;
+          list-style: none;
+        }
+
+        .org-tree li {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+          padding-top: 24px;
+          transition: all 0.3s ease;
+          list-style: none;
+        }
+
+        /* Connector lines */
+        .org-tree li::before, .org-tree li::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 50%;
+          border-top: 2px solid rgba(5, 175, 242, 0.15);
+          width: 50%;
+          height: 24px;
+        }
+
+        .org-tree li::after {
+          right: auto;
+          left: 50%;
+          border-left: 2px solid rgba(5, 175, 242, 0.15);
+        }
+
+        .org-tree li:only-child::after, .org-tree li:only-child::before {
+          display: none;
+        }
+
+        .org-tree li:only-child {
+          padding-top: 0;
+        }
+
+        .org-tree li:first-child::before, .org-tree li:last-child::after {
+          border: 0 none;
+        }
+
+        .org-tree li:last-child::before {
+          border-right: 2px solid rgba(5, 175, 242, 0.15);
+          border-radius: 0 8px 0 0;
+        }
+
+        .org-tree li:first-child::after {
+          border-radius: 8px 0 0 0;
+        }
+
+        .org-tree ul::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 50%;
+          border-left: 2px solid rgba(5, 175, 242, 0.15);
+          width: 0;
+          height: 24px;
+        }
+
+        /* Node Cards styling */
+        .org-node-card {
+          background: var(--white);
+          border: 1px solid rgba(5, 175, 242, 0.08);
+          border-radius: 14px;
+          padding: 14px 18px;
+          text-align: center;
+          box-shadow: var(--shadow-sm);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          min-width: 160px;
+          max-width: 200px;
+          cursor: default;
+          z-index: 2;
+        }
+
+        .org-node-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(223, 183, 108, 0.4);
+          box-shadow: var(--shadow-md);
+          background: var(--trinh-blue-light);
+        }
+
+        /* Vacant node styling */
+        .org-node-card.vacant {
+          border-color: rgba(16, 185, 129, 0.3);
+          background: rgba(16, 185, 129, 0.02);
+        }
+        .org-node-card.vacant:hover {
+          background: rgba(16, 185, 129, 0.06);
+          border-color: rgba(16, 185, 129, 0.5);
+        }
+
+        .org-node-card .role {
+          font-size: 9.5px;
+          text-transform: uppercase;
+          font-weight: 800;
+          color: var(--text-muted);
+          letter-spacing: 0.5px;
+          display: block;
+          margin-bottom: 4px;
+          transition: color 0.3s ease;
+        }
+        .org-node-card:hover .role {
+          color: var(--trinh-blue-dark);
+        }
+
+        .org-node-card .name {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 13.5px;
+          font-weight: 900;
+          color: var(--coffee-dark);
+          display: block;
+        }
+
+        .org-node-card .tag {
+          display: inline-block;
+          font-size: 8.5px;
+          font-weight: 800;
+          color: #047857;
+          background: rgba(16, 185, 129, 0.1);
+          padding: 2px 6px;
+          border-radius: 20px;
+          margin-top: 6px;
+        }
+
+        /* CEO Card Custom styling */
+        .org-node-card.ceo {
+          background: linear-gradient(135deg, var(--trinh-blue-dark, #0d2d45), #0a1a2e);
+          border: 2px solid var(--trinh-gold, #dfb76c);
+          color: #fff;
+          min-width: 250px;
+          padding: 18px 24px;
+          box-shadow: 0 10px 25px rgba(5, 175, 242, 0.15);
+        }
+
+        .org-node-card.ceo:hover {
+          background: linear-gradient(135deg, #113652, #0e243b);
+          box-shadow: 0 12px 30px rgba(5, 175, 242, 0.22);
+          border-color: #fff;
+        }
+
+        .org-node-card.ceo .role {
+          color: rgba(255, 255, 255, 0.6);
+        }
+        .org-node-card.ceo .name {
+          color: #fff;
+          font-size: 19px;
+          margin: 2px 0 4px 0;
+        }
+        .org-node-card.ceo .sub {
+          font-size: 11px;
+          opacity: 0.8;
+          color: var(--trinh-blue-light);
+          font-weight: 700;
+        }
+
+        /* Filtering classes */
+        .org-node-card.dimmed {
+          opacity: 0.15 !important;
+          filter: grayscale(80%);
+          transform: scale(0.95);
+        }
+        
+        .org-node-card.highlighted {
+          border-color: var(--trinh-gold) !important;
+          box-shadow: 0 0 15px rgba(223, 183, 108, 0.3) !important;
+        }
+      </style>
+
+      <div class="org-tree-wrapper">
+        <!-- Scroll hint -->
+        <div class="org-tree-scroll-hint">
+          <i class="fa-solid fa-angles-left"></i> Vuốt ngang / Rê chuột để xem trọn bộ sơ đồ tổ chức <i class="fa-solid fa-angles-right"></i>
         </div>
 
-        <!-- Divider -->
-        <div class="org-tier-divider">
-          <div class="div-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-        </div>
+        <div class="org-tree-canvas">
+          <div class="org-tree">
+            <ul>
+              <li>
+                <!-- CEO Card -->
+                <div class="org-node-card org-card-v2 ceo" data-dept="all" id="ceo-card">
+                  <span class="role">CEO &amp; Sáng Lập</span>
+                  <span class="name">Anh Sơn</span>
+                  <span class="sub">Trình Cà Phê — Đà Nẵng</span>
+                </div>
 
-        <!-- ═══ TẦNG 2: TRƯỞNG KHỐI / GIÁM ĐỐC BỘ PHẬN ═══ -->
-        <div class="org-tier">
-          <div class="org-tier-label">
-            <span class="org-tier-badge">TẦNG 2<br>Trưởng Khối</span>
-          </div>
-          <div class="org-tier-content">
-            <!-- QC & Training -->
-            <div class="org-card-v2 vacant" data-dept="qc">
-              <i class="card-icon fa-solid fa-clipboard-check"></i>
-              <span class="card-role">QC &amp; Training</span>
-              <span class="card-name">Đang Tuyển</span>
-              <span class="card-tag">🟢 Tuyển dụng</span>
-            </div>
+                <ul>
+                  <!-- 1. QC & Training -->
+                  <li>
+                    <div class="org-node-card org-card-v2 vacant" data-dept="qc">
+                      <span class="role">QC &amp; Training</span>
+                      <span class="name">Đang Tuyển</span>
+                      <span class="tag">🟢 Tuyển dụng</span>
+                    </div>
+                  </li>
 
-            <!-- Head of Product -->
-            <div class="org-card-v2 filled" data-dept="product">
-              <i class="card-icon fa-solid fa-mug-hot"></i>
-              <span class="card-role">Head of Product</span>
-              <span class="card-name">Tân</span>
-              <span class="card-tag">Sản Phẩm</span>
-            </div>
+                  <!-- 2. Head of Product -->
+                  <li>
+                    <div class="org-node-card org-card-v2 filled" data-dept="product">
+                      <span class="role">Head of Product</span>
+                      <span class="name">Tân</span>
+                    </div>
+                    <ul>
+                      <li>
+                        <div class="org-node-card org-card-v2 filled" data-dept="product">
+                          <span class="role">Food Manager</span>
+                          <span class="name">Toàn</span>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="org-node-card org-card-v2 filled" data-dept="product">
+                          <span class="role">Barista Manager</span>
+                          <span class="name">Toàn</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
 
-            <!-- Operation Manager -->
-            <div class="org-card-v2 filled" data-dept="ops">
-              <i class="card-icon fa-solid fa-gears"></i>
-              <span class="card-role">Operation Manager</span>
-              <span class="card-name">Sơn</span>
-              <span class="card-tag">Vận Hành</span>
-            </div>
+                  <!-- 3. Operation Manager -->
+                  <li>
+                    <div class="org-node-card org-card-v2 filled" data-dept="ops">
+                      <span class="role">Operation Manager</span>
+                      <span class="name">Sơn</span>
+                    </div>
+                    <ul>
+                      <li>
+                        <div class="org-node-card org-card-v2 filled" data-dept="ops">
+                          <span class="role">Quản Lý Vùng</span>
+                          <span class="name">Gấu</span>
+                        </div>
+                        <ul>
+                          <li>
+                            <div class="org-node-card org-card-v2 filled" data-dept="ops">
+                              <span class="role">Quản lý cửa hàng</span>
+                              <span class="name">Từng CS</span>
+                            </div>
+                            <ul>
+                              <li>
+                                <div class="org-node-card org-card-v2 filled" data-dept="ops">
+                                  <span class="role">Giám sát</span>
+                                  <span class="name">Từng ca</span>
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
 
-            <!-- Finance -->
-            <div class="org-card-v2 filled" data-dept="finance">
-              <i class="card-icon fa-solid fa-wallet"></i>
-              <span class="card-role">Trưởng Kế toán tài chính</span>
-              <span class="card-name">Kim Anh</span>
-              <span class="card-tag">Tài Chính</span>
-            </div>
+                  <!-- 4. Trưởng Kế toán tài chính -->
+                  <li>
+                    <div class="org-node-card org-card-v2 filled" data-dept="finance">
+                      <span class="role">Trưởng Kế toán tài chính</span>
+                      <span class="name">Kim Anh</span>
+                    </div>
+                    <ul>
+                      <li>
+                        <div class="org-node-card org-card-v2 vacant" data-dept="finance">
+                          <span class="role">Kế toán trưởng</span>
+                          <span class="name">Đang Tuyển</span>
+                          <span class="tag">🟢 Tuyển dụng</span>
+                        </div>
+                        <ul>
+                          <li>
+                            <div class="org-node-card org-card-v2 filled" data-dept="finance">
+                              <span class="role">Thu mua &amp; Kho</span>
+                              <span class="name">Nguyện</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="org-node-card org-card-v2 filled" data-dept="finance">
+                              <span class="role">Kế toán Thu Chi</span>
+                              <span class="name">Ngọc Huyền</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="org-node-card org-card-v2 filled" data-dept="finance">
+                              <span class="role">Kế toán thuê ngoài</span>
+                              <span class="name">Oanh</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
 
-            <!-- HR -->
-            <div class="org-card-v2 filled" data-dept="hr">
-              <i class="card-icon fa-solid fa-user-plus"></i>
-              <span class="card-role">Trưởng Nhân sự</span>
-              <span class="card-name">Thanh Hà</span>
-              <span class="card-tag">Nhân Sự</span>
-            </div>
+                  <!-- 5. Trưởng Nhân sự -->
+                  <li>
+                    <div class="org-node-card org-card-v2 filled" data-dept="hr">
+                      <span class="role">Trưởng Nhân sự</span>
+                      <span class="name">Thanh Hà</span>
+                    </div>
+                  </li>
 
-            <!-- Marketing -->
-            <div class="org-card-v2 filled" data-dept="mkt">
-              <i class="card-icon fa-solid fa-bullhorn"></i>
-              <span class="card-role">Phụ trách Marketing</span>
-              <span class="card-name">Hương</span>
-              <span class="card-tag">Marketing</span>
-            </div>
-          </div>
-        </div>
+                  <!-- 6. Phụ trách Marketing -->
+                  <li>
+                    <div class="org-node-card org-card-v2 filled" data-dept="mkt">
+                      <span class="role">Phụ trách Marketing</span>
+                      <span class="name">Hương</span>
+                    </div>
+                    <ul>
+                      <!-- Marketing Manager -->
+                      <li>
+                        <div class="org-node-card org-card-v2 filled" data-dept="mkt">
+                          <span class="role">Marketing Manager</span>
+                          <span class="name">Vũ</span>
+                        </div>
+                        <ul>
+                          <!-- Left Column (Marcom) -->
+                          <li>
+                            <div class="org-node-card org-card-v2 filled" data-dept="mkt">
+                              <span class="role">Marcom - MKT executive</span>
+                              <span class="name">Quốc Huy</span>
+                            </div>
+                            <ul>
+                              <li>
+                                <div class="org-node-card org-card-v2 filled" data-dept="mkt">
+                                  <span class="role">Copywriter Part-time</span>
+                                  <span class="name">Tú Anh</span>
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
+                          <!-- Right Column (Content) -->
+                          <li>
+                            <div class="org-node-card org-card-v2 filled" data-dept="mkt">
+                              <span class="role">Content Creator Fulltime</span>
+                              <span class="name">Thanh Trúc</span>
+                            </div>
+                            <ul>
+                              <li>
+                                <div class="org-node-card org-card-v2 filled" data-dept="mkt">
+                                  <span class="role">Content Creator Part-time</span>
+                                  <span class="name">Mỹ Duyên</span>
+                                </div>
+                                <ul>
+                                  <li>
+                                    <div class="org-node-card org-card-v2 filled" data-dept="mkt">
+                                      <span class="role">Content Creator Part-time</span>
+                                      <span class="name">Hạ Vy</span>
+                                    </div>
+                                    <ul>
+                                      <li>
+                                        <div class="org-node-card org-card-v2 filled" data-dept="mkt">
+                                          <span class="role">Photography</span>
+                                          <span class="name">Đăng Đại</span>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                      <!-- Sale Marketing Fulltime directly under Phụ trách MKT -->
+                      <li>
+                        <div class="org-node-card org-card-v2 filled" data-dept="mkt">
+                          <span class="role">Sale Marketing Fulltime</span>
+                          <span class="name">Kiều My</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
 
-        <!-- Divider -->
-        <div class="org-tier-divider">
-          <div class="div-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-        </div>
-
-        <!-- ═══ TẦNG 3: QUẢN LÝ BỘ PHẬN ═══ -->
-        <div class="org-tier">
-          <div class="org-tier-label">
-            <span class="org-tier-badge">TẦNG 3<br>Quản Lý</span>
-          </div>
-          <div class="org-tier-content">
-            <!-- Food Manager -->
-            <div class="org-card-v2 filled" data-dept="product">
-              <i class="card-icon fa-solid fa-utensils"></i>
-              <span class="card-role">Food Manager</span>
-              <span class="card-name">Toàn</span>
-              <span class="card-tag">Sản Phẩm</span>
-            </div>
-
-            <!-- Barista Manager -->
-            <div class="org-card-v2 filled" data-dept="product">
-              <i class="card-icon fa-solid fa-fire-burner"></i>
-              <span class="card-role">Barista Manager</span>
-              <span class="card-name">Toàn</span>
-              <span class="card-tag">Sản Phẩm</span>
-            </div>
-
-            <!-- Quản Lý Vùng -->
-            <div class="org-card-v2 filled" data-dept="ops">
-              <i class="card-icon fa-solid fa-map-location-dot"></i>
-              <span class="card-role">Quản Lý Vùng</span>
-              <span class="card-name">Gấu</span>
-              <span class="card-tag">Vận Hành</span>
-            </div>
-
-            <!-- Kế Toán Trưởng -->
-            <div class="org-card-v2 vacant" data-dept="finance">
-              <i class="card-icon fa-solid fa-calculator"></i>
-              <span class="card-role">Kế Toán Trưởng</span>
-              <span class="card-name">Đang Tuyển</span>
-              <span class="card-tag">🟢 Tuyển dụng</span>
-            </div>
-
-            <!-- Marketing Manager -->
-            <div class="org-card-v2 filled" data-dept="mkt">
-              <i class="card-icon fa-solid fa-user-group"></i>
-              <span class="card-role">Marketing Manager</span>
-              <span class="card-name">Vũ</span>
-              <span class="card-tag">Marketing</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Divider -->
-        <div class="org-tier-divider">
-          <div class="div-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-        </div>
-
-        <!-- ═══ TẦNG 4: GIÁM SÁT & CHUYÊN VIÊN ═══ -->
-        <div class="org-tier">
-          <div class="org-tier-label">
-            <span class="org-tier-badge">TẦNG 4<br>Chuyên Viên</span>
-          </div>
-          <div class="org-tier-content">
-            <!-- Quản lý cửa hàng -->
-            <div class="org-card-v2 filled" data-dept="ops">
-              <i class="card-icon fa-solid fa-shop"></i>
-              <span class="card-role">Quản lý cửa hàng</span>
-              <span class="card-name">Từng CS</span>
-              <span class="card-tag">Vận Hành</span>
-            </div>
-
-            <!-- Thu Mua & Kho -->
-            <div class="org-card-v2 filled" data-dept="finance">
-              <i class="card-icon fa-solid fa-truck-ramp-box"></i>
-              <span class="card-role">Thu mua &amp; Kho</span>
-              <span class="card-name">Nguyện</span>
-              <span class="card-tag">Tài Chính</span>
-            </div>
-
-            <!-- Kế Toán Thu Chi -->
-            <div class="org-card-v2 filled" data-dept="finance">
-              <i class="card-icon fa-solid fa-cash-register"></i>
-              <span class="card-role">Kế toán Thu Chi</span>
-              <span class="card-name">Ngọc Huyền</span>
-              <span class="card-tag">Tài Chính</span>
-            </div>
-
-            <!-- Kế toán thuê ngoài -->
-            <div class="org-card-v2 filled" data-dept="finance">
-              <i class="card-icon fa-solid fa-file-invoice-dollar"></i>
-              <span class="card-role">Kế toán thuê ngoài</span>
-              <span class="card-name">Oanh</span>
-              <span class="card-tag">Tài Chính</span>
-            </div>
-
-            <!-- Marcom - MKT executive -->
-            <div class="org-card-v2 filled" data-dept="mkt">
-              <i class="card-icon fa-solid fa-bullhorn"></i>
-              <span class="card-role">Marcom - MKT executive</span>
-              <span class="card-name">Quốc Huy</span>
-              <span class="card-tag">Marketing</span>
-            </div>
-
-            <!-- Content Creator Fulltime -->
-            <div class="org-card-v2 filled" data-dept="mkt">
-              <i class="card-icon fa-solid fa-wand-magic-sparkles"></i>
-              <span class="card-role">Content Creator Fulltime</span>
-              <span class="card-name">Thanh Trúc</span>
-              <span class="card-tag">Marketing</span>
-            </div>
-
-            <!-- Sale Marketing Fulltime -->
-            <div class="org-card-v2 filled" data-dept="mkt">
-              <i class="card-icon fa-solid fa-chart-line"></i>
-              <span class="card-role">Sale Marketing Fulltime</span>
-              <span class="card-name">Kiều My</span>
-              <span class="card-tag">Marketing</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Divider -->
-        <div class="org-tier-divider">
-          <div class="div-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-        </div>
-
-        <!-- ═══ TẦNG 5: VẬN HÀNH & THỰC THI ═══ -->
-        <div class="org-tier">
-          <div class="org-tier-label">
-            <span class="org-tier-badge">TẦNG 5<br>Thực Thi</span>
-          </div>
-          <div class="org-tier-content">
-            <!-- Giám Sát Ca -->
-            <div class="org-card-v2 filled" data-dept="ops">
-              <i class="card-icon fa-solid fa-eye"></i>
-              <span class="card-role">Giám sát</span>
-              <span class="card-name">Từng ca</span>
-              <span class="card-tag">Vận Hành</span>
-            </div>
-
-            <!-- Copywriter Partime -->
-            <div class="org-card-v2 filled" data-dept="mkt">
-              <i class="card-icon fa-solid fa-feather-pointed"></i>
-              <span class="card-role">Copywriter Part-time</span>
-              <span class="card-name">Tú Anh</span>
-              <span class="card-tag">Marketing</span>
-            </div>
-
-            <!-- Content Creator Partime (Mỹ Duyên) -->
-            <div class="org-card-v2 filled" data-dept="mkt">
-              <i class="card-icon fa-solid fa-mobile-screen-button"></i>
-              <span class="card-role">Content Creator Part-time</span>
-              <span class="card-name">Mỹ Duyên</span>
-              <span class="card-tag">Marketing</span>
-            </div>
-
-            <!-- Content Creator Partime (Hạ Vy) -->
-            <div class="org-card-v2 filled" data-dept="mkt">
-              <i class="card-icon fa-solid fa-video"></i>
-              <span class="card-role">Content Creator Part-time</span>
-              <span class="card-name">Hạ Vy</span>
-              <span class="card-tag">Marketing</span>
-            </div>
-
-            <!-- Photography -->
-            <div class="org-card-v2 filled" data-dept="mkt">
-              <i class="card-icon fa-solid fa-camera"></i>
-              <span class="card-role">Photography</span>
-              <span class="card-name">Đăng Đại</span>
-              <span class="card-tag">Marketing</span>
-            </div>
+                </ul>
+              </li>
+            </ul>
           </div>
         </div>
-
-      </div><!-- /org-tiers-stack -->
+      </div>
 
       <!-- Legend -->
       <div class="org-legend">
