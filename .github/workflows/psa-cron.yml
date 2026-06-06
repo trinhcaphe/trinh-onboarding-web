@@ -1,0 +1,16 @@
+name: PSA Heartbeat Cron
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Vercel API
+        run: |
+          echo "Pinging Vercel API..."
+          response=$(curl -s "https://personal-schedule-assistant-seven.vercel.app/api/cron?type=remind&pin=1234")
+          echo "Response: $response"
