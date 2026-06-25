@@ -161,45 +161,40 @@
     #s1 { text-align:center; }
     #s1 .cover-logo {
       width:90px; height:90px; border-radius:50%;
-      background:linear-gradient(135deg,var(--gold),#b8892e);
+      background:#fff;
       display:flex; align-items:center; justify-content:center;
       margin:0 auto 24px;
-      box-shadow:0 0 0 16px rgba(223,183,108,.1), 0 0 0 32px rgba(223,183,108,.05);
-      animation:pulse-ring 3s ease infinite;
+      box-shadow:0 0 0 16px rgba(255,255,255,.12), 0 0 0 32px rgba(255,255,255,.06);
+      animation:pulse-ring-white 3s ease infinite;
     }
-    @keyframes pulse-ring {
-      0%,100% { box-shadow:0 0 0 16px rgba(223,183,108,.1), 0 0 0 32px rgba(223,183,108,.05); }
-      50%     { box-shadow:0 0 0 22px rgba(223,183,108,.15), 0 0 0 44px rgba(223,183,108,.06); }
+    @keyframes pulse-ring-white {
+      0%,100% { box-shadow:0 0 0 16px rgba(255,255,255,.12), 0 0 0 32px rgba(255,255,255,.06); }
+      50%     { box-shadow:0 0 0 22px rgba(255,255,255,.18), 0 0 0 44px rgba(255,255,255,.08); }
     }
     #s1 .cover-logo img { width:56px; }
     #s1 h1 {
       font-size:clamp(32px,6vw,64px); font-weight:900; color:#fff;
       line-height:1.05; margin-bottom:16px;
     }
-    #s1 h1 span { color:var(--gold); }
+    #s1 h1 span { color:var(--blue-light); }
     #s1 .cover-sub {
       font-family:'Dancing Script',cursive; font-size:clamp(20px,3vw,28px);
-      color:rgba(255,255,255,.7); margin-bottom:32px;
-    }
-    #s1 .cover-chips {
-      display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:40px;
-    }
-    #s1 .chip {
-      padding:7px 18px; border-radius:50px;
-      border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.7);
-      font-size:13px; font-weight:600;
-      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.9); margin-bottom:32px;
     }
     #s1 .start-btn {
       display:inline-flex; align-items:center; gap:10px;
       padding:14px 36px; border-radius:50px;
-      background:linear-gradient(135deg,var(--blue),var(--blue-dark));
-      color:#fff; font-size:16px; font-weight:700;
+      background:#fff;
+      color:var(--blue-dark); font-size:16px; font-weight:800;
       border:none; cursor:pointer;
-      box-shadow:0 8px 32px rgba(5,175,242,.35);
+      box-shadow:0 8px 24px rgba(0,0,0,0.15);
       transition:all .3s ease; font-family:'Montserrat',sans-serif;
     }
-    #s1 .start-btn:hover { transform:translateY(-3px); box-shadow:0 16px 48px rgba(5,175,242,.5); }
+    #s1 .start-btn:hover {
+      transform:translateY(-3px);
+      box-shadow:0 12px 32px rgba(255,255,255,0.3);
+      background:var(--blue-light);
+    }
 
     /* ═══ CONTENT SLIDES ═══ */
     .slide-inner { max-width:900px; width:100%; }
@@ -829,7 +824,7 @@
 <div class="deck" id="deck">
 
   <!-- ─── SLIDE 1: COVER ─── -->
-  <div class="slide bg-navy active" id="s1">
+  <div class="slide bg-blue active" id="s1">
     <div class="cover-logo">
       <img src="logo-trinh.png" alt="Logo Trình">
     </div>
