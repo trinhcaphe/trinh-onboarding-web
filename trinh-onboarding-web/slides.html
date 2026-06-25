@@ -1470,111 +1470,7 @@
     </div>
   </div>
 
-  <!-- ─── SLIDE 16: SỔ TAY HÀNH CHÍNH NHÂN SỰ ─── -->
-  <div class="slide bg-navy" id="s16">
-    <div class="slide-inner">
-      <div class="slide-tag gold"><i class="fa-solid fa-file-invoice"></i> Quy Định Nội Bộ</div>
-      <h2 class="slide-title">Sổ Tay Hành Chính &amp; Nhân Sự</h2>
-      <p class="slide-subtitle">Các quy chế hành chính cơ bản giúp hệ thống vận hành trật tự và công bằng.</p>
-      
-      <style>
-        .hr-grid-s {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 16px;
-          margin-top: 24px;
-        }
-        @media (max-width: 1024px) {
-          .hr-grid-s {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-          }
-        }
-        @media (max-width: 576px) {
-          .hr-grid-s {
-            grid-template-columns: 1fr;
-            gap: 10px;
-          }
-        }
-        .hr-card-s {
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 16px;
-          padding: 24px 16px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          cursor: default;
-          backdrop-filter: blur(10px);
-        }
-        .hr-card-s:hover {
-          background: rgba(255, 255, 255, 0.08);
-          border-color: rgba(5, 175, 242, 0.4);
-          transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba(5, 175, 242, 0.15);
-        }
-        .hr-card-s i {
-          font-size: 28px;
-          color: #05AFF2;
-          margin-bottom: 14px;
-          transition: transform 0.3s ease, color 0.3s ease;
-        }
-        .hr-card-s:hover i {
-          transform: scale(1.15);
-          color: #dfb76c;
-        }
-        .hr-card-s h4 {
-          font-size: 13.5px;
-          font-weight: 700;
-          color: #ffffff;
-          line-height: 1.4;
-          margin: 0;
-          transition: color 0.3s ease;
-        }
-        .hr-card-s:hover h4 {
-          color: #dfb76c;
-        }
-      </style>
-      
-      <div class="hr-grid-s">
-        <div class="hr-card-s">
-          <i class="fa-solid fa-clock"></i>
-          <h4>1. Khung Giờ Làm Việc &amp; Ca Làm</h4>
-        </div>
-        <div class="hr-card-s">
-          <i class="fa-solid fa-fingerprint"></i>
-          <h4>2. Quy Định Chấm Công</h4>
-        </div>
-        <div class="hr-card-s">
-          <i class="fa-solid fa-calendar-days"></i>
-          <h4>3. Quy Trình Đăng Ký Nghỉ Phép</h4>
-        </div>
-        <div class="hr-card-s">
-          <i class="fa-solid fa-coins"></i>
-          <h4>4. Quy Chế Lương &amp; Thưởng KPI</h4>
-        </div>
-        <div class="hr-card-s">
-          <i class="fa-solid fa-file-signature"></i>
-          <h4>5. Hợp Đồng Lao Động &amp; Cam Kết</h4>
-        </div>
-        <div class="hr-card-s">
-          <i class="fa-solid fa-heart"></i>
-          <h4>6. Chế Độ Bảo Hiểm &amp; Phúc Lợi</h4>
-        </div>
-        <div class="hr-card-s">
-          <i class="fa-solid fa-shield-halved"></i>
-          <h4>7. Bảo Quản Tài Sản Cửa Hàng</h4>
-        </div>
-        <div class="hr-card-s">
-          <i class="fa-solid fa-key"></i>
-          <h4>8. Bảo Mật Thông Tin Nội Bộ</h4>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <!-- ─── SLIDE 17: SƠ ĐỒ TỔ CHỨC ─── -->
   <div class="slide bg-dark" id="s17">
@@ -1908,58 +1804,7 @@
     </div>
   </div>
 
-  <!-- ─── SLIDE 20: CHECKLIST ─── -->
-  <div class="slide bg-navy" id="s20">
-    <div class="slide-inner">
-      <div class="slide-tag green"><i class="fa-solid fa-list-check"></i> Checklist Hội Nhập</div>
-      <h2 class="slide-title">Đo Lường Tiến Độ</h2>
-      <p class="slide-subtitle" style="margin-bottom:16px">Tick đầy đủ để đạt <strong>≥70%</strong> và mở khoá form ký cam kết.</p>
-      <div class="progress-wrap">
-        <div class="progress-bar-s"><div class="progress-bar-fill-s" id="sl-progress" style="width:0%"></div></div>
-        <div class="progress-info">
-          <span id="sl-award">🌱 Hạt Cà Phê Mới Nảy Mầm</span>
-          <span id="sl-pct">0%</span>
-        </div>
-      </div>
-      <div class="checklist-slides" id="slide-checklist">
-        <div class="cl-item" onclick="toggleCl(this,10)" data-pts="10">
-          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
-          <span>Đọc kỹ Branding Platform &amp; hiểu 3 giá trị cốt lõi (Tươi - Thật - Tình)</span>
-        </div>
-        <div class="cl-item" onclick="toggleCl(this,10)" data-pts="10">
-          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
-          <span>Gia nhập nhóm Zalo "Nhóm Tát" và gửi lời chào bản thân</span>
-        </div>
-        <div class="cl-item" onclick="toggleCl(this,15)" data-pts="15">
-          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
-          <span>Thấu hiểu Triết lý "5 Tươi" Nhà Trình</span>
-        </div>
-        <div class="cl-item" onclick="toggleCl(this,15)" data-pts="15">
-          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
-          <span>Uống thử bơ &amp; hiểu quy chuẩn các sản phẩm signature</span>
-        </div>
-        <div class="cl-item" onclick="toggleCl(this,15)" data-pts="15">
-          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
-          <span>Nắm rõ vai trò các thành viên trong Sơ Đồ Tổ Chức Nhà Trình</span>
-        </div>
-        <div class="cl-item" onclick="toggleCl(this,20)" data-pts="20">
-          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
-          <span>Thực hành khai báo task và cập nhật link sản phẩm trên Working File</span>
-        </div>
-        <div class="cl-item" onclick="toggleCl(this,15)" data-pts="15">
-          <div class="cl-box"><i class="fa-solid fa-check"></i></div>
-          <span>Hiểu rõ các nguyên tắc họp, phản hồi và giao tiếp trong đội ngũ</span>
-        </div>
-      </div>
-      <div style="text-align:right;margin-top:14px">
-        <button onclick="goTo(20)" id="sl-next-btn"
-          style="padding:10px 24px;border-radius:50px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;opacity:.4;pointer-events:none;transition:all .3s ease"
-          disabled>
-          Tiếp theo: Ký Cam Kết <i class="fa-solid fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
-  </div>
+
 
   <!-- ─── SLIDE 21: FORM KÝ CAM KẾT ─── -->
   <div class="slide bg-coffee" id="s21">
@@ -2038,7 +1883,7 @@
 
 <!-- ═══ JAVASCRIPT ═══ -->
 <script>
-  const TOTAL = 21;
+  const TOTAL = document.querySelectorAll('.slide').length;
   let current = 0;
 
   // ── Build dots ──
