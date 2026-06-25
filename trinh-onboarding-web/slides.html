@@ -808,6 +808,15 @@
     </a>
   </div>
   <div style="display: flex; align-items: center; gap: 16px;">
+    <!-- Autoplay Button -->
+    <button id="btn-autoplay" onclick="toggleAutoplay()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.3s ease;">
+      <i class="fa-solid fa-play"></i> Trình Chiếu
+    </button>
+    <!-- Download Button -->
+    <a href="https://github.com/trinhcaphe/trinh-onboarding-web/archive/refs/heads/main.zip" style="background: rgba(223,183,108,0.15); border: 1px solid rgba(223,183,108,0.3); color: var(--gold); padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: all 0.3s ease;" onmouseover="this.style.background='var(--gold)'; this.style.color='#000';" onmouseout="this.style.background='rgba(223,183,108,0.15)'; this.style.color='var(--gold)';">
+      <i class="fa-solid fa-download"></i> Tải Slide
+    </a>
+    <span style="color: rgba(255,255,255,.15);">|</span>
     <a href="index.html" style="color: rgba(255,255,255,.6); text-decoration: none; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px; transition: all .2s ease;" onmouseover="this.style.color='#05AFF2'" onmouseout="this.style.color='rgba(255,255,255,.6)'">
       <i class="fa-solid fa-house"></i> Cổng Hội Nhập
     </a>
@@ -832,7 +841,7 @@
       <span class="chip"><i class="fa-solid fa-map-location-dot"></i> Đà Nẵng · Hội An</span>
       <a href="https://github.com/trinhcaphe/trinh-onboarding-web/archive/refs/heads/main.zip" class="chip" style="text-decoration: none; background: rgba(223,183,108,.15); border-color: rgba(223,183,108,.3); color: var(--gold); transition: all 0.3s ease;" onmouseover="this.style.background='var(--gold)'; this.style.color='#000';" onmouseout="this.style.background='rgba(223,183,108,.15)'; this.style.color='var(--gold)';"><i class="fa-solid fa-download"></i> Tải slide offline (.ZIP)</a>
     </div>
-    <button class="start-btn" onclick="goTo(1)">
+    <button class="start-btn" onclick="goTo(1, true)">
       <i class="fa-solid fa-play"></i> Bắt đầu hành trình
     </button>
   </div>
@@ -1097,49 +1106,14 @@
     <div class="slide-inner">
       <div class="slide-tag gold"><i class="fa-solid fa-mug-hot"></i> Giá Trị 5 Tươi</div>
       <h2 class="slide-title">1. Sản phẩm TƯƠI NGON</h2>
-      <p class="slide-subtitle" style="margin-bottom: 20px;"><strong>Định nghĩa:</strong> Mang đến những hạt cà phê Fine Robusta chất lượng cao từ vườn nhà Trình. Và những món nước tươi ngon như Cà phê Bơ, Bơ Dẻo dừa nước Hội An, Kem Bơ...</p>
-      
-      <style>
-        .behave-list {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-        }
-        .behave-list > .behave-card:last-child:nth-child(odd) {
-          grid-column: span 2;
-        }
-        @media (max-width: 640px) {
-          .behave-list {
-            grid-template-columns: 1fr;
-            gap: 10px;
-          }
-          .behave-list > .behave-card:last-child:nth-child(odd) {
-            grid-column: span 1;
-          }
-        }
-        .behave-card {
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-left: 3px solid var(--gold);
-          border-radius: 12px;
-          padding: 16px;
-          display: flex;
-          gap: 12px;
-          align-items: flex-start;
-        }
-        .behave-card i {
-          font-size: 16px;
-          color: var(--gold);
-          margin-top: 2px;
-        }
-        .behave-card p {
-          font-size: 13px;
-          color: rgba(255, 255, 255, 0.8);
-          line-height: 1.5;
-        }
-      </style>
-      
-
+      <div class="two-col" style="align-items: center;">
+        <div>
+          <p class="slide-subtitle" style="margin-bottom: 0;"><strong>Định nghĩa:</strong> Mang đến những hạt cà phê Fine Robusta chất lượng cao từ vườn nhà Trình. Và những món nước tươi ngon như Cà phê Bơ, Bơ Dẻo dừa nước Hội An, Kem Bơ...</p>
+        </div>
+        <div class="glass-card" style="display:flex;align-items:center;justify-content:center;padding:8px;">
+          <img src="song-tuoi.jpg" alt="Sản phẩm tươi ngon" style="width:100%;border-radius:12px;object-fit:cover;max-height:260px;">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1148,9 +1122,14 @@
     <div class="slide-inner">
       <div class="slide-tag gold"><i class="fa-solid fa-seedling"></i> Giá Trị 5 Tươi</div>
       <h2 class="slide-title">2. Không gian TƯƠI XANH</h2>
-      <p class="slide-subtitle" style="margin-bottom: 20px;"><strong>Định nghĩa:</strong> Không gian đầy sức sống được phủ bởi sự xanh tươi và những điều mộc mạc bình dị.</p>
-      
-
+      <div class="two-col" style="align-items: center;">
+        <div>
+          <p class="slide-subtitle" style="margin-bottom: 0;"><strong>Định nghĩa:</strong> Không gian đầy sức sống được phủ bởi sự xanh tươi và những điều mộc mạc bình dị.</p>
+        </div>
+        <div class="glass-card" style="display:flex;align-items:center;justify-content:center;padding:8px;">
+          <img src="chuoi-cua-hang.jpg" alt="Không gian tươi xanh" style="width:100%;border-radius:12px;object-fit:cover;max-height:260px;">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1159,9 +1138,14 @@
     <div class="slide-inner">
       <div class="slide-tag gold"><i class="fa-solid fa-face-smile"></i> Giá Trị 5 Tươi</div>
       <h2 class="slide-title">3. Bầu không khí TƯƠI VUI</h2>
-      <p class="slide-subtitle" style="margin-bottom: 20px;"><strong>Định nghĩa:</strong> Với nhiều hoạt động sống động, Trình mang đến bầu không khí tích cực và tràn đầy năng lượng.<br>Thoải mái khi thưởng thức cà phê</p>
-      
-
+      <div class="two-col" style="align-items: center;">
+        <div>
+          <p class="slide-subtitle" style="margin-bottom: 0;"><strong>Định nghĩa:</strong> Với nhiều hoạt động sống động, Trình mang đến bầu không khí tích cực và tràn đầy năng lượng.<br>Thoải mái khi thưởng thức cà phê</p>
+        </div>
+        <div class="glass-card" style="display:flex;align-items:center;justify-content:center;padding:8px;">
+          <img src="hero-bg-2.jpg" alt="Bầu không khí tươi vui" style="width:100%;border-radius:12px;object-fit:cover;max-height:260px;">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1170,9 +1154,14 @@
     <div class="slide-inner">
       <div class="slide-tag gold"><i class="fa-solid fa-user-group"></i> Giá Trị 5 Tươi</div>
       <h2 class="slide-title">4. Tình người TƯƠI TẮN</h2>
-      <p class="slide-subtitle" style="margin-bottom: 20px;"><strong>Định nghĩa:</strong> Chân thành, gần gũi, tử tế và bình dị là những điều bà con mang đến cho nhau.</p>
-      
-
+      <div class="two-col" style="align-items: center;">
+        <div>
+          <p class="slide-subtitle" style="margin-bottom: 0;"><strong>Định nghĩa:</strong> Chân thành, gần gũi, tử tế và bình dị là những điều bà con mang đến cho nhau.</p>
+        </div>
+        <div class="glass-card" style="display:flex;align-items:center;justify-content:center;padding:8px;">
+          <img src="coffee-workshop.jpg" alt="Tình người tươi tắn" style="width:100%;border-radius:12px;object-fit:cover;max-height:260px;">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1181,9 +1170,14 @@
     <div class="slide-inner">
       <div class="slide-tag gold"><i class="fa-solid fa-hands-holding"></i> Giá Trị 5 Tươi</div>
       <h2 class="slide-title">5. Nét đẹp truyền thống TƯƠI MỚI</h2>
-      <p class="slide-subtitle" style="margin-bottom: 20px;"><strong>Định nghĩa:</strong> Mỗi quán cà phê, mỗi ly cà phê là một nét văn hoá đặc sắc của Việt Nam. Những gói cà phê mang tinh thần truyền thống tươi mới</p>
-      
-
+      <div class="two-col" style="align-items: center;">
+        <div>
+          <p class="slide-subtitle" style="margin-bottom: 0;"><strong>Định nghĩa:</strong> Mỗi quán cà phê, mỗi ly cà phê là một nét văn hoá đặc sắc của Việt Nam. Những gói cà phê mang tinh thần truyền thống tươi mới</p>
+        </div>
+        <div class="glass-card" style="display:flex;align-items:center;justify-content:center;padding:8px;">
+          <img src="hero-bg-3.jpg" alt="Truyền thống tươi mới" style="width:100%;border-radius:12px;object-fit:cover;max-height:260px;">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1255,7 +1249,7 @@
           <h4 style="color: var(--gold);">Lotte Mart, Hanigo &amp; Aeon Mall</h4>
           <p>Hệ thống siêu thị lớn, homestay &amp; điểm phân phối cà phê đóng gói quà tặng.</p>
           <div class="hours">🚀 Phủ sóng Đà Nẵng &amp; Hội An</div>
-          <a href="#" onclick="event.preventDefault(); goTo(2);" style="color: var(--gold);"><i class="fa-solid fa-arrow-pointer"></i> Xem quy mô</a>
+          <a href="#" onclick="event.preventDefault(); goTo(2, true);" style="color: var(--gold);"><i class="fa-solid fa-arrow-pointer"></i> Xem quy mô</a>
         </div>
       </div>
     </div>
@@ -1854,10 +1848,10 @@
 <div class="dots" id="dots"></div>
 
 <!-- ═══ NAVIGATION ARROWS ═══ -->
-<button class="nav-btn" id="btn-prev" onclick="prevSlide()" disabled>
+<button class="nav-btn" id="btn-prev" onclick="prevSlide(true)" disabled>
   <i class="fa-solid fa-chevron-left"></i>
 </button>
-<button class="nav-btn" id="btn-next" onclick="nextSlide()">
+<button class="nav-btn" id="btn-next" onclick="nextSlide(true)">
   <i class="fa-solid fa-chevron-right"></i>
 </button>
 
@@ -1888,12 +1882,43 @@
   const TOTAL = document.querySelectorAll('.slide').length;
   let current = 0;
 
+  // Set total slide counter
+  document.getElementById('tot').textContent = TOTAL;
+
+  // ── Autoplay logic ──
+  let autoplayInterval = null;
+  let isAutoplay = false;
+
+  function toggleAutoplay() {
+    const btn = document.getElementById('btn-autoplay');
+    if (isAutoplay) {
+      clearInterval(autoplayInterval);
+      autoplayInterval = null;
+      isAutoplay = false;
+      btn.innerHTML = '<i class="fa-solid fa-play"></i> Trình Chiếu';
+      btn.style.background = 'rgba(255,255,255,0.08)';
+      btn.style.borderColor = 'rgba(255,255,255,0.15)';
+    } else {
+      isAutoplay = true;
+      btn.innerHTML = '<i class="fa-solid fa-pause"></i> Dừng Chiếu';
+      btn.style.background = 'rgba(5, 175, 242, 0.2)';
+      btn.style.borderColor = 'rgba(5, 175, 242, 0.4)';
+      autoplayInterval = setInterval(() => {
+        if (current === TOTAL - 1) {
+          toggleAutoplay();
+        } else {
+          nextSlide();
+        }
+      }, 5000);
+    }
+  }
+
   // ── Build dots ──
   const dotsEl = document.getElementById('dots');
   for (let i = 0; i < TOTAL; i++) {
     const d = document.createElement('div');
     d.className = 'dot' + (i === 0 ? ' active' : '');
-    d.onclick = () => goTo(i);
+    d.onclick = () => goTo(i, true);
     dotsEl.appendChild(d);
   }
 
@@ -1904,8 +1929,11 @@
     document.getElementById('btn-next').disabled = current === TOTAL - 1;
   }
 
-  function goTo(idx) {
+  function goTo(idx, isManual = false) {
     if (idx < 0 || idx >= TOTAL || idx === current) return;
+    if (isManual && isAutoplay) {
+      toggleAutoplay();
+    }
     const slides = document.querySelectorAll('.slide');
     slides[current].classList.remove('active');
     slides[current].classList.add('exit-left');
@@ -1915,13 +1943,13 @@
     updateUI();
   }
 
-  function nextSlide() { goTo(current + 1); }
-  function prevSlide() { goTo(current - 1); }
+  function nextSlide(isManual = false) { goTo(current + 1, isManual); }
+  function prevSlide(isManual = false) { goTo(current - 1, isManual); }
 
   // ── Keyboard navigation ──
   document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSlide();
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide(true);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSlide(true);
   });
 
   // ── Touch/swipe navigation ──
@@ -1929,7 +1957,7 @@
   document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
   document.addEventListener('touchend', e => {
     const dx = touchX - e.changedTouches[0].clientX;
-    if (Math.abs(dx) > 50) dx > 0 ? nextSlide() : prevSlide();
+    if (Math.abs(dx) > 50) dx > 0 ? nextSlide(true) : prevSlide(true);
   }, { passive: true });
 
   // ── Checklist logic ──
