@@ -808,9 +808,9 @@
     </a>
   </div>
   <div style="display: flex; align-items: center; gap: 16px;">
-    <!-- Autoplay Button -->
-    <button id="btn-autoplay" onclick="toggleAutoplay()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.3s ease;">
-      <i class="fa-solid fa-play"></i> Trình Chiếu
+    <!-- Fullscreen Button -->
+    <button id="btn-fullscreen" onclick="toggleFullscreen()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.3s ease;">
+      <i class="fa-solid fa-expand"></i> Trình Chiếu
     </button>
     <!-- Download Button -->
     <a href="https://github.com/trinhcaphe/trinh-onboarding-web/archive/refs/heads/main.zip" style="background: rgba(223,183,108,0.15); border: 1px solid rgba(223,183,108,0.3); color: var(--gold); padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: all 0.3s ease;" onmouseover="this.style.background='var(--gold)'; this.style.color='#000';" onmouseout="this.style.background='rgba(223,183,108,0.15)'; this.style.color='var(--gold)';">
@@ -841,7 +841,7 @@
       <span class="chip"><i class="fa-solid fa-map-location-dot"></i> Đà Nẵng · Hội An</span>
       <a href="https://github.com/trinhcaphe/trinh-onboarding-web/archive/refs/heads/main.zip" class="chip" style="text-decoration: none; background: rgba(223,183,108,.15); border-color: rgba(223,183,108,.3); color: var(--gold); transition: all 0.3s ease;" onmouseover="this.style.background='var(--gold)'; this.style.color='#000';" onmouseout="this.style.background='rgba(223,183,108,.15)'; this.style.color='var(--gold)';"><i class="fa-solid fa-download"></i> Tải slide offline (.ZIP)</a>
     </div>
-    <button class="start-btn" onclick="goTo(1, true)">
+    <button class="start-btn" onclick="goTo(1)">
       <i class="fa-solid fa-play"></i> Bắt đầu hành trình
     </button>
   </div>
@@ -1249,7 +1249,7 @@
           <h4 style="color: var(--gold);">Lotte Mart, Hanigo &amp; Aeon Mall</h4>
           <p>Hệ thống siêu thị lớn, homestay &amp; điểm phân phối cà phê đóng gói quà tặng.</p>
           <div class="hours">🚀 Phủ sóng Đà Nẵng &amp; Hội An</div>
-          <a href="#" onclick="event.preventDefault(); goTo(2, true);" style="color: var(--gold);"><i class="fa-solid fa-arrow-pointer"></i> Xem quy mô</a>
+          <a href="#" onclick="event.preventDefault(); goTo(2);" style="color: var(--gold);"><i class="fa-solid fa-arrow-pointer"></i> Xem quy mô</a>
         </div>
       </div>
     </div>
@@ -1342,129 +1342,7 @@
     </div>
   </div>
 
-  <!-- ─── SLIDE 14: NGUYÊN TẮC LÀM VIỆC ─── -->
-  <div class="slide bg-blue" id="s14">
-    <div class="slide-inner">
-      <div class="slide-tag" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff"><i class="fa-solid fa-circle-info"></i> Nguyên Tắc Làm Việc</div>
-      <h2 class="slide-title">Nguyên Tắc Giao Tiếp &amp; Họp Hành</h2>
-      <p class="slide-subtitle">Các quy định chuẩn mực để phối hợp công việc trơn tru và chuyên nghiệp.</p>
-      
-      <style>
-        .rules-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 16px;
-        }
-        @media (max-width: 768px) {
-          .rules-grid {
-            grid-template-columns: 1fr;
-            gap: 12px;
-          }
-        }
-      </style>
-      
-      <div class="rules-grid">
-        <div class="glass-card" style="border-top: 3px solid var(--gold);">
-          <h3><i class="fa-solid fa-comments"></i> 1. Kênh Giao Tiếp &amp; SLA</h3>
-          <p style="font-size: 13px; margin-top: 6px;">Trao đổi công việc chính thức trên Zalo nhóm "Nhóm Tát" và Odoo. Cam kết **phản hồi trong 15 phút** trong ca trực và tối đa 2 giờ đối với việc chung.</p>
-        </div>
-        <div class="glass-card" style="border-top: 3px solid #10B981;">
-          <h3><i class="fa-solid fa-users-rectangle"></i> 2. Nguyên Tắc Họp Hành</h3>
-          <p style="font-size: 13px; margin-top: 6px;">Phải chuẩn bị tài liệu trước 24 giờ. Luôn có biên bản họp (Minutes Taker) và phân công rõ **Người chịu trách nhiệm (Assignee), Deadline và Chỉ số KPI**.</p>
-        </div>
-        <div class="glass-card" style="border-top: 3px solid #f43f5e;">
-          <h3><i class="fa-solid fa-reply-all"></i> 3. Văn Hóa Phản Hồi</h3>
-          <p style="font-size: 13px; margin-top: 6px;">Feedback tập trung cải tiến công việc, không công kích cá nhân. **Tuyệt đối không làm ngơ khi nhận thông tin**, bắt buộc phải tương tác/phản hồi ngay khi xem tin nhắn.</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- ─── SLIDE 15: BẢNG NÊN & TRÁNH LÀM ─── -->
-  <div class="slide bg-slate" id="s15">
-    <div class="slide-inner">
-      <div class="slide-tag green"><i class="fa-solid fa-scale-unbalanced"></i> Do's &amp; Don'ts</div>
-      <h2 class="slide-title">Quy Tắc Ứng Xử Tại Quán</h2>
-      <p class="slide-subtitle">Các hành vi Nên thực hiện và Tuyệt đối Tránh để gìn giữ văn hóa tốt đẹp của Nhà Trình.</p>
-      
-      <style>
-        .dos-donts-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 20px;
-        }
-        @media (max-width: 640px) {
-          .dos-donts-grid {
-            grid-template-columns: 1fr;
-            gap: 12px;
-          }
-        }
-        .dd-box {
-          padding: 20px;
-          border-radius: 16px;
-          backdrop-filter: blur(8px);
-        }
-        .dd-box.dos {
-          background: rgba(16, 185, 129, 0.08);
-          border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-        .dd-box.donts {
-          background: rgba(244, 63, 94, 0.08);
-          border: 1px solid rgba(244, 63, 94, 0.2);
-        }
-        .dd-box h3 {
-          font-size: 16px;
-          font-weight: 800;
-          margin-bottom: 12px;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-        .dd-box.dos h3 { color: #34d399; }
-        .dd-box.donts h3 { color: #f43f5e; }
-        .dd-list {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
-        .dd-list li {
-          font-size: 13px;
-          line-height: 1.55;
-          display: flex;
-          align-items: flex-start;
-          gap: 8px;
-        }
-        .dd-box.dos li { color: rgba(255, 255, 255, 0.85); }
-        .dd-box.donts li { color: rgba(255, 255, 255, 0.85); }
-        .dd-box.dos li i { color: #34d399; margin-top: 3px; }
-        .dd-box.donts li i { color: #f43f5e; margin-top: 3px; }
-      </style>
-      
-      <div class="dos-donts-grid">
-        <div class="dd-box dos">
-          <h3><i class="fa-solid fa-circle-check"></i> 🟢 NÊN LÀM (DO'S)</h3>
-          <ul class="dd-list">
-            <li><i class="fa-solid fa-check"></i> Chủ động chào đón khách bằng nụ cười tươi tắn nhất.</li>
-            <li><i class="fa-solid fa-check"></i> Nhặt rác, lau dọn bàn ghế bẩn ngay khi thấy (không đợi nhắc).</li>
-            <li><i class="fa-solid fa-check"></i> Đứng ra chịu trách nhiệm, trung thực báo cáo sai lỗi đầu tiên.</li>
-            <li><i class="fa-solid fa-check"></i> Hỗ trợ chia sẻ gánh nặng quầy bar/phục vụ khi cao điểm.</li>
-            <li><i class="fa-solid fa-check"></i> Đăng ký lịch làm đúng hạn (trước Thứ 6 hằng tuần).</li>
-          </ul>
-        </div>
-        <div class="dd-box donts">
-          <h3><i class="fa-solid fa-circle-xmark"></i> 🔴 TRÁNH LÀM (DON'TS)</h3>
-          <ul class="dd-list">
-            <li><i class="fa-solid fa-xmark"></i> Sử dụng điện thoại làm việc riêng, hút thuốc trong ca.</li>
-            <li><i class="fa-solid fa-xmark"></i> Tụ tập nói xấu nội bộ, gây chia rẽ đoàn kết anh em.</li>
-            <li><i class="fa-solid fa-xmark"></i> Đi làm muộn, bỏ ca tự ý không báo trước quản lý.</li>
-            <li><i class="fa-solid fa-xmark"></i> Xem tin nhắn công việc mà KHÔNG phản hồi, làm ngơ.</li>
-            <li><i class="fa-solid fa-xmark"></i> Bàn giao ca sơ sài, để quầy bar dơ bẩn cho ca sau.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 
@@ -1695,152 +1573,7 @@
       
     </div>
   </div>
-<!-- ─── SLIDE 18: 30 NGÀY HÀNH TRÌNH ─── -->
-  <div class="slide bg-blue" id="s18">
-    <div class="slide-inner">
-      <div class="slide-tag" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff"><i class="fa-solid fa-route"></i> Lộ Trình Hội Nhập</div>
-      <h2 class="slide-title">30 Ngày Đầu Của Bạn</h2>
-      <p class="slide-subtitle" style="margin-bottom:20px">Hành trình từ hạt mầm đến cây cà phê đầu tiên trong Nhà Trình.</p>
-      <div class="timeline-slides">
-        <div class="tl-item">
-          <div class="tl-dot">1</div>
-          <div>
-            <span class="date">Ngày 1</span>
-            <h4>Chào Sân &amp; Setup</h4>
-            <p>Hội ngộ đội ngũ, tham quan quán, setup tài khoản Gmail và Odoo, làm quen môi trường.</p>
-            <div class="tl-tags">
-              <span class="tl-tag">Branding Platform</span>
-              <span class="tl-tag">Nhóm Zalo "Nhóm Tát"</span>
-            </div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot">2</div>
-          <div>
-            <span class="date">Ngày 2–3</span>
-            <h4>Nghiên Cứu Sản Phẩm &amp; Menu</h4>
-            <p>Hiểu về các dòng đồ uống signature, sản phẩm đóng gói và triết lý "5 Tươi".</p>
-            <div class="tl-tags">
-              <span class="tl-tag">Uống thử 4 signature</span>
-              <span class="tl-tag">Trình Farm</span>
-            </div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot">3</div>
-          <div>
-            <span class="date">Tuần 1</span>
-            <h4>Bắt Nhịp Quy Trình</h4>
-            <p>Nhận phân công các task cố định trên WORKING FILE_MKT. Đăng story và quay video theo định hướng.</p>
-            <div class="tl-tags">
-              <span class="tl-tag">Working File</span>
-              <span class="tl-tag">Báo cáo đầu ca</span>
-            </div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot">4</div>
-          <div>
-            <span class="date">Tuần 2+</span>
-            <h4>Vận Hành Độc Lập</h4>
-            <p>Tự chủ quản lý danh sách công việc, cập nhật trạng thái chuẩn xác, báo cáo đúng hạn.</p>
-            <div class="tl-tags">
-              <span class="tl-tag">Khung giờ vàng đăng bài</span>
-              <span class="tl-tag">Google Map checklist</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- ─── SLIDE 19: QUY TRÌNH LÀM VIỆC ─── -->
-  <div class="slide bg-slate" id="s19">
-    <div class="slide-inner">
-      <div class="slide-tag"><i class="fa-solid fa-diagram-project"></i> Quy Trình MKT</div>
-      <h2 class="slide-title">Quy Trình Làm Việc Hằng Ngày</h2>
-      <p class="slide-subtitle" style="margin-bottom:20px">Chuỗi hành động chuẩn giúp đội ngũ MKT vận hành trơn tru và nhất quán.</p>
-      <div class="wf-steps">
-        <div class="wf-step">
-          <div class="wf-num">1</div>
-          <div>
-            <h4><i class="fa-solid fa-sun" style="color:var(--gold);margin-right:6px"></i>Báo Cáo Đầu Ca</h4>
-            <p>Gửi checklist nhiệm vụ ngày hôm nay qua Zalo "Nhóm Tát" trước 8:30 AM.</p>
-          </div>
-        </div>
-        <div class="wf-step">
-          <div class="wf-num">2</div>
-          <div>
-            <h4><i class="fa-solid fa-list-check" style="color:var(--blue);margin-right:6px"></i>Cập Nhật Working File</h4>
-            <p>Khai báo task, điền link sản phẩm, cập nhật trạng thái trên Google Sheets chia sẻ nội bộ.</p>
-          </div>
-        </div>
-        <div class="wf-step">
-          <div class="wf-num">3</div>
-          <div>
-            <h4><i class="fa-solid fa-file-image" style="color:#a78bfa;margin-right:6px"></i>Gửi Duyệt Thiết Kế</h4>
-            <p>Nộp ảnh/video về nhóm trước khung giờ đăng. Chờ duyệt từ Creative Strategist hoặc Manager.</p>
-          </div>
-        </div>
-        <div class="wf-step">
-          <div class="wf-num">4</div>
-          <div>
-            <h4><i class="fa-solid fa-clock" style="color:#f59e0b;margin-right:6px"></i>Đăng Bài Khung Giờ Vàng</h4>
-            <p>Tuân thủ nghiêm lịch đăng: 7:00 — 11:30 — 17:00 — 20:00. Không tự ý thay đổi giờ đăng.</p>
-          </div>
-        </div>
-        <div class="wf-step">
-          <div class="wf-num">5</div>
-          <div>
-            <h4><i class="fa-solid fa-moon" style="color:rgba(255,255,255,.5);margin-right:6px"></i>Tổng Kết Cuối Ca</h4>
-            <p>Báo cáo kết quả bài đăng, số reach/engagement, vấn đề phát sinh và đề xuất cải thiện.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <!-- ─── SLIDE 21: FORM KÝ CAM KẾT ─── -->
-  <div class="slide bg-coffee" id="s21">
-    <div class="form-slide">
-      <div class="slide-tag gold" style="margin-bottom:16px"><i class="fa-solid fa-feather-pointed"></i> Ký Cam Kết Hội Nhập</div>
-      <h2 class="slide-title" style="font-size:30px;margin-bottom:8px">Bạn Đã Sẵn Sàng!</h2>
-      <p style="font-size:14px;color:rgba(255,255,255,.6);margin-bottom:24px">Điền đầy đủ thông tin và gửi cam kết để chính thức gia nhập Nhà Trình.</p>
-      <form id="slide-form" onsubmit="submitSlideForm(event)">
-        <div class="form-group-s">
-          <label>Họ và tên nhân viên</label>
-          <input type="text" id="sf-name" placeholder="Họ và tên đầy đủ của bạn" required>
-        </div>
-        <div class="form-group-s">
-          <label>Vị trí công tác</label>
-          <input type="text" id="sf-role" placeholder="Ví dụ: Thiết kế menu, Video creator..." required>
-        </div>
-        <div class="two-col-form">
-          <div class="form-group-s">
-            <label>Số điện thoại</label>
-            <input type="tel" id="sf-phone" placeholder="Số điện thoại" required>
-          </div>
-          <div class="form-group-s">
-            <label>Địa chỉ Email</label>
-            <input type="email" id="sf-email" placeholder="Email liên hệ" required>
-          </div>
-        </div>
-        <div class="form-group-s">
-          <label>Đóng góp ý kiến sau khi đọc</label>
-          <textarea id="sf-feedback" placeholder="Bạn có thắc mắc hay gặp khó khăn gì không?"></textarea>
-        </div>
-        <div class="agree-row" onclick="this.querySelector('input').click()">
-          <input type="checkbox" id="sf-agree" required onclick="event.stopPropagation()">
-          <span>Tôi cam kết đã tìm hiểu kỹ và nghiêm túc tuân thủ mọi nguyên tắc vận hành của Trình Cà Phê.</span>
-        </div>
-        <button type="submit" class="submit-btn-s" id="sf-btn">
-          <i class="fa-solid fa-paper-plane"></i> Gửi Cam Kết Hội Nhập
-        </button>
-      </form>
-    </div>
-  </div>
 
 </div><!-- /deck -->
 
@@ -1848,10 +1581,10 @@
 <div class="dots" id="dots"></div>
 
 <!-- ═══ NAVIGATION ARROWS ═══ -->
-<button class="nav-btn" id="btn-prev" onclick="prevSlide(true)" disabled>
+<button class="nav-btn" id="btn-prev" onclick="prevSlide()" disabled>
   <i class="fa-solid fa-chevron-left"></i>
 </button>
-<button class="nav-btn" id="btn-next" onclick="nextSlide(true)">
+<button class="nav-btn" id="btn-next" onclick="nextSlide()">
   <i class="fa-solid fa-chevron-right"></i>
 </button>
 
@@ -1860,22 +1593,6 @@
   <kbd>←</kbd><kbd>→</kbd> phím mũi tên · Swipe trên mobile
 </div>
 
-<!-- ═══ SUCCESS MODAL ═══ -->
-<div class="modal-overlay" id="success-modal">
-  <div class="modal-card">
-    <div class="modal-logo"><img src="logo-trinh.png" alt="Logo"></div>
-    <h2>Chào mừng bạn gia nhập Nhà Trình! 🕊️</h2>
-    <div class="modal-body">
-      <p>Thương chào <strong id="modal-name" style="color:var(--blue)"></strong> – thành viên mới toanh của đại gia đình Trình Cà Phê!</p>
-      <p>Bạn đã hoàn thành xuất sắc hành trình hội nhập với tinh thần rất "Tươi" và đầy nhiệt huyết.</p>
-      <div class="modal-slogan">"Sống tươi mỗi ngày qua tách cà phê"</div>
-      <p>Chúc bạn có những ngày tháng làm việc rực rỡ dưới mái nhà chung mang tên Trình! ☕✨</p>
-    </div>
-    <button class="modal-close" onclick="closeModal()">
-      <i class="fa-solid fa-mug-hot"></i> Bắt đầu hành trình!
-    </button>
-  </div>
-</div>
 
 <!-- ═══ JAVASCRIPT ═══ -->
 <script>
@@ -1885,40 +1602,36 @@
   // Set total slide counter
   document.getElementById('tot').textContent = TOTAL;
 
-  // ── Autoplay logic ──
-  let autoplayInterval = null;
-  let isAutoplay = false;
-
-  function toggleAutoplay() {
-    const btn = document.getElementById('btn-autoplay');
-    if (isAutoplay) {
-      clearInterval(autoplayInterval);
-      autoplayInterval = null;
-      isAutoplay = false;
-      btn.innerHTML = '<i class="fa-solid fa-play"></i> Trình Chiếu';
-      btn.style.background = 'rgba(255,255,255,0.08)';
-      btn.style.borderColor = 'rgba(255,255,255,0.15)';
+  // ── Fullscreen presentation mode logic ──
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(err => {
+        alert(`Không thể kích hoạt chế độ trình chiếu toàn màn hình: ${err.message}`);
+      });
     } else {
-      isAutoplay = true;
-      btn.innerHTML = '<i class="fa-solid fa-pause"></i> Dừng Chiếu';
-      btn.style.background = 'rgba(5, 175, 242, 0.2)';
-      btn.style.borderColor = 'rgba(5, 175, 242, 0.4)';
-      autoplayInterval = setInterval(() => {
-        if (current === TOTAL - 1) {
-          toggleAutoplay();
-        } else {
-          nextSlide();
-        }
-      }, 5000);
+      document.exitFullscreen();
     }
   }
+
+  document.addEventListener('fullscreenchange', () => {
+    const btn = document.getElementById('btn-fullscreen');
+    if (document.fullscreenElement) {
+      btn.innerHTML = '<i class="fa-solid fa-compress"></i> Thu Nhỏ';
+      btn.style.background = 'rgba(5, 175, 242, 0.2)';
+      btn.style.borderColor = 'rgba(5, 175, 242, 0.4)';
+    } else {
+      btn.innerHTML = '<i class="fa-solid fa-expand"></i> Trình Chiếu';
+      btn.style.background = 'rgba(255,255,255,0.08)';
+      btn.style.borderColor = 'rgba(255,255,255,0.15)';
+    }
+  });
 
   // ── Build dots ──
   const dotsEl = document.getElementById('dots');
   for (let i = 0; i < TOTAL; i++) {
     const d = document.createElement('div');
     d.className = 'dot' + (i === 0 ? ' active' : '');
-    d.onclick = () => goTo(i, true);
+    d.onclick = () => goTo(i);
     dotsEl.appendChild(d);
   }
 
@@ -1929,11 +1642,8 @@
     document.getElementById('btn-next').disabled = current === TOTAL - 1;
   }
 
-  function goTo(idx, isManual = false) {
+  function goTo(idx) {
     if (idx < 0 || idx >= TOTAL || idx === current) return;
-    if (isManual && isAutoplay) {
-      toggleAutoplay();
-    }
     const slides = document.querySelectorAll('.slide');
     slides[current].classList.remove('active');
     slides[current].classList.add('exit-left');
@@ -1943,13 +1653,13 @@
     updateUI();
   }
 
-  function nextSlide(isManual = false) { goTo(current + 1, isManual); }
-  function prevSlide(isManual = false) { goTo(current - 1, isManual); }
+  function nextSlide() { goTo(current + 1); }
+  function prevSlide() { goTo(current - 1); }
 
   // ── Keyboard navigation ──
   document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide(true);
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSlide(true);
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSlide();
   });
 
   // ── Touch/swipe navigation ──
@@ -1957,75 +1667,10 @@
   document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
   document.addEventListener('touchend', e => {
     const dx = touchX - e.changedTouches[0].clientX;
-    if (Math.abs(dx) > 50) dx > 0 ? nextSlide(true) : prevSlide(true);
+    if (Math.abs(dx) > 50) dx > 0 ? nextSlide() : prevSlide();
   }, { passive: true });
 
-  // ── Checklist logic ──
-  let clTotal = 0;
-  function toggleCl(el, pts) {
-    el.classList.toggle('done');
-    if (el.classList.contains('done')) clTotal += pts;
-    else clTotal -= pts;
-    clTotal = Math.max(0, Math.min(100, clTotal));
-    document.getElementById('sl-progress').style.width = clTotal + '%';
-    document.getElementById('sl-pct').textContent = clTotal + '%';
-    const awards = [
-      [0,   '🌱 Hạt Cà Phê Mới Nảy Mầm'],
-      [30,  '☀️ Cây Con Đón Nắng'],
-      [60,  '🌿 Lá Non Xanh Mướt'],
-      [80,  '☕ Quả Chín Sắp Thu Hoạch'],
-      [100, '🏆 Nhân Viên Chính Thức Nhà Trình!']
-    ];
-    let award = awards[0][1];
-    for (const [threshold, name] of awards) { if (clTotal >= threshold) award = name; }
-    document.getElementById('sl-award').textContent = award;
-    const btn = document.getElementById('sl-next-btn');
-    if (clTotal >= 70) {
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      btn.style.pointerEvents = 'auto';
-    } else {
-      btn.disabled = true;
-      btn.style.opacity = '.4';
-      btn.style.pointerEvents = 'none';
-    }
-  }
 
-  // ── Form submit ──
-  async function submitSlideForm(e) {
-    e.preventDefault();
-    const btn = document.getElementById('sf-btn');
-    const name = document.getElementById('sf-name').value.trim();
-    const role = document.getElementById('sf-role').value.trim();
-    const phone = document.getElementById('sf-phone').value.trim();
-    const email = document.getElementById('sf-email').value.trim();
-    const feedback = document.getElementById('sf-feedback').value.trim();
-    if (!name || !role || !phone || !email) return;
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...';
-    // Optional: Send to Google Sheets
-    const SCRIPT_URL = '';
-    if (SCRIPT_URL) {
-      try {
-        await fetch(SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, role, phone, email, feedback, score: clTotal, timestamp: new Date().toISOString() })
-        });
-      } catch (_) {}
-    }
-    // Show modal
-    document.getElementById('modal-name').textContent = name;
-    document.getElementById('success-modal').classList.add('show');
-  }
-
-  function closeModal() {
-    document.getElementById('success-modal').classList.remove('show');
-    document.getElementById('slide-form').reset();
-    document.getElementById('sf-btn').disabled = false;
-    document.getElementById('sf-btn').innerHTML = '<i class="fa-solid fa-paper-plane"></i> Gửi Cam Kết Hội Nhập';
-    goTo(0);
-  }
 </script>
 </body>
 </html>
