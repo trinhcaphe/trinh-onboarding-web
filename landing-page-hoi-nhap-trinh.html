@@ -2894,6 +2894,9 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
+    .stats-grid > .stat-card:last-child:nth-child(odd) {
+      grid-column: span 2;
+    }
     
     .stat-card {
       background: var(--white);
@@ -2970,6 +2973,9 @@
       .stats-grid {
         grid-template-columns: 1fr;
         gap: 16px;
+      }
+      .stats-grid > .stat-card:last-child:nth-child(odd) {
+        grid-column: span 1;
       }
     }
 
@@ -3580,12 +3586,7 @@
             <div class="stat-number">100+</div>
             <p class="stat-text">Hơn <strong>100 nhân sự</strong> có chuyên môn</p>
           </div>
-          <!-- Card 5: 4.9 -->
-          <div class="stat-card">
-            <div class="stat-icon"><i class="fa-solid fa-star"></i></div>
-            <div class="stat-number">4.9</div>
-            <p class="stat-text">Tỉ lệ đánh giá <strong>4.9/5 sao</strong> trên nền tảng Google và Tripadvisor</p>
-          </div>
+
           <!-- Card 6: 120.000 m2 -->
           <div class="stat-card">
             <div class="stat-icon"><i class="fa-solid fa-seedling"></i></div>
@@ -4654,31 +4655,31 @@
             <div class="culture-card-v3">
               <div class="c-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
               <h4>Tử Tế</h4>
-              <p>Làm việc bằng cái tâm trong sạch và lòng chân thành. Từ ly nước pha cho khách đến cách hành xử với đồng đội đều phải thật thà, tử tế. Trình tin rằng gieo điều lành sẽ nhận quả ngọt, sự tử tế là gốc rễ của mọi sự bền vững.</p>
+              <p>Làm việc chân thành, công bằng và có tâm; từ sản phẩm, dịch vụ đến cách đối đãi với khách hàng, đồng đội, đối tác và cộng đồng.</p>
             </div>
             <!-- Pillar 2: Kỷ Cương -->
             <div class="culture-card-v3">
               <div class="c-icon"><i class="fa-solid fa-scale-balanced"></i></div>
               <h4>Kỷ Cương</h4>
-              <p>Đúng giờ, đúng ca, chuẩn quy trình. Từng ly cà phê bơ phục vụ khách phải chuẩn 100% định lượng, từng góc quán phải sạch sẽ, tinh tươm. Tự giác giữ gìn nề nếp nhà Trình như giữ gìn ngọn lửa ấm trong gian bếp.</p>
+              <p>Tôn trọng nguyên tắc, quy trình và cam kết chung; làm việc đúng giờ, đúng chuẩn, rõ trách nhiệm để giữ nề nếp Nhà Trình.</p>
             </div>
             <!-- Pillar 3: Tình Thương -->
             <div class="culture-card-v3">
               <div class="c-icon"><i class="fa-solid fa-people-roof"></i></div>
               <h4>Tình Thương</h4>
-              <p>Coi đồng đội là anh em ruột thịt, coi khách hàng là bà con chòm xóm. Sẵn sàng gánh vác hỗ trợ khi đồng ca quá tải, đối thoại chân thành và ấm áp. Ở nhà Trình, công việc không chỉ là làm công ăn lương, mà là cùng nhau chung sống dưới một mái nhà.</p>
+              <p>Biết lắng nghe, đồng cảm và hỗ trợ nhau; xem đồng đội như người nhà, cùng xây dựng một môi trường làm việc ấm áp và tích cực.</p>
             </div>
             <!-- Pillar 4: Trách Nhiệm -->
             <div class="culture-card-v3">
               <div class="c-icon"><i class="fa-solid fa-circle-check"></i></div>
               <h4>Trách Nhiệm</h4>
-              <p>Nhận việc là làm đến nơi đến chốn, không đùn đẩy, né tránh. Chủ động chịu trách nhiệm với đầu ra công việc và dám thẳng thắn nhận lỗi khi có sai sót để cùng tiến bộ. Chữ "Trách" đi liền với chữ "Nhiệm", làm tròn vai để đồng đội yên lòng.</p>
+              <p>Làm đến nơi đến chốn, không đùn đẩy, không né tránh; dám nhận lỗi, sửa sai và cùng chịu trách nhiệm với kết quả chung.</p>
             </div>
             <!-- Pillar 5: Linh Hoạt -->
             <div class="culture-card-v3">
               <div class="c-icon"><i class="fa-solid fa-lightbulb"></i></div>
               <h4>Linh Hoạt</h4>
-              <p>Không rập khuôn, cứng nhắc trước các tình huống thực tế. Sẵn sàng xoay chuyển nhanh chóng để mang lại trải nghiệm tốt nhất cho bà con và tối ưu hóa vận hành. Biết tận dụng công nghệ, AI để giải phóng sức lao động và đột phá năng suất.</p>
+              <p>Cởi mở học hỏi cái mới, chủ động cải tiến và ứng biến phù hợp; biết áp dụng công nghệ, giải pháp mới để làm việc hiệu quả hơn mỗi ngày.</p>
             </div>
           </div>
         </div>
